@@ -13,9 +13,11 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            CarBrand carBrand = new CarBrand();
-            MsSqlServerContext db = new MsSqlServerContext();
-            db.CarBrands.FirstOrDefault();
+            VehicleType vehicleType = new VehicleType();
+            using (MsSqlServerContext db = new MsSqlServerContext())
+            {
+                db.VehicleTypes.FirstOrDefault();
+            }
             return View();
         }
     }

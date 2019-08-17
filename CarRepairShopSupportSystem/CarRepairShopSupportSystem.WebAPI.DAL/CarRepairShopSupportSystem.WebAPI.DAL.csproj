@@ -48,8 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CarBrand.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vehicle.cs" />
+    <Compile Include="Models\VehicleBrand.cs" />
+    <Compile Include="Models\VehicleColour.cs" />
+    <Compile Include="Models\VehicleEngine.cs" />
+    <Compile Include="Models\VehicleFuel.cs" />
+    <Compile Include="Models\VehicleModel.cs" />
+    <Compile Include="Models\VehiclePart.cs" />
+    <Compile Include="Models\VehicleType.cs" />
     <Compile Include="MsSqlServerDB\Configuration.cs" />
+    <Compile Include="MsSqlServerDB\EFCommandInterceptor.cs" />
     <Compile Include="MsSqlServerDB\MsSqlDbInitializer.cs" />
     <Compile Include="MsSqlServerDB\MsSqlServerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
