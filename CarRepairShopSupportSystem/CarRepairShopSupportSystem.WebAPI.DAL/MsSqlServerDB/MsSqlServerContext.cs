@@ -15,10 +15,12 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
         {
         }
 
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -51,16 +53,6 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                         .HasForeignKey(o => o.VehicleId)
                         .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
-                        .HasMany<Order>(u => u.WorksOnOrders)
-                        .WithMany(o => o.WorkByUsers)
-                        .Map(cs =>
-                        {
-                            cs.MapLeftKey($"{nameof(User)}Id");
-                            cs.MapRightKey($"{nameof(Order)}Id");
-                            cs.ToTable($"{nameof(User)}{nameof(Order)}");
-                        });
-
             modelBuilder.Entity<Order>()
                         .HasMany<Service>(o => o.ContainsServices)
                         .WithMany(s => s.ContainedInOrders)
@@ -79,6 +71,19 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                             cs.MapLeftKey($"{nameof(Order)}Id");
                             cs.MapRightKey($"{nameof(VehiclePart)}Id");
                             cs.ToTable($"{nameof(Order)}{nameof(VehiclePart)}");
+                        });
+
+            modelBuilder.Entity<Permission>()
+                        .HasKey(p => p.PermissiondId);
+            
+            modelBuilder.Entity<User>()
+                        .HasMany<Order>(u => u.WorksOnOrders)
+                        .WithMany(o => o.WorkByUsers)
+                        .Map(cs =>
+                        {
+                            cs.MapLeftKey($"{nameof(User)}Id");
+                            cs.MapRightKey($"{nameof(Order)}Id");
+                            cs.ToTable($"{nameof(User)}{nameof(Order)}");
                         });
         }
     }

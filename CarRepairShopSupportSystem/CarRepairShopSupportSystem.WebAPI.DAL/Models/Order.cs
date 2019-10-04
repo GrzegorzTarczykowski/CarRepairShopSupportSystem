@@ -11,11 +11,11 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
         public int OrderId { get; set; }
         public decimal TotalCost { get; set; }
         public string Description { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime PlannedStartDateOfRepair { get; set; }
-        public DateTime StartDateOfRepair { get; set; }
-        public DateTime PlannedEndDateOfRepair { get; set; }
-        public DateTime EndDateOfRepair { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? PlannedStartDateOfRepair { get; set; }
+        public DateTime? StartDateOfRepair { get; set; }
+        public DateTime? PlannedEndDateOfRepair { get; set; }
+        public DateTime? EndDateOfRepair { get; set; }
 
         public int OrderStatusId { get; set; }
         public OrderStatus OrderStatus { get; set; }

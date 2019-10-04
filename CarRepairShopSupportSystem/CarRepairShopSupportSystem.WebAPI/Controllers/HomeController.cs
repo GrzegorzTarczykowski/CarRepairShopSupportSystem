@@ -10,6 +10,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Ogólne informacje o zestawie są kontrolowane poprzez następujący 
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
-[assembly: AssemblyTitle("CarRepairShopSupportSystem.DAL")]
+[assembly: AssemblyTitle("CarRepairShopSupportSystem.WebAPI.BLL")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CarRepairShopSupportSystem.DAL")]
+[assembly: AssemblyProduct("CarRepairShopSupportSystem.WebAPI.BLL")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Następujący identyfikator GUID jest identyfikatorem biblioteki typów w przypadku udostępnienia tego projektu w modelu COM
-[assembly: Guid("fdffda70-c6b2-42f2-8691-c5a3d47d8d92")]
+[assembly: Guid("9d9096c0-e4bb-4808-8c47-a36cc1d7c0f4")]
 
 // Informacje o wersji zestawu zawierają następujące cztery wartości:
 //

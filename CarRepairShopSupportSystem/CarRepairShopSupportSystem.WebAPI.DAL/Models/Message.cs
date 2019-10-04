@@ -11,7 +11,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
         public int MessageId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public DateTime SentDate { get; set; }
+        public DateTime? SentDate { get; set; }
 
         public int OrderId { get; set; }
         public Order Order { get; set; }

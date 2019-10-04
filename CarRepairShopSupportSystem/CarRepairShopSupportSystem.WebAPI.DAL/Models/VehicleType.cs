@@ -11,6 +11,6 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
         public int VehicleTypeId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
+        //public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }
