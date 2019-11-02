@@ -23,61 +23,129 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
             this.repository = repository;
         }
 
+        [HttpGet]
         internal protected IEnumerable<T> GetBase()
         {
-            return repository.GetAll();
+            try
+            {
+                return repository.GetAll();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
+        [HttpGet]
         internal protected IEnumerable<T> GetByBase(Expression<Func<T, bool>> predicate)
         {
-            return repository.FindBy(predicate);
+            try
+            {
+                return repository.FindBy(predicate);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
+        [HttpGet]
         internal protected T GetBase(int id)
         {
-            return repository.FindById(id);
+            try
+            {
+                return repository.FindById(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
+        [HttpGet]
+        internal protected HttpResponseMessage GetIsAny(Expression<Func<T, bool>> predicate)
+        {
+            try
+            {
+                if (repository.Any(predicate))
+                {
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return new HttpResponseMessage(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpPost]
         internal protected HttpResponseMessage PostBase(T value)
         {
-            if (ModelState.IsValid)
+            try
             {
-                repository.Add(value);
-                repository.SaveChanges();
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                if (ModelState.IsValid)
+                {
+                    repository.Add(value);
+                    repository.SaveChanges();
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
 
+        [HttpPut]
         internal protected HttpResponseMessage PutBase(bool isSameEntity, T value)
         {
-            if (ModelState.IsValid && isSameEntity)
+            try
             {
-                repository.Edit(value);
-                repository.SaveChanges();
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                if (ModelState.IsValid && isSameEntity)
+                {
+                    repository.Edit(value);
+                    repository.SaveChanges();
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
 
+        [HttpDelete]
         internal protected HttpResponseMessage DeleteBase(int id)
         {
-            T entity = repository.FindById(id);
-            if (entity != null)
+            try
             {
-                repository.Remove(entity);
-                repository.SaveChanges();
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                T entity = repository.FindById(id);
+                if (entity != null)
+                {
+                    repository.Remove(entity);
+                    repository.SaveChanges();
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Not Found");
+                }
             }
-            else
+            catch (Exception)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Not Found");
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
     }

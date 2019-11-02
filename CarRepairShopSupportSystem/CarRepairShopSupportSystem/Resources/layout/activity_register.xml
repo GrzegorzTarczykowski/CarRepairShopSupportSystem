@@ -1,0 +1,70 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundMainGradientSelector">
+<LinearLayout
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <TextView
+            android:text="Rejestracja"
+            android:textStyle="bold"
+            android:textSize="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:focusable="true"
+            android:hint="Podaj nazwe użytkownika"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:hint="Podaj Imię"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:focusable="true"
+            android:hint="Podaj nazwisko"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:inputType="textEmailAddress"
+            android:hint="Podaj email"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextPhoneNumber"
+            android:focusable="true"
+            android:hint="Podaj numer telefonu"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:hint="Podaj hasło"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+         <EditText
+            android:id="@+id/editTextConfirmPassword"
+            android:hint="Podaj powtórnie hasło"
+            android:textColorHint="#9b0493"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Zarejestruj"
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

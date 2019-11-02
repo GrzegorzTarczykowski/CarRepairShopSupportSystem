@@ -1,4 +1,5 @@
-﻿using CarRepairShopSupportSystem.WebAPI.DAL.Abstraction;
+﻿using CarRepairShopSupportSystem.WebAPI.BLL.IService;
+using CarRepairShopSupportSystem.WebAPI.DAL.Abstraction;
 using CarRepairShopSupportSystem.WebAPI.DAL.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
@@ -14,12 +15,12 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Provider
     public class AuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
         private readonly IRepository<Client> clientRepository;
-        private readonly IRepository<User> userRepository;
+        private readonly ILoginService loginService;
 
-        public AuthorizationServerProvider(IRepository<Client> clientRepository, IRepository<User> userRepository)
+        public AuthorizationServerProvider(IRepository<Client> clientRepository, ILoginService loginService)
         {
             this.clientRepository = clientRepository;
-            this.userRepository = userRepository;
+            this.loginService = loginService;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -74,9 +75,7 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Provider
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            User user = userRepository.FindBy(u => u.Username == context.UserName
-                                               && u.Password == context.Password
-                                               , nameof(User.Permission)).FirstOrDefault();
+            User user = loginService.Login(context.UserName, context.Password);
 
             if (user == null)
             {

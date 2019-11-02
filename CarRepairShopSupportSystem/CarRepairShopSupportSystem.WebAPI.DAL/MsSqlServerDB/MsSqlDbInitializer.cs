@@ -1,4 +1,5 @@
-﻿using CarRepairShopSupportSystem.WebAPI.DAL.Models;
+﻿using CarRepairShopSupportSystem.WebAPI.DAL.Enums;
+using CarRepairShopSupportSystem.WebAPI.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -27,17 +28,21 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             IList<Permission> defaultPermissions = new List<Permission>();
 
-            defaultPermissions.Add(new Permission() { Name = "SuperAdmin" });
-            defaultPermissions.Add(new Permission() { Name = "Admin" });
-            defaultPermissions.Add(new Permission() { Name = "User" });
+            defaultPermissions.Add(new Permission() { Name = $"{PermissionId.SuperAdmin}" });
+            defaultPermissions.Add(new Permission() { Name = $"{PermissionId.Admin}" });
+            defaultPermissions.Add(new Permission() { Name = $"{PermissionId.User}" });
+            defaultPermissions.Add(new Permission() { Name = $"{PermissionId.Guest}" });
 
             context.Permissions.AddRange(defaultPermissions);
 
             IList<User> defaultUsers = new List<User>();
 
-            defaultUsers.Add(new User() { Username = "TestowyAdmin"
-                                        , Salt = new byte[1]
-                                        , Password = "1"
+            defaultUsers.Add(new User() { Username = "TestAdmin"
+                                        , Salt = new byte[32] { 20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80 }
+                                        , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
                                         , FirstName = "Grzegorz"
                                         , LastName = "Tarcz"
                                         , Email = "jakis@wp.pl"
@@ -46,6 +51,17 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                         , LastLogin = DateTime.Now
                                         , PermissionId = 1
                                         , Permission = defaultPermissions[0] });
+
+            defaultUsers.Add(new User() { Username = "TestGuest"
+                                        , Salt = new byte[32] { 20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80 }
+                                        , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
+                                        , CreateDate = DateTime.Now
+                                        , LastLogin = DateTime.Now
+                                        , PermissionId = 4
+                                        , Permission = defaultPermissions[3] });
 
             context.Users.AddRange(defaultUsers);
 

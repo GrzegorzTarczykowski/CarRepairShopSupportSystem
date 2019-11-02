@@ -85,6 +85,18 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                             cs.MapRightKey($"{nameof(Order)}Id");
                             cs.ToTable($"{nameof(User)}{nameof(Order)}");
                         });
+
+            modelBuilder.Entity<User>()
+                        .HasRequired(u => u.Permission)
+                        .WithMany(p => p.AssignedToUsers)
+                        .HasForeignKey(u => u.PermissionId)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Vehicle>()
+                        .HasRequired(v => v.User)
+                        .WithMany(u => u.OwnedVehicles)
+                        .HasForeignKey(v => v.UserId)
+                        .WillCascadeOnDelete(false);
         }
     }
 }
