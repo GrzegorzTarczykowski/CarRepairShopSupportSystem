@@ -65,6 +65,25 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             context.Users.AddRange(defaultUsers);
 
+            IList<VehicleBrand> defaultVehicleBrands = new List<VehicleBrand>();
+
+            defaultVehicleBrands.Add(new VehicleBrand() { Name = "Audi" });
+            defaultVehicleBrands.Add(new VehicleBrand() { Name = "BMW" });
+            defaultVehicleBrands.Add(new VehicleBrand() { Name = "Mercedes" });
+
+            context.VehicleBrands.AddRange(defaultVehicleBrands);
+
+            IList<VehicleModel> defaultVehicleModels = new List<VehicleModel>();
+
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Audi A8" });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Audi Q8" });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "BMW Serii 1" });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "BMW X7" });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Mercedes Klasa C" });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Mercedes Klasa E" });
+
+            context.VehicleModels.AddRange(defaultVehicleModels);
+
             IList<VehicleType> defaultVehicleTypes = new List<VehicleType>();
 
             defaultVehicleTypes.Add(new VehicleType() { Name = "Micro" });

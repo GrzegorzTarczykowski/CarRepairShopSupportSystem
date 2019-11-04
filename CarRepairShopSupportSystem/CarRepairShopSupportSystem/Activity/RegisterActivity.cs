@@ -22,7 +22,7 @@ namespace CarRepairShopSupportSystem.Activity
         private readonly IRegisterService registerService;
         public RegisterActivity()
         {
-            registerService = new RegisterService(new AccessTokenService(new ApplicationSessionService(), new TokenService()));
+            registerService = new RegisterService(new AccessTokenService(new ApplicationSessionService(), new TokenService()), new ApplicationSessionService());
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

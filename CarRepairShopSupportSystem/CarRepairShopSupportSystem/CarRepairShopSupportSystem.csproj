@@ -62,7 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity\MenuActivity.cs" />
+    <Compile Include="Activity\MyVehicleListActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
+    <Compile Include="Adapter\VehicleAdapter.cs" />
     <Compile Include="Handler\AlertHandler.cs" />
     <Compile Include="Handler\ExceptionHandler.cs" />
     <Compile Include="MainActivity.cs" />
@@ -120,6 +122,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_register.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_myVehicleList.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -34,7 +34,7 @@ namespace CarRepairShopSupportSystem
             TaskScheduler.UnobservedTaskException += ExceptionHandler.LogTaskSchedulerUnhandledException;
 
             FindViewById<Button>(Resource.Id.btnLogin).Click += BtnLogin_Click;
-            FindViewById<EditText>(Resource.Id.txtViewRegister).Click += TxtViewRegister_Click;
+            FindViewById<Android.Support.V7.Widget.AppCompatTextView>(Resource.Id.txtRegister).Click += TxtViewRegister_Click;
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)

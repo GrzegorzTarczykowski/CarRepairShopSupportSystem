@@ -14,16 +14,20 @@ namespace CarRepairShopSupportSystem.BLL.Service
     public class RegisterService : IRegisterService
     {
         private readonly IAccessTokenService accessTokenService;
+        private readonly IApplicationSessionService applicationSessionService;
 
-        public RegisterService(IAccessTokenService accessTokenService)
+        public RegisterService(IAccessTokenService accessTokenService, IApplicationSessionService applicationSessionService)
         {
             this.accessTokenService = accessTokenService;
+            this.applicationSessionService = applicationSessionService;
         }
 
         public bool Register(User user)
         {
             try
             {
+                ApplicationSession.userName = "TestGuest";
+                ApplicationSession.userPassword = "1";
                 HttpClientHandler handler = new HttpClientHandler();
                 HttpClient client = new HttpClient(handler);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessTokenService.GetAccessToken());
@@ -38,6 +42,10 @@ namespace CarRepairShopSupportSystem.BLL.Service
             catch (Exception)
             {
                 return false;
+            }
+            finally
+            {
+                applicationSessionService.ClearApplicationSession();
             }
         }
     }

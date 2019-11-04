@@ -10,6 +10,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
         <Button
+            android:text="Moje pojazdy"
+            android:id="@+id/btnMyVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Moje konto"
+            android:id="@+id/btnMyAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Kontakt z warsztatem"
+            android:id="@+id/btnContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
             android:text="Wyloguj"
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
