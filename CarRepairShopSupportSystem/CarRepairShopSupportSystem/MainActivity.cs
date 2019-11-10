@@ -22,7 +22,7 @@ namespace CarRepairShopSupportSystem
 
         public MainActivity()
         {
-            loginService = new LoginService(new ApplicationSessionService(), new AccessTokenService(new ApplicationSessionService(), new TokenService()));
+            loginService = new LoginService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

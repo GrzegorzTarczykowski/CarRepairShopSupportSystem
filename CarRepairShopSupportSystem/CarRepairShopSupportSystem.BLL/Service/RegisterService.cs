@@ -14,12 +14,12 @@ namespace CarRepairShopSupportSystem.BLL.Service
 {
     public class RegisterService : IRegisterService
     {
-        private readonly IAccessTokenService accessTokenService;
+        private readonly IHttpClientService httpClientService;
         private readonly IApplicationSessionService applicationSessionService;
 
-        public RegisterService(IAccessTokenService accessTokenService, IApplicationSessionService applicationSessionService)
+        public RegisterService(IHttpClientService httpClientService, IApplicationSessionService applicationSessionService)
         {
-            this.accessTokenService = accessTokenService;
+            this.httpClientService = httpClientService;
             this.applicationSessionService = applicationSessionService;
         }
 
@@ -29,15 +29,13 @@ namespace CarRepairShopSupportSystem.BLL.Service
             {
                 ApplicationSession.userName = "TestGuest";
                 ApplicationSession.userPassword = "1";
-                HttpClientHandler handler = new HttpClientHandler();
-                HttpClient client = new HttpClient(handler);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessTokenService.GetAccessToken());
-                var content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                var tokenResponse = client.PostAsync(Setting.addressAPI + "api/Users", content).Result;
+                HttpResponseMessage tokenResponse = httpClientService.Post("api/Users", user);
+
                 if (tokenResponse.IsSuccessStatusCode)
                 {
                     return new OperationResult { ResultCode = ResultCode.Successful };
                 }
+
                 OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
                 operationResult.ResultCode = ResultCode.Error;
                 return operationResult;

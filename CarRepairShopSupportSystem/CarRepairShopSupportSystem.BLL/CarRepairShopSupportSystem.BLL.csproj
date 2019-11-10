@@ -50,9 +50,11 @@
     <Compile Include="IService\IApplicationSessionService.cs" />
     <Compile Include="IService\ICryptographyService.cs" />
     <Compile Include="IService\IEmailService.cs" />
+    <Compile Include="IService\IHttpClientService.cs" />
     <Compile Include="IService\ILoginService.cs" />
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\ITokenService.cs" />
+    <Compile Include="IService\IVehicleService.cs" />
     <Compile Include="IService\IWebApiAccessService.cs" />
     <Compile Include="Models\ApplicationSession.cs" />
     <Compile Include="Models\OperationResult.cs" />
@@ -67,10 +69,11 @@
     <Compile Include="Service\ApplicationSessionService.cs" />
     <Compile Include="Service\CryptographyService.cs" />
     <Compile Include="Service\EmailService.cs" />
+    <Compile Include="Service\HttpClientService.cs" />
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\RegisterService.cs" />
-    <Compile Include="Service\TmpService.cs" />
     <Compile Include="Service\TokenService.cs" />
+    <Compile Include="Service\VehicleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

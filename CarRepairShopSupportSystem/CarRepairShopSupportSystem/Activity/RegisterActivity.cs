@@ -24,7 +24,7 @@ namespace CarRepairShopSupportSystem.Activity
         private readonly IEmailService emailService;
         public RegisterActivity()
         {
-            registerService = new RegisterService(new AccessTokenService(new ApplicationSessionService(), new TokenService()), new ApplicationSessionService());
+            registerService = new RegisterService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
             emailService = new EmailService();
         }
 
@@ -32,7 +32,7 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_register);
-            FindViewById<Button>(Resource.Id.btnRegister).Click += BtnRegister_Click; ;
+            FindViewById<Button>(Resource.Id.btnRegister).Click += BtnRegister_Click;
         }
 
         private void BtnRegister_Click(object sender, EventArgs e)

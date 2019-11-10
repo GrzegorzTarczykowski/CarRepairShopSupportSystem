@@ -11,11 +11,11 @@ namespace CarRepairShopSupportSystem.BLL.Service
 {
     public class EmailService : IEmailService
     {
-        public bool IsValid(string email)
+        public bool IsValid(string emailAddress)
         {
             try
             {
-                MailAddress m = new MailAddress(email);
+                MailAddress m = new MailAddress(emailAddress);
                 return true;
             }
             catch (FormatException)

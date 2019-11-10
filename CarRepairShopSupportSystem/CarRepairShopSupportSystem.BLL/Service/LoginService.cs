@@ -13,13 +13,13 @@ namespace CarRepairShopSupportSystem.BLL.Service
 {
     public class LoginService : ILoginService
     {
+        private readonly IHttpClientService httpClientService;
         private readonly IApplicationSessionService applicationSessionService;
-        private readonly IAccessTokenService accessTokenService;
 
-        public LoginService(IApplicationSessionService applicationSessionService, IAccessTokenService accessTokenService)
+        public LoginService(IHttpClientService httpClientService, IApplicationSessionService applicationSessionService)
         {
+            this.httpClientService = httpClientService;
             this.applicationSessionService = applicationSessionService;
-            this.accessTokenService = accessTokenService;
         }
 
         public bool Login(string username, string password)
@@ -28,11 +28,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
             {
                 ApplicationSession.userName = username;
                 ApplicationSession.userPassword = password;
-
-                HttpClientHandler handler = new HttpClientHandler();
-                HttpClient client = new HttpClient(handler);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessTokenService.GetAccessToken());
-                var APIResponse = client.GetAsync(Setting.addressAPI + $"api/Users?username={username}&password={password}").Result;
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Users?username={username}&password={password}");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;

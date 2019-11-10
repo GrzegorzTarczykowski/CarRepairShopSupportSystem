@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class UsersController : ABaseApiController<User>
     {
         private readonly ILoginService loginService;
@@ -23,7 +24,6 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.registerService = registerService;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>
         public IEnumerable<User> Get()
@@ -31,7 +31,6 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return GetBase();
         }
 
-        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>/5
         public User Get(int id)
@@ -55,22 +54,6 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 };
             }
             return null;
-        }
-
-        [Authorize(Roles = "SuperAdmin")]
-        [HttpGet]
-        // GET api/<controller>?username=username
-        public HttpResponseMessage GetIsAnyByUsername([FromUri]string username)
-        {
-            return GetIsAny(u => u.Username == username);
-        }
-
-        [Authorize(Roles = "SuperAdmin")]
-        [HttpGet]
-        // GET api/<controller>?email=email
-        public HttpResponseMessage GetIsAnyByEmail([FromUri]string email)
-        {
-            return GetIsAny(u => u.Email == email);
         }
 
         [Authorize(Roles = "SuperAdmin, Admin, User, Guest")]
@@ -103,7 +86,6 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "SuperAdmin")]
         [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]User value)
@@ -111,7 +93,6 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return PutBase(id == value.UserId, value);
         }
 
-        [Authorize(Roles = "SuperAdmin")]
         [HttpDelete]
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)

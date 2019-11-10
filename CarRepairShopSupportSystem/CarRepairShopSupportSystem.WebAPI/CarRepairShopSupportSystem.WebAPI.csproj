@@ -228,11 +228,11 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VehicleBrandsController.cs" />
     <Compile Include="Controllers\VehicleColourController.cs" />
+    <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VehicleEngineController.cs" />
     <Compile Include="Controllers\VehicleFuelController.cs" />
     <Compile Include="Controllers\VehicleModelController.cs" />
     <Compile Include="Controllers\VehiclePartController.cs" />
-    <Compile Include="Controllers\VehiclesController.cs" />
     <Compile Include="Controllers\VehicleTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Vehicle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

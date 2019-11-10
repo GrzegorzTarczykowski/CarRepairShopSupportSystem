@@ -21,7 +21,7 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_menu);
-            FindViewById<Button>(Resource.Id.btnMyVehicle).Click += BtnMyVehicle_Click; ;
+            FindViewById<Button>(Resource.Id.btnMyVehicle).Click += BtnMyVehicle_Click;
             FindViewById<Button>(Resource.Id.btnLogout).Click += BtnLogout_Click;
         }
 
