@@ -1,4 +1,5 @@
-﻿using CarRepairShopSupportSystem.BLL.IService;
+﻿using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using Newtonsoft.Json;
 using System;
@@ -22,7 +23,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
             this.applicationSessionService = applicationSessionService;
         }
 
-        public bool Register(User user)
+        public OperationResult Register(User user)
         {
             try
             {
@@ -35,13 +36,15 @@ namespace CarRepairShopSupportSystem.BLL.Service
                 var tokenResponse = client.PostAsync(Setting.addressAPI + "api/Users", content).Result;
                 if (tokenResponse.IsSuccessStatusCode)
                 {
-                    return true;
+                    return new OperationResult { ResultCode = ResultCode.Successful };
                 }
-                return false;
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
             }
             catch (Exception)
             {
-                return false;
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z rejestracją" };
             }
             finally
             {

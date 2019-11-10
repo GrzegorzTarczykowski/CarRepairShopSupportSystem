@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
@@ -20,9 +21,11 @@ namespace CarRepairShopSupportSystem.Activity
     public class RegisterActivity : AppCompatActivity
     {
         private readonly IRegisterService registerService;
+        private readonly IEmailService emailService;
         public RegisterActivity()
         {
             registerService = new RegisterService(new AccessTokenService(new ApplicationSessionService(), new TokenService()), new ApplicationSessionService());
+            emailService = new EmailService();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -49,6 +52,10 @@ namespace CarRepairShopSupportSystem.Activity
             else if (string.IsNullOrWhiteSpace(FindViewById<EditText>(Resource.Id.editTextEmail).Text))
             {
                 Toast.MakeText(Application.Context, "Uzupełnij email", ToastLength.Long).Show();
+            }
+            else if (!emailService.IsValid(FindViewById<EditText>(Resource.Id.editTextEmail).Text))
+            {
+                Toast.MakeText(Application.Context, "Niepoprawny mail", ToastLength.Long).Show();
             }
             else if (string.IsNullOrWhiteSpace(FindViewById<EditText>(Resource.Id.editTextPhoneNumber).Text))
             {
@@ -78,16 +85,16 @@ namespace CarRepairShopSupportSystem.Activity
                     Email = FindViewById<EditText>(Resource.Id.editTextEmail).Text,
                     PhoneNumber = FindViewById<EditText>(Resource.Id.editTextPhoneNumber).Text
                 };
-                
-                bool succesfull = registerService.Register(user);
-                if (succesfull)
+
+                OperationResult operationResult = registerService.Register(user);
+                if (operationResult.ResultCode == ResultCode.Successful)
                 {
                     SetResult(Result.Ok);
                     this.Finish();
                 }
                 else
                 {
-                    Toast.MakeText(Application.Context, "Nieudana próba rejestracji", ToastLength.Long).Show();
+                    Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
                 }
             }
         }

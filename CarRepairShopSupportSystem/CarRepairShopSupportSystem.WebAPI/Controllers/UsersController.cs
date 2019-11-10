@@ -97,9 +97,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 case RegisterServiceResponse.DuplicateEmail:
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Istnieje juz użykownik o podanym emailu");
                 case RegisterServiceResponse.ErrorRegister:
-                    return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Nieoczekiwany bład");
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
                 default:
-                    return Request.CreateErrorResponse(HttpStatusCode.NotImplemented, "Nieoczekiwany bład");
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
             }
         }
 

@@ -3026,10 +3026,10 @@ namespace CarRepairShopSupportSystem
 			public const int activity_menu = 2131361819;
 			
 			// aapt resource value: 0x7F0A001C
-			public const int activity_myVehicleList = 2131361820;
+			public const int activity_register = 2131361820;
 			
 			// aapt resource value: 0x7F0A001D
-			public const int activity_register = 2131361821;
+			public const int activity_vehicleList = 2131361821;
 			
 			// aapt resource value: 0x7F0A001E
 			public const int design_bottom_navigation_item = 2131361822;

@@ -44,15 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="IService\IAccessTokenService.cs" />
     <Compile Include="IService\IApiHttpClient.cs" />
     <Compile Include="IService\IApplicationSessionService.cs" />
     <Compile Include="IService\ICryptographyService.cs" />
+    <Compile Include="IService\IEmailService.cs" />
     <Compile Include="IService\ILoginService.cs" />
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\ITokenService.cs" />
     <Compile Include="IService\IWebApiAccessService.cs" />
     <Compile Include="Models\ApplicationSession.cs" />
+    <Compile Include="Models\OperationResult.cs" />
     <Compile Include="Models\ResourceUri.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Token.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Service\AccessTokenService.cs" />
     <Compile Include="Service\ApplicationSessionService.cs" />
     <Compile Include="Service\CryptographyService.cs" />
+    <Compile Include="Service\EmailService.cs" />
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\RegisterService.cs" />
     <Compile Include="Service\TmpService.cs" />
@@ -71,5 +75,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

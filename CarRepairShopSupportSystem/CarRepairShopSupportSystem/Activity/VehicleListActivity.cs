@@ -15,12 +15,12 @@ using CarRepairShopSupportSystem.Adapter;
 namespace CarRepairShopSupportSystem.Activity
 {
     [Activity(Label = "Moje pojazdy")]
-    public class MyVehicleListActivity : AppCompatActivity
+    public class VehicleListActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_myVehicleList);
+            SetContentView(Resource.Layout.activity_vehicleList);
             GridView gvVehicleList = FindViewById<GridView>(Resource.Id.gvVehicleList);
             gvVehicleList.Adapter = new VehicleAdapter(this, null);
         }

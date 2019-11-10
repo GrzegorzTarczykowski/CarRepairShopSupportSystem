@@ -16,7 +16,7 @@ namespace CarRepairShopSupportSystem.Activity
     [Activity(Label = "Menu")]
     public class MenuActivity : AppCompatActivity
     {
-        private const int myVehicleListRequestCode = 1;
+        private const int vehicleListRequestCode = 1;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -27,8 +27,8 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnMyVehicle_Click(object sender, EventArgs e)
         {
-            Intent nextActivity = new Intent(this, typeof(MyVehicleListActivity));
-            StartActivityForResult(nextActivity, myVehicleListRequestCode);
+            Intent nextActivity = new Intent(this, typeof(VehicleListActivity));
+            StartActivityForResult(nextActivity, vehicleListRequestCode);
         }
 
         private void BtnLogout_Click(object sender, EventArgs e)
