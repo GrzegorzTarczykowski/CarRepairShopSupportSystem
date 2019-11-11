@@ -15,8 +15,6 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
 
         public int UserId { get; set; }
         public User User { get; set; }
-        public int VehicleBrandId { get; set; }
-        public VehicleBrand VehicleBrand { get; set; }
         public int VehicleColourId { get; set; }
         public VehicleColour VehicleColour { get; set; }
         public int VehicleEngineId { get; set; }

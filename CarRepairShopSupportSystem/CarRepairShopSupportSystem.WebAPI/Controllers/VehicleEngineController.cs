@@ -10,9 +10,8 @@ using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
-    public class VehicleEngineController : ABaseApiController<VehicleEngine>
+    public class VehicleEngineController : ACRUDApiController<VehicleEngine>
     {
-        //new Repository<T>(new MsSqlServerContext(), new UnitOfWork())
         public VehicleEngineController(IRepository<VehicleEngine> repository) : base(repository)
         {
         }

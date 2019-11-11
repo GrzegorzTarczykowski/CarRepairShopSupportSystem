@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,7 +28,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
             {
                 ApplicationSession.userName = "TestGuest";
                 ApplicationSession.userPassword = "1";
-                HttpResponseMessage tokenResponse = httpClientService.Post("api/Users", user);
+                HttpResponseMessage tokenResponse = httpClientService.Post("api/User", user);
 
                 if (tokenResponse.IsSuccessStatusCode)
                 {

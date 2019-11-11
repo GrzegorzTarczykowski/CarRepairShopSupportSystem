@@ -12,30 +12,15 @@ using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
-    public class UsersController : ABaseApiController<User>
+    public class UserController : ACRUDApiController<User>
     {
         private readonly ILoginService loginService;
         private readonly IRegisterService registerService;
 
-        public UsersController(IRepository<User> repository, ILoginService loginService, IRegisterService registerService) : base(repository)
+        public UserController(IRepository<User> repository, ILoginService loginService, IRegisterService registerService) : base(repository)
         {
             this.loginService = loginService;
             this.registerService = registerService;
-        }
-
-        [HttpGet]
-        // GET api/<controller>
-        public IEnumerable<User> Get()
-        {
-            return GetBase();
-        }
-
-        [HttpGet]
-        // GET api/<controller>/5
-        public User Get(int id)
-        {
-            return GetBase(id);
         }
 
         [Authorize(Roles = "SuperAdmin, Admin, User")]
@@ -61,31 +46,35 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         // POST api/<controller>
         public HttpResponseMessage Post([FromBody]Models.User value)
         {
-            User user = new User()
+            return PostBase(delegate
             {
-                Username = value.Username,
-                Password = value.Password,
-                FirstName = value.FirstName,
-                LastName = value.LastName,
-                Email = value.Email,
-                PhoneNumber = value.PhoneNumber
-            };
-            RegisterServiceResponse registerServiceResponse =  registerService.Register(user);
-            switch (registerServiceResponse)
-            {
-                case RegisterServiceResponse.SuccessRegister:
-                    return new HttpResponseMessage(HttpStatusCode.OK);
-                case RegisterServiceResponse.DuplicateUsername:
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Istnieje juz użykownik o podanej nazwie");
-                case RegisterServiceResponse.DuplicateEmail:
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Istnieje juz użykownik o podanym emailu");
-                case RegisterServiceResponse.ErrorRegister:
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
-                default:
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
-            }
+                User user = new User()
+                {
+                    Username = value.Username,
+                    Password = value.Password,
+                    FirstName = value.FirstName,
+                    LastName = value.LastName,
+                    Email = value.Email,
+                    PhoneNumber = value.PhoneNumber
+                };
+                RegisterServiceResponse registerServiceResponse = registerService.Register(user);
+                switch (registerServiceResponse)
+                {
+                    case RegisterServiceResponse.SuccessRegister:
+                        return new HttpResponseMessage(HttpStatusCode.OK);
+                    case RegisterServiceResponse.DuplicateUsername:
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Istnieje juz użykownik o podanej nazwie");
+                    case RegisterServiceResponse.DuplicateEmail:
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Istnieje juz użykownik o podanym emailu");
+                    case RegisterServiceResponse.ErrorRegister:
+                        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
+                    default:
+                        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
+                }
+            });
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]User value)
@@ -93,6 +82,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return PutBase(id == value.UserId, value);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [HttpDelete]
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)

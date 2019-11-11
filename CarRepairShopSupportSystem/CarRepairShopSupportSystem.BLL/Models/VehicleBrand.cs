@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.Models
 {
-    public class Vehicle
+    public class VehicleBrand
     {
-        public int EngineMileage { get; set; }
-        public string RegistrationNumbers { get; set; }
-        public string VehicleModelName { get; set; }
+        public int VehicleBrandId { get; set; }
+        public string Name { get; set; }
     }
 }

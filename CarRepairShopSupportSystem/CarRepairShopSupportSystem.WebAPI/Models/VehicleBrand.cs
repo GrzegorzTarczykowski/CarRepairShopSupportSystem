@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
+namespace CarRepairShopSupportSystem.WebAPI.Models
 {
     public class VehicleBrand
     {
         public int VehicleBrandId { get; set; }
         public string Name { get; set; }
-
-        public virtual ICollection<VehicleModel> VehicleModels { get; set; }
     }
 }

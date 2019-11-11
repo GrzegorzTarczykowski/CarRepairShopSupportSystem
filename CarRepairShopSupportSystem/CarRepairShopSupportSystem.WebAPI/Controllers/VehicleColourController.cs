@@ -10,9 +10,8 @@ using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
-    public class VehicleColourController : ABaseApiController<VehicleColour>
+    public class VehicleColourController : ACRUDApiController<VehicleColour>
     {
-        //new Repository<T>(new MsSqlServerContext(), new UnitOfWork())
         public VehicleColourController(IRepository<VehicleColour> repository) : base(repository)
         {
         }

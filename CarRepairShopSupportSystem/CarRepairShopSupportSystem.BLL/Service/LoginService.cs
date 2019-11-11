@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +27,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
             {
                 ApplicationSession.userName = username;
                 ApplicationSession.userPassword = password;
-                HttpResponseMessage APIResponse = httpClientService.Get($"api/Users?username={username}&password={password}");
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/User?username={username}&password={password}");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;

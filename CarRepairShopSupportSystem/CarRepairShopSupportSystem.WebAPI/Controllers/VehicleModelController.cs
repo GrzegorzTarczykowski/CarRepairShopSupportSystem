@@ -10,37 +10,47 @@ using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
-    public class VehicleModelController : ABaseApiController<VehicleModel>
+    public class VehicleModelController : ACRUDApiController<VehicleModel>
     {
-        //new Repository<T>(new MsSqlServerContext(), new UnitOfWork())
         public VehicleModelController(IRepository<VehicleModel> repository) : base(repository)
         {
         }
 
-        // GET api/<controller>
-        public IEnumerable<VehicleModel> Get()
+        [Route("api/VehicleModel/GetByVehicleBrandId")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        [HttpGet]
+        public IEnumerable<Models.VehicleModel> GetByVehicleBrandId([FromUri]int vehicleBrandId)
         {
-            return GetBase();
+            return GetByBase(vm => vm.VehicleBrandId == vehicleBrandId)
+                ?.Select(vm => new Models.VehicleModel { VehicleModelId = vm.VehicleModelId, Name = vm.Name });
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
         // GET api/<controller>/5
         public VehicleModel Get(int id)
         {
             return GetBase(id);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPost]
         // POST api/<controller>
         public HttpResponseMessage Post([FromBody]VehicleModel value)
         {
             return PostBase(value);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]VehicleModel value)
         {
             return PutBase(id == value.VehicleModelId, value);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpDelete]
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)
         {

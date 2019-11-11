@@ -223,10 +223,11 @@
     <Compile Include="Autofac\RepositoryModule.cs" />
     <Compile Include="Autofac\ServiceModule.cs" />
     <Compile Include="Autofac\UnitOfWorkModule.cs" />
-    <Compile Include="Controllers\Abstraction\ABaseApiController[T].cs" />
+    <Compile Include="Controllers\Abstraction\ABaseApiController.cs" />
+    <Compile Include="Controllers\Abstraction\ACRUDApiController[T].cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\VehicleBrandsController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VehicleBrandController.cs" />
     <Compile Include="Controllers\VehicleColourController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Controllers\VehicleEngineController.cs" />
@@ -238,6 +239,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\VehicleBrand.cs" />
+    <Compile Include="Models\VehicleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +297,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\User\" />
+    <Folder Include="Views\VehicleBrand\" />
     <Folder Include="Views\Vehicle\" />
   </ItemGroup>
   <ItemGroup>

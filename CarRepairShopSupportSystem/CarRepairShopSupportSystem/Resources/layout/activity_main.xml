@@ -26,7 +26,7 @@
         <EditText
             android:id="@+id/editTextPassword"
             android:inputType="textPassword"
-            android:hint="Podaj login"
+            android:hint="Podaj hasło"
             android:textColorHint="#9b0493"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

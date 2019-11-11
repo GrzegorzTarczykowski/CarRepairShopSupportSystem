@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
+namespace CarRepairShopSupportSystem.BLL.Models
 {
     public class VehicleModel
     {
         public int VehicleModelId { get; set; }
         public string Name { get; set; }
-
-        public int VehicleBrandId { get; set; }
-        public VehicleBrand VehicleBrand { get; set; }
-
-        public virtual ICollection<Vehicle> Vehicles { get; set; }
     }
 }

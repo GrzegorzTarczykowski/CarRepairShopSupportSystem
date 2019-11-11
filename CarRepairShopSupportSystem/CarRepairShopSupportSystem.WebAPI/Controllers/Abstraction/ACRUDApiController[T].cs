@@ -1,24 +1,19 @@
 ﻿using CarRepairShopSupportSystem.WebAPI.DAL.Abstraction;
-using CarRepairShopSupportSystem.WebAPI.DAL.Models;
-using CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB;
-using CarRepairShopSupportSystem.WebAPI.DAL.Repository;
-using CarRepairShopSupportSystem.WebAPI.DAL.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
 {
-    public abstract class ABaseApiController<T> : ApiController where T : class
+    public abstract class ACRUDApiController<T> : ABaseApiController where T : class
     {
         private readonly IRepository<T> repository;
 
-        internal protected ABaseApiController(IRepository<T> repository)
+        internal protected ACRUDApiController(IRepository<T> repository)
         {
             this.repository = repository;
         }
@@ -26,46 +21,31 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
         [HttpGet]
         internal protected IEnumerable<T> GetBase()
         {
-            try
-            {
-                return repository.GetAll();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return BaseAction(repository.GetAll);
         }
 
         [HttpGet]
         internal protected IEnumerable<T> GetByBase(Expression<Func<T, bool>> predicate)
         {
-            try
-            {
-                return repository.FindBy(predicate);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return BaseAction(delegate 
+            { 
+                return repository.FindBy(predicate); 
+            });
         }
 
         [HttpGet]
         internal protected T GetBase(int id)
         {
-            try
+            return BaseAction(delegate
             {
                 return repository.FindById(id);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            });
         }
 
         [HttpGet]
         internal protected HttpResponseMessage GetIsAny(Expression<Func<T, bool>> predicate)
         {
-            try
+            return BaseAction(delegate
             {
                 if (repository.Any(predicate))
                 {
@@ -75,41 +55,32 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
                 {
                     return new HttpResponseMessage(HttpStatusCode.NotFound);
                 }
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
+            });
         }
 
         [HttpPost]
         internal protected HttpResponseMessage PostBase(T value)
         {
-            try
+            return BaseAction(delegate
             {
-                if (ModelState.IsValid)
-                {
-                    repository.Add(value);
-                    repository.SaveChanges();
-                    return new HttpResponseMessage(HttpStatusCode.OK);
-                }
-                else
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                }
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
+                repository.Add(value);
+                repository.SaveChanges();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            });
+        }
+
+        [HttpPost]
+        internal protected HttpResponseMessage PostBase(Func<HttpResponseMessage> func)
+        {
+            return BaseAction(func);
         }
 
         [HttpPut]
         internal protected HttpResponseMessage PutBase(bool isSameEntity, T value)
         {
-            try
+            return BaseAction(delegate
             {
-                if (ModelState.IsValid && isSameEntity)
+                if (isSameEntity)
                 {
                     repository.Edit(value);
                     repository.SaveChanges();
@@ -119,17 +90,19 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
+            });
+        }
+
+        [HttpPut]
+        internal protected HttpResponseMessage PutBase(Func<HttpResponseMessage> func)
+        {
+            return BaseAction(func);
         }
 
         [HttpDelete]
         internal protected HttpResponseMessage DeleteBase(int id)
         {
-            try
+            return BaseAction(delegate
             {
                 T entity = repository.FindById(id);
                 if (entity != null)
@@ -142,11 +115,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Not Found");
                 }
-            }
-            catch (Exception)
-            {
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            }
+            });
         }
     }
 }

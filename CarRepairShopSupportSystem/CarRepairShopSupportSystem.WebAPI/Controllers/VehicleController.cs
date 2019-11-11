@@ -5,26 +5,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace CarRepairShopSupportSystem.WebAPI.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
-    public class VehicleController : ABaseApiController<Vehicle>
+    public class VehicleController : ACRUDApiController<Vehicle>
     {
         public VehicleController(IRepository<Vehicle> repository) : base(repository)
         {
         }
 
-        [Route("api/Vehicles/GetByUserId/{userId}")]
+        [Route("api/Vehicle/GetByUserId")]
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
-        public IEnumerable<Vehicle> GetByUserId(int userId)
+        public IEnumerable<Vehicle> GetByUserId([FromUri]int userId)
         {
             return GetByBase(v => v.UserId == userId);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>/5
         public Vehicle Get(int id)
@@ -32,6 +31,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return GetBase(id);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpPost]
         // POST api/<controller>
         public HttpResponseMessage Post([FromBody]Vehicle value)
@@ -39,6 +39,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return PostBase(value);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]Vehicle value)
@@ -46,6 +47,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return PutBase(id == value.VehicleId, value);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [HttpDelete]
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)

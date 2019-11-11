@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.IService
 {
-    public interface IVehicleService
+    public interface IVehicleBrandService
     {
-        OperationResult AddUserVehicle(Vehicle vehicle);
-        IEnumerable<Vehicle> GetVehicleListByUserId(int userId);
+        IEnumerable<VehicleBrand> GetAllVehicleBrandList();
     }
 }

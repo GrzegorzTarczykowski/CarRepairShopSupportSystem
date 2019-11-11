@@ -37,7 +37,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             IList<User> defaultUsers = new List<User>();
 
-            defaultUsers.Add(new User() { Username = "TestAdmin"
+            defaultUsers.Add(new User() { Username = "TestSuperAdmin"
                                         , Salt = new byte[32] { 20, 10, 150, 5, 15, 45, 60, 80,
                                                                 20, 10, 150, 5, 15, 45, 60, 80,
                                                                 20, 10, 150, 5, 15, 45, 60, 80,
@@ -51,6 +51,28 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                         , LastLogin = DateTime.Now
                                         , PermissionId = 1
                                         , Permission = defaultPermissions[0] });
+
+            defaultUsers.Add(new User() { Username = "TestAdmin"
+                                        , Salt = new byte[32] { 20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80 }
+                                        , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
+                                        , CreateDate = DateTime.Now
+                                        , LastLogin = DateTime.Now
+                                        , PermissionId = 2
+                                        , Permission = defaultPermissions[1] });
+
+            defaultUsers.Add(new User() { Username = "TestUser"
+                                        , Salt = new byte[32] { 20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80,
+                                                                20, 10, 150, 5, 15, 45, 60, 80 }
+                                        , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
+                                        , CreateDate = DateTime.Now
+                                        , LastLogin = DateTime.Now
+                                        , PermissionId = 3
+                                        , Permission = defaultPermissions[2] });
 
             defaultUsers.Add(new User() { Username = "TestGuest"
                                         , Salt = new byte[32] { 20, 10, 150, 5, 15, 45, 60, 80,
@@ -75,12 +97,12 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             IList<VehicleModel> defaultVehicleModels = new List<VehicleModel>();
 
-            defaultVehicleModels.Add(new VehicleModel() { Name = "Audi A8" });
-            defaultVehicleModels.Add(new VehicleModel() { Name = "Audi Q8" });
-            defaultVehicleModels.Add(new VehicleModel() { Name = "BMW Serii 1" });
-            defaultVehicleModels.Add(new VehicleModel() { Name = "BMW X7" });
-            defaultVehicleModels.Add(new VehicleModel() { Name = "Mercedes Klasa C" });
-            defaultVehicleModels.Add(new VehicleModel() { Name = "Mercedes Klasa E" });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "A8", VehicleBrandId = 1 });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Q8", VehicleBrandId = 1 });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Serii 1", VehicleBrandId = 2 });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "X7", VehicleBrandId = 2 });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Klasa C", VehicleBrandId = 3 });
+            defaultVehicleModels.Add(new VehicleModel() { Name = "Klasa E", VehicleBrandId = 3 });
 
             context.VehicleModels.AddRange(defaultVehicleModels);
 
