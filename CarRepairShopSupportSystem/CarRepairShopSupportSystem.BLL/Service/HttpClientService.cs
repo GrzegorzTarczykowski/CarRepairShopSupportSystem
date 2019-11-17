@@ -51,5 +51,22 @@ namespace CarRepairShopSupportSystem.BLL.Service
                 throw;
             }
         }
+
+        public HttpResponseMessage Put(string requestUri, object content)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessTokenService.GetAccessToken());
+                    HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+                    return client.PutAsync(Setting.addressAPI + requestUri, httpContent).Result;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

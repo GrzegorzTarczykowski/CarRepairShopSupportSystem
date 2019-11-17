@@ -28,19 +28,41 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override Java.Lang.Object GetItem(int position)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public override long GetItemId(int position)
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            TextView dummyTextView = new TextView(context);
-            dummyTextView.Text = vehicles[position].VehicleModelName;
-            return dummyTextView;
+            LinearLayout linearLayout;
+
+            if (convertView == null)
+            {
+                linearLayout = new LinearLayout(context);
+                linearLayout.Orientation = Orientation.Vertical;
+                TextView tvBrandNameAndModelName = new TextView(context)
+                {
+                    TextSize = 40,
+                    Text = $"{vehicles[position].VehicleBrandName} {vehicles[position].VehicleModelName}"
+                };
+                linearLayout.AddView(tvBrandNameAndModelName);
+                TextView tvRegistrationNumbers = new TextView(context)
+                {
+                    TextSize = 20,
+                    Text = $"Numer rejestracyjny: {vehicles[position].RegistrationNumbers}"
+                };
+                linearLayout.AddView(tvRegistrationNumbers);
+            }
+            else
+            {
+                linearLayout = (LinearLayout)convertView;
+            }
+            
+            return linearLayout;
         }
     }
 }

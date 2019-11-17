@@ -95,6 +95,22 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             context.VehicleBrands.AddRange(defaultVehicleBrands);
 
+            IList<VehicleEngine> defaultVehicleEngines = new List<VehicleEngine>();
+
+            defaultVehicleEngines.Add(new VehicleEngine() { EngineCode = "ALZ", CapacityCCM = 1595, PowerKW = 75 });
+            defaultVehicleEngines.Add(new VehicleEngine() { EngineCode = "BFB", CapacityCCM = 1781, PowerKW = 120 });
+            defaultVehicleEngines.Add(new VehicleEngine() { EngineCode = "BKE", CapacityCCM = 1896, PowerKW = 85 });
+
+            context.VehicleEngines.AddRange(defaultVehicleEngines);
+
+            IList<VehicleFuel> defaultVehicleFuels = new List<VehicleFuel>();
+
+            defaultVehicleFuels.Add(new VehicleFuel() { Name = "Benzyna" });
+            defaultVehicleFuels.Add(new VehicleFuel() { Name = "Olej napędowy" });
+            defaultVehicleFuels.Add(new VehicleFuel() { Name = "LPG" });
+
+            context.VehicleFuels.AddRange(defaultVehicleFuels);
+
             IList<VehicleModel> defaultVehicleModels = new List<VehicleModel>();
 
             defaultVehicleModels.Add(new VehicleModel() { Name = "A8", VehicleBrandId = 1 });
@@ -126,6 +142,24 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
             defaultVehicleTypes.Add(new VehicleType() { Name = "Big Truck" });
 
             context.VehicleTypes.AddRange(defaultVehicleTypes);
+
+            IList<Vehicle> defaultVehicles = new List<Vehicle>();
+
+            defaultVehicles.Add(new Vehicle() { EngineMileage = 123
+                                                , RegistrationNumbers = "123"
+                                                , Description = string.Empty
+                                                , UserId = 1
+                                                , User = defaultUsers[0]
+                                                , VehicleEngineId = 1
+                                                , VehicleEngine = defaultVehicleEngines[0]
+                                                , VehicleFuelId = 1
+                                                , VehicleFuel = defaultVehicleFuels[0]
+                                                , VehicleModelId = 1
+                                                , VehicleModel = defaultVehicleModels[0]
+                                                , VehicleTypeId = 1
+                                                , VehicleType = defaultVehicleTypes[0] });
+
+            context.Vehicles.AddRange(defaultVehicles);
         }
     }
 }

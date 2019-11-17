@@ -73,6 +73,7 @@
     <Compile Include="IService\IRefreshTokenService.cs" />
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\IService.cs" />
+    <Compile Include="IService\IVehicleService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\AuthorizationServerProvider.cs" />
     <Compile Include="Provider\RefreshTokenProvider.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\RefreshTokenService.cs" />
     <Compile Include="Service\RegisterService.cs" />
+    <Compile Include="Service\VehicleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

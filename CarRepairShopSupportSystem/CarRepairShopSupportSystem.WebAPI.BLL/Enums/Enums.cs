@@ -13,4 +13,11 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Enums
         DuplicateEmail,
         ErrorRegister
     }
+    
+    public enum VehicleServiceResponse
+    {
+        SuccessOperationAdd,
+        DuplicateRegistrationNumbers,
+        ErrorOperationAdd
+    }
 }

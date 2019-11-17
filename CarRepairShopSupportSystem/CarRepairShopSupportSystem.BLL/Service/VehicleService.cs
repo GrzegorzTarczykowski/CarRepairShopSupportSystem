@@ -14,16 +14,19 @@ namespace CarRepairShopSupportSystem.BLL.Service
     public class VehicleService : IVehicleService
     {
         private readonly IHttpClientService httpClientService;
+        private readonly IApplicationSessionService applicationSessionService;
 
-        public VehicleService(IHttpClientService httpClientService)
+        public VehicleService(IHttpClientService httpClientService, IApplicationSessionService applicationSessionService)
         {
             this.httpClientService = httpClientService;
+            this.applicationSessionService = applicationSessionService;
         }
 
         public OperationResult AddUserVehicle(Vehicle vehicle)
         {
             try
             {
+                vehicle.UserId = applicationSessionService.GetUserFromApplicationSession().UserId;
                 HttpResponseMessage tokenResponse = httpClientService.Post("api/Vehicle", vehicle);
 
                 if (tokenResponse.IsSuccessStatusCode)
@@ -41,10 +44,33 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
         }
 
-        public IEnumerable<Vehicle> GetVehicleListByUserId(int userId)
+        public OperationResult EditUserVehicle(Vehicle vehicle)
         {
             try
             {
+                vehicle.UserId = applicationSessionService.GetUserFromApplicationSession().UserId;
+                HttpResponseMessage tokenResponse = httpClientService.Put($"api/Vehicle/{vehicle.VehicleId}", vehicle);
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z rejestracją" };
+            }
+        }
+
+        public IEnumerable<Vehicle> GetVehicleListByUserId()
+        {
+            try
+            {
+                int userId = applicationSessionService.GetUserFromApplicationSession().UserId;
                 HttpResponseMessage APIResponse = httpClientService.Get($"api/Vehicle/GetByUserId?userId={userId}");
                 if (APIResponse.IsSuccessStatusCode)
                 {

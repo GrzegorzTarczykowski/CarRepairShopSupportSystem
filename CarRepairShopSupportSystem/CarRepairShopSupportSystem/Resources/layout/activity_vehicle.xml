@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -6,35 +6,76 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundMainGradientSelector">
     <LinearLayout
+        android:layout_margin="10dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:text="Przebieg samochodu:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/editEngineMileage"
             android:focusable="true"
             android:hint="Podaj przebieg samochodu"
             android:textColorHint="#9b0493"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Numer rejestracyjny:"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/editRegistrationNumbers"
             android:hint="Podaj numer rejestracyjny"
             android:textColorHint="#9b0493"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Marka samochodu:"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/spinnerVehicleBrand"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Model samochodu:"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/spinnerVehicleModel"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Silnik:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinnerVehicleEngine"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Paliwo:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinnerVehicleFuel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Typ samochodu:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:id="@+id/spinnerVehicleType"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <Button
             android:text="Dodaj / Modyfikuj"
-            android:id="@+id/btnAddEdit"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnSubmitOperation"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

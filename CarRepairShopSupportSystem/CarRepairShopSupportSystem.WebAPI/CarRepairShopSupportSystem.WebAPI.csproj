@@ -239,8 +239,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehicleBrand.cs" />
+    <Compile Include="Models\VehicleEngine.cs" />
+    <Compile Include="Models\VehicleFuel.cs" />
     <Compile Include="Models\VehicleModel.cs" />
+    <Compile Include="Models\VehicleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

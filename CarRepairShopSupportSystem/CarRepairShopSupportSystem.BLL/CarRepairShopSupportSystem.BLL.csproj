@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="IService\IAccessTokenService.cs" />
     <Compile Include="IService\IApiHttpClient.cs" />
     <Compile Include="IService\IApplicationSessionService.cs" />
@@ -55,8 +56,11 @@
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\ITokenService.cs" />
     <Compile Include="IService\IVehicleBrandService.cs" />
+    <Compile Include="IService\IVehicleEngineService.cs" />
+    <Compile Include="IService\IVehicleFuelService.cs" />
     <Compile Include="IService\IVehicleModelService.cs" />
     <Compile Include="IService\IVehicleService.cs" />
+    <Compile Include="IService\IVehicleTypeService.cs" />
     <Compile Include="IService\IWebApiAccessService.cs" />
     <Compile Include="Models\ApplicationSession.cs" />
     <Compile Include="Models\OperationResult.cs" />
@@ -67,7 +71,10 @@
     <Compile Include="Models\UserToken.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehicleBrand.cs" />
+    <Compile Include="Models\VehicleEngine.cs" />
+    <Compile Include="Models\VehicleFuel.cs" />
     <Compile Include="Models\VehicleModel.cs" />
+    <Compile Include="Models\VehicleType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AccessTokenService.cs" />
     <Compile Include="Service\ApplicationSessionService.cs" />
@@ -78,8 +85,11 @@
     <Compile Include="Service\RegisterService.cs" />
     <Compile Include="Service\TokenService.cs" />
     <Compile Include="Service\VehicleBrandService.cs" />
+    <Compile Include="Service\VehicleEngineService.cs" />
+    <Compile Include="Service\VehicleFuelService.cs" />
     <Compile Include="Service\VehicleModelService.cs" />
     <Compile Include="Service\VehicleService.cs" />
+    <Compile Include="Service\VehicleTypeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

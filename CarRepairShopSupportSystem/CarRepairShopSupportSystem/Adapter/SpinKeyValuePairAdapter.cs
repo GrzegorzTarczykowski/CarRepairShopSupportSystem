@@ -12,10 +12,28 @@ using Android.Widget;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    internal class SpinKeyValuePairAdapter : ArrayAdapter<KeyValuePair<int, string>>
+    internal class SpinKeyValuePairAdapter : ArrayAdapter<string>
     {
-        public SpinKeyValuePairAdapter(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+        private readonly Context context;
+        private readonly KeyValuePair<int, string>[] keyValuePair;
+
+        public SpinKeyValuePairAdapter(Context context, KeyValuePair<int, string>[] keyValuePair) 
+            : base(context, Android.Resource.Layout.SimpleSpinnerItem, keyValuePair.Select(kvp => kvp.Value).ToArray())
         {
+            this.context = context;
+            this.keyValuePair = keyValuePair;
+        }
+
+        public override long GetItemId(int position)
+        {
+            return keyValuePair[position].Key;
+        }
+
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            TextView dummyTextView = new TextView(context);
+            dummyTextView.Text = keyValuePair[position].Value;
+            return dummyTextView;
         }
     }
 }

@@ -4,19 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundMainGradientSelector">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <Button
             android:text="Dodaj pojazd"
             android:id="@+id/btnAddVehicle"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <GridView
             android:id="@+id/gvVehicleList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:columnWidth="100dp"
-            android:numColumns="auto_fit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="350dp"
+            android:numColumns="1"
             android:verticalSpacing="24dp"
             android:horizontalSpacing="10dp"
             android:stretchMode="spacingWidthUniform"/>
+    </LinearLayout>
 </LinearLayout>
