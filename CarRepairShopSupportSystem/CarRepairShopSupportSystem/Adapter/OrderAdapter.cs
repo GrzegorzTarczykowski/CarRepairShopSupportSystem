@@ -10,31 +10,32 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Models;
+using Java.Lang;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    internal class VehicleAdapter : BaseAdapter
+    class OrderAdapter : BaseAdapter
     {
         private readonly Context context;
-        private readonly Vehicle[] vehicles;
+        private readonly Order[] orders;
 
-        public VehicleAdapter(Context context, Vehicle[] vehicles)
+        public OrderAdapter(Context context, Order[] orders)
         {
             this.context = context;
-            this.vehicles = vehicles;
+            this.orders = orders;
         }
 
-        public override int Count => vehicles.Length;
+        public override int Count => throw new NotImplementedException();
 
         public override Java.Lang.Object GetItem(int position)
         {
-            return JsonConvert.SerializeObject(vehicles[position]);
+            return JsonConvert.SerializeObject(orders[position]);
         }
 
         public override long GetItemId(int position)
         {
-            return vehicles[position].VehicleId;
+            return orders[position].VehicleId;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -48,21 +49,15 @@ namespace CarRepairShopSupportSystem.Adapter
                 TextView tvBrandNameAndModelName = new TextView(context)
                 {
                     TextSize = 40,
-                    Text = $"{vehicles[position].VehicleBrandName} {vehicles[position].VehicleModelName}"
+                    Text = $"{orders[position].CreateDate} {orders[position].EndDateOfRepair}"
                 };
                 linearLayout.AddView(tvBrandNameAndModelName);
-                TextView tvRegistrationNumbers = new TextView(context)
-                {
-                    TextSize = 20,
-                    Text = $"Numer rejestracyjny: {vehicles[position].RegistrationNumbers}"
-                };
-                linearLayout.AddView(tvRegistrationNumbers);
             }
             else
             {
                 linearLayout = (LinearLayout)convertView;
             }
-            
+
             return linearLayout;
         }
     }

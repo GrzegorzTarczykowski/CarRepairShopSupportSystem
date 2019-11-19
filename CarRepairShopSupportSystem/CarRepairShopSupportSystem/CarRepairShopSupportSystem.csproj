@@ -66,6 +66,7 @@
     <Compile Include="Activity\VehicleActivity.cs" />
     <Compile Include="Activity\VehicleDetailsActivity.cs" />
     <Compile Include="Activity\VehicleListActivity.cs" />
+    <Compile Include="Adapter\OrderAdapter.cs" />
     <Compile Include="Adapter\SpinKeyValuePairAdapter.cs" />
     <Compile Include="Adapter\VehicleAdapter.cs" />
     <Compile Include="Handler\AlertHandler.cs" />

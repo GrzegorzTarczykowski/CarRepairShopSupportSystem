@@ -11,23 +11,20 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.Service
 {
-    public class VehicleService : IVehicleService
+    public class OrderService : IOrderService
     {
         private readonly IHttpClientService httpClientService;
-        private readonly IApplicationSessionService applicationSessionService;
 
-        public VehicleService(IHttpClientService httpClientService, IApplicationSessionService applicationSessionService)
+        public OrderService(IHttpClientService httpClientService)
         {
             this.httpClientService = httpClientService;
-            this.applicationSessionService = applicationSessionService;
         }
 
-        public OperationResult AddUserVehicle(Vehicle vehicle)
+        public OperationResult AddVehicleOrder(Order order)
         {
             try
             {
-                vehicle.UserId = applicationSessionService.GetUserFromApplicationSession().UserId;
-                HttpResponseMessage tokenResponse = httpClientService.Post("api/Vehicle", vehicle);
+                HttpResponseMessage tokenResponse = httpClientService.Post("api/Order", order);
 
                 if (tokenResponse.IsSuccessStatusCode)
                 {
@@ -40,16 +37,15 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
             catch (Exception)
             {
-                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z rejestracją" };
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z tworzeniem zlecenia" };
             }
         }
 
-        public OperationResult EditUserVehicle(Vehicle vehicle)
+        public OperationResult EditVehicleOrder(Order order)
         {
             try
             {
-                vehicle.UserId = applicationSessionService.GetUserFromApplicationSession().UserId;
-                HttpResponseMessage tokenResponse = httpClientService.Put($"api/Vehicle/{vehicle.VehicleId}", vehicle);
+                HttpResponseMessage tokenResponse = httpClientService.Put($"api/Order/{order.OrderId}", order);
 
                 if (tokenResponse.IsSuccessStatusCode)
                 {
@@ -62,26 +58,25 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
             catch (Exception)
             {
-                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem edycja pojazdu" };
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem edycja zlecenia" };
             }
         }
 
-        public IEnumerable<Vehicle> GetVehicleListByUserId()
+        public IEnumerable<Order> GetOrderListByVehicleId(int vehicleId)
         {
             try
             {
-                int userId = applicationSessionService.GetUserFromApplicationSession().UserId;
-                HttpResponseMessage APIResponse = httpClientService.Get($"api/Vehicle/GetByUserId?userId={userId}");
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Order/GetByVehicleId?vehicleId={vehicleId}");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
-                    IEnumerable<Vehicle> matchingVehicleList = JsonConvert.DeserializeObject<IEnumerable<Vehicle>>(JsonContent);
-                    if (matchingVehicleList != null)
+                    IEnumerable<Order> matchingOrderList = JsonConvert.DeserializeObject<IEnumerable<Order>>(JsonContent);
+                    if (matchingOrderList != null)
                     {
-                        return matchingVehicleList;
+                        return matchingOrderList;
                     }
                 }
-                return Enumerable.Empty<Vehicle>();
+                return Enumerable.Empty<Order>();
             }
             catch (Exception)
             {

@@ -20,4 +20,10 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Enums
         DuplicateRegistrationNumbers,
         ErrorOperationAdd
     }
+
+    public enum OrderServiceResponse
+    {
+        SuccessOperationAdd,
+        ErrorOperationAdd
+    }
 }

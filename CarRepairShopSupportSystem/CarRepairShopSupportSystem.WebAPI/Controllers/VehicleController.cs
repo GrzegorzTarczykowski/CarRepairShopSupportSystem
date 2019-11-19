@@ -58,21 +58,11 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpPost]
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody]Models.Vehicle value)
+        public HttpResponseMessage Post([FromBody]Vehicle value)
         {
             return PostBase(delegate
             {
-                Vehicle vehicle = new Vehicle
-                {
-                    EngineMileage = value.EngineMileage,
-                    RegistrationNumbers = value.RegistrationNumbers,
-                    UserId = value.UserId,
-                    VehicleEngineId = value.VehicleEngineId,
-                    VehicleFuelId = value.VehicleFuelId,
-                    VehicleModelId = value.VehicleModelId,
-                    VehicleTypeId = value.VehicleTypeId
-                };
-                VehicleServiceResponse vehicleServiceResponse = vehicleService.AddUserVehicle(vehicle);
+                VehicleServiceResponse vehicleServiceResponse = vehicleService.AddUserVehicle(value);
                 switch (vehicleServiceResponse)
                 {
                     case VehicleServiceResponse.SuccessOperationAdd:
@@ -87,7 +77,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             });
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]Vehicle value)

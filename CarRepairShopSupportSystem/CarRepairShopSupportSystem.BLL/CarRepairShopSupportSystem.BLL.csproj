@@ -53,6 +53,7 @@
     <Compile Include="IService\IEmailService.cs" />
     <Compile Include="IService\IHttpClientService.cs" />
     <Compile Include="IService\ILoginService.cs" />
+    <Compile Include="IService\IOrderService.cs" />
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\ITokenService.cs" />
     <Compile Include="IService\IVehicleBrandService.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="IService\IWebApiAccessService.cs" />
     <Compile Include="Models\ApplicationSession.cs" />
     <Compile Include="Models\OperationResult.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\ResourceUri.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Token.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Service\EmailService.cs" />
     <Compile Include="Service\HttpClientService.cs" />
     <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\RegisterService.cs" />
     <Compile Include="Service\TokenService.cs" />
     <Compile Include="Service\VehicleBrandService.cs" />

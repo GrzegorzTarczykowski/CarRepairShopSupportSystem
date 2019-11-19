@@ -226,6 +226,7 @@
     <Compile Include="Controllers\Abstraction\ABaseApiController.cs" />
     <Compile Include="Controllers\Abstraction\ACRUDApiController[T].cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleBrandController.cs" />
     <Compile Include="Controllers\VehicleColourController.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Models\VehicleBrand.cs" />
@@ -301,6 +303,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Order\" />
     <Folder Include="Views\User\" />
     <Folder Include="Views\VehicleBrand\" />
     <Folder Include="Views\Vehicle\" />

@@ -70,6 +70,7 @@
     <Compile Include="IService\IAuthorizationService.cs" />
     <Compile Include="IService\ICryptographyService.cs" />
     <Compile Include="IService\ILoginService.cs" />
+    <Compile Include="IService\IOrderService.cs" />
     <Compile Include="IService\IRefreshTokenService.cs" />
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\IService.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Provider\RefreshTokenProvider.cs" />
     <Compile Include="Service\CryptographyService.cs" />
     <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\OrderService.cs" />
     <Compile Include="Service\RefreshTokenService.cs" />
     <Compile Include="Service\RegisterService.cs" />
     <Compile Include="Service\VehicleService.cs" />

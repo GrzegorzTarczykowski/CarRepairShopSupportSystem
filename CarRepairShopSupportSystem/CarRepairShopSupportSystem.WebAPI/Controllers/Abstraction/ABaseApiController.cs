@@ -23,7 +23,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
                     return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
@@ -35,7 +35,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
             {
                 return func();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return default;
             }
