@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -11,12 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="Dodaj pojazd"
-            android:id="@+id/btnAddVehicle"
+            android:text="Dodaj usługę"
+            android:id="@+id/btnAddService"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+        <Button
+            android:text="Zatwierdź wybrane usługi"
+            android:id="@+id/btnSubmitSelectedServices"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <GridView
-            android:id="@+id/gvVehicleList"
+            android:id="@+id/gvServiceList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:columnWidth="400dp"

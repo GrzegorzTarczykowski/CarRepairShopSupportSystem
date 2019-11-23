@@ -35,6 +35,15 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             context.Permissions.AddRange(defaultPermissions);
 
+            IList<Service> defaultServices = new List<Service>();
+
+            defaultServices.Add(new Service() { Name = "Diagnoza pojazdu", Description = string.Empty, Price = 50.00M });
+            defaultServices.Add(new Service() { Name = "Wymiana opoy", Description = string.Empty, Price = 20.00M });
+            defaultServices.Add(new Service() { Name = "Wymiana oleju", Description = string.Empty, Price = 50.00M });
+            defaultServices.Add(new Service() { Name = "Wymiana klocków hamulcowych", Description = string.Empty, Price = 100.00M });
+
+            context.Services.AddRange(defaultServices);
+
             IList<User> defaultUsers = new List<User>();
 
             defaultUsers.Add(new User() { Username = "TestSuperAdmin"

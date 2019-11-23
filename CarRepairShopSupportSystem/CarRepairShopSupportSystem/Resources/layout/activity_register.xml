@@ -1,101 +1,115 @@
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundMainGradientSelector">
-<LinearLayout
+    <LinearLayout
         android:layout_margin="10dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-            <TextView
-                android:text="Rejestracja"
-                android:textStyle="bold"
-                android:textSize="35dp"
+        <TextView
+            android:text="Rejestracja"
+            android:textStyle="bold"
+            android:textSize="35dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Nazwa użytkownika:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextUsername"
-                android:focusable="true"
-                android:hint="Podaj nazwe użytkownika"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Imię:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextFirstName"
-                android:hint="Podaj Imię"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Nazwisko:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextLastName"
-                android:focusable="true"
-                android:hint="Podaj nazwisko"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Email:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:inputType="textEmailAddress"
-                android:hint="Podaj email"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Numer telefonu:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextPhoneNumber"
-                android:focusable="true"
-                android:hint="Podaj numer telefonu"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Hasło:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:inputType="textPassword"
-                android:hint="Podaj hasło"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Powtórne hasło:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-             <EditText
-                android:id="@+id/editTextConfirmPassword"
-                android:inputType="textPassword"
-                android:hint="Podaj powtórnie hasło"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:text="Zarejestruj"
-                android:id="@+id/btnRegister"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="Nazwa użytkownika:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextUsername"
+                        android:focusable="true"
+                        android:hint="Podaj nazwe użytkownika"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Imię:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextFirstName"
+                        android:hint="Podaj Imię"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Nazwisko:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextLastName"
+                        android:focusable="true"
+                        android:hint="Podaj nazwisko"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Email:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextEmail"
+                        android:inputType="textEmailAddress"
+                        android:hint="Podaj email"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Numer telefonu:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextPhoneNumber"
+                        android:focusable="true"
+                        android:hint="Podaj numer telefonu"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Hasło:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextPassword"
+                        android:inputType="textPassword"
+                        android:hint="Podaj hasło"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Powtórne hasło:"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/editTextConfirmPassword"
+                        android:inputType="textPassword"
+                        android:hint="Podaj powtórnie hasło"
+                        android:textColorHint="#9b0493"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:text="Zarejestruj"
+                        android:id="@+id/btnRegister"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

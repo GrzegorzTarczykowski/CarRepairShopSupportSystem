@@ -26,7 +26,7 @@ namespace CarRepairShopSupportSystem.Adapter
             this.orders = orders;
         }
 
-        public override int Count => throw new NotImplementedException();
+        public override int Count => orders.Length;
 
         public override Java.Lang.Object GetItem(int position)
         {

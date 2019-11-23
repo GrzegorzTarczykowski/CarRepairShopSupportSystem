@@ -41,7 +41,15 @@ namespace CarRepairShopSupportSystem.Activity
             RefreshVehicleDetailsList(Intent);
             RefreshGvOrderList();
 
+            FindViewById<Button>(Resource.Id.btnAddOrder).Click += BtnAddOrder_Click;
             FindViewById<Button>(Resource.Id.btnEditVehicle).Click += BtnEditVehicle_Click;
+        }
+
+        private void BtnAddOrder_Click(object sender, EventArgs e)
+        {
+            Intent nextActivity = new Intent(this, typeof(ServiceListActivity));
+            nextActivity.PutExtra("VehicleDetails", JsonConvert.SerializeObject(vehicle));
+            StartActivityForResult(nextActivity, vehicleRequestCode);
         }
 
         private void BtnEditVehicle_Click(object sender, EventArgs e)
@@ -57,7 +65,10 @@ namespace CarRepairShopSupportSystem.Activity
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == vehicleRequestCode)
             {
-                RefreshVehicleDetailsList(data);
+                if (resultCode == Result.Ok)
+                {
+                    RefreshVehicleDetailsList(data);
+                }
                 RefreshGvOrderList();
             }
         }

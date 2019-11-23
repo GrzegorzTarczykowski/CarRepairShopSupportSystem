@@ -62,11 +62,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity\MenuActivity.cs" />
+    <Compile Include="Activity\OrderEditorActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
+    <Compile Include="Activity\ServiceListActivity.cs" />
     <Compile Include="Activity\VehicleActivity.cs" />
     <Compile Include="Activity\VehicleDetailsActivity.cs" />
     <Compile Include="Activity\VehicleListActivity.cs" />
     <Compile Include="Adapter\OrderAdapter.cs" />
+    <Compile Include="Adapter\ServiceAdapter.cs" />
     <Compile Include="Adapter\SpinKeyValuePairAdapter.cs" />
     <Compile Include="Adapter\VehicleAdapter.cs" />
     <Compile Include="Handler\AlertHandler.cs" />
@@ -144,6 +147,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_vehicleDetails.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_orderEditor.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_serviceList.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

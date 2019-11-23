@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundMainGradientSelector">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Dodaj zlecenie"
+            android:textStyle="bold"
+            android:textSize="35dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+                    <Button
+                        android:text="Wybór usług"
+                        android:id="@+id/btnService"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:text="Wybór części"
+                        android:id="@+id/btnVehiclePart"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:text="Ustalenie terminu"
+                        android:id="@+id/btnTimetable"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Koszt zlecenia [PLN]:"
+                        android:textSize="25dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tvTotalCostOrder"
+                        android:text="0"
+                        android:textSize="25dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Planowana data rozpoczęcia:"
+                        android:textSize="25dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tvPlannedStartDateOfRepair"
+                        android:text="01-01-1900"
+                        android:textSize="25dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="Planowana data zakończenia:"
+                        android:textSize="25dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tvPlannedEndDateOfRepair"
+                        android:text="01-01-1900"
+                        android:textSize="25dp"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:text="Dodaj zlecenie"
+                        android:id="@+id/btnAddOrder"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
