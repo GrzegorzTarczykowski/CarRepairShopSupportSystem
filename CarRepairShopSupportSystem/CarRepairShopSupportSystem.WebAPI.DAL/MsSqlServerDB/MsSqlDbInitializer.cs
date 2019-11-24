@@ -55,7 +55,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                         , FirstName = "Grzegorz"
                                         , LastName = "Tarcz"
                                         , Email = "jakis@wp.pl"
-                                        , PhoneNumber = "NieDzwonDoMnie"
+                                        , PhoneNumber = 986594394
                                         , CreateDate = DateTime.Now
                                         , LastLogin = DateTime.Now
                                         , PermissionId = 1

@@ -23,6 +23,7 @@
             android:numColumns="1"
             android:verticalSpacing="24dp"
             android:horizontalSpacing="10dp"
-            android:stretchMode="spacingWidthUniform"/>
+            android:stretchMode="spacingWidthUniform"
+            android:scrollbars="vertical"/>
     </LinearLayout>
 </LinearLayout>

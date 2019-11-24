@@ -14,8 +14,8 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "Edytor zleceń")]
-    public class OrderEditorActivity : AppCompatActivity
+    [Activity(Label = "OrderDetailsActivity")]
+    public class OrderDetailsActivity : AppCompatActivity
     {
         private const int serviceListRequestCode = 1;
         private IList<BLL.Models.Service> selectedServiceList;
@@ -23,27 +23,33 @@ namespace CarRepairShopSupportSystem.Activity
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_orderEditor);
+            SetContentView(Resource.Layout.activity_orderDetails);
 
             FindViewById<Button>(Resource.Id.btnService).Click += BtnService_Click;
-            FindViewById<Button>(Resource.Id.btnVehiclePart).Click += BtnVehiclePart_Click;
-            FindViewById<Button>(Resource.Id.btnTimetable).Click += BtnTimetable_Click;
-            FindViewById<Button>(Resource.Id.btnAddOrder).Click += BtnAddOrder_Click;
+            FindViewById<Button>(Resource.Id.btnSentMessages).Click += BtnSentMessages_Click;
+            FindViewById<Button>(Resource.Id.btnReceivedMessages).Click += BtnReceivedMessages_Click;
+            FindViewById<Button>(Resource.Id.btnDeleteOrder).Click += BtnDeleteOrder_Click;
+            FindViewById<Button>(Resource.Id.btnNextOrder).Click += BtnNextOrder_Click;
         }
 
-        private void BtnAddOrder_Click(object sender, EventArgs e)
+        private void BtnNextOrder_Click(object sender, EventArgs e)
         {
-            
+            //throw new NotImplementedException();
         }
 
-        private void BtnTimetable_Click(object sender, EventArgs e)
+        private void BtnDeleteOrder_Click(object sender, EventArgs e)
         {
-            
+            //throw new NotImplementedException();
         }
 
-        private void BtnVehiclePart_Click(object sender, EventArgs e)
+        private void BtnReceivedMessages_Click(object sender, EventArgs e)
         {
-            
+            //throw new NotImplementedException();
+        }
+
+        private void BtnSentMessages_Click(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         private void BtnService_Click(object sender, EventArgs e)
@@ -61,7 +67,6 @@ namespace CarRepairShopSupportSystem.Activity
                 if (resultCode == Result.Ok)
                 {
                     selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(data.GetStringExtra("SelectedServiceList"));
-                    FindViewById<TextView>(Resource.Id.tvTotalCostOrder).Text = selectedServiceList.Sum(ss => ss.Price).ToString();
                 }
             }
         }

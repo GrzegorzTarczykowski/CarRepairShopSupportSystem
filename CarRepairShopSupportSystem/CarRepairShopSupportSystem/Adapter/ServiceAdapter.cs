@@ -17,11 +17,13 @@ namespace CarRepairShopSupportSystem.Adapter
     {
         private readonly Context context;
         private readonly Service[] services;
+        private readonly Service[] selectedServices;
 
-        public ServiceAdapter(Context context, Service[] services)
+        public ServiceAdapter(Context context, Service[] services, Service[] selectedServices)
         {
             this.context = context;
             this.services = services;
+            this.selectedServices = selectedServices;
         }
 
         public override int Count => services.Length;
@@ -38,46 +40,40 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            ScrollView scrollView;
+            LinearLayout linearLayout;
 
             if (convertView == null)
             {
-                scrollView = new ScrollView(context);
-                RelativeLayout relativeLayout = new RelativeLayout(context);
-                LinearLayout linearLayout = new LinearLayout(context);
+                linearLayout = new LinearLayout(context);
                 linearLayout.Orientation = Orientation.Vertical;
-                LinearLayout linearLayoutHorizontal = new LinearLayout(context);
-                linearLayoutHorizontal.Orientation = Orientation.Horizontal;
-                CheckBox checkBox = new CheckBox(context);
-                checkBox.Click += CheckBox_Click;
-                linearLayoutHorizontal.AddView(checkBox);
                 TextView tvBrandNameAndModelName = new TextView(context)
                 {
-                    TextSize = 60,
+                    TextSize = 40,
                     Text = $"{services[position].Name}"
                 };
-                linearLayoutHorizontal.AddView(tvBrandNameAndModelName);
-                linearLayout.AddView(linearLayoutHorizontal);
+                linearLayout.AddView(tvBrandNameAndModelName);
                 TextView tvRegistrationNumbers = new TextView(context)
                 {
                     TextSize = 20,
                     Text = $"Cena: {services[position].Price} [PLN]"
                 };
                 linearLayout.AddView(tvRegistrationNumbers);
-                relativeLayout.AddView(linearLayout);
-                scrollView.AddView(relativeLayout);
+
+                if (selectedServices.Any(ss => ss.ServiceId == services[position].ServiceId))
+                {
+                    linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
+                }
+                else
+                {
+                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                }
             }
             else
             {
-                scrollView = (ScrollView)convertView;
+                linearLayout = (LinearLayout)convertView;
             }
 
-            return scrollView;
-        }
-
-        private void CheckBox_Click(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
+            return linearLayout;
         }
     }
 }
