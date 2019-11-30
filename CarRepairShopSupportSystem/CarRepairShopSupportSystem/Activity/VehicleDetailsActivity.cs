@@ -91,7 +91,7 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<TextView>(Resource.Id.tvRegistrationNumbers).Text = vehicle.RegistrationNumbers;
             FindViewById<TextView>(Resource.Id.tvVehicleBrand).Text = vehicle.VehicleBrandName;
             FindViewById<TextView>(Resource.Id.tvVehicleModel).Text = vehicle.VehicleModelName;
-            FindViewById<TextView>(Resource.Id.tvEngineMileage).Text = vehicle.VehicleEngineCode;
+            FindViewById<TextView>(Resource.Id.tvVehicleEngine).Text = vehicle.VehicleEngineCode;
             FindViewById<TextView>(Resource.Id.tvVehicleFuel).Text = vehicle.VehicleFuelName;
             FindViewById<TextView>(Resource.Id.tvVehicleType).Text = vehicle.VehicleTypeName;
         }

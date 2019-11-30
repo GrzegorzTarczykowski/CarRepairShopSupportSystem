@@ -66,12 +66,15 @@
     <Compile Include="Activity\OrderEditorActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
     <Compile Include="Activity\ServiceListActivity.cs" />
+    <Compile Include="Activity\TimetableActivity.cs" />
     <Compile Include="Activity\VehicleActivity.cs" />
     <Compile Include="Activity\VehicleDetailsActivity.cs" />
     <Compile Include="Activity\VehicleListActivity.cs" />
+    <Compile Include="Adapter\CalendarAdapter.cs" />
     <Compile Include="Adapter\OrderAdapter.cs" />
     <Compile Include="Adapter\ServiceAdapter.cs" />
     <Compile Include="Adapter\SpinKeyValuePairAdapter.cs" />
+    <Compile Include="Adapter\TimetableAdapter.cs" />
     <Compile Include="Adapter\VehicleAdapter.cs" />
     <Compile Include="Handler\AlertHandler.cs" />
     <Compile Include="Handler\ExceptionHandler.cs" />
@@ -163,6 +166,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_orderDetails.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_timetable.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

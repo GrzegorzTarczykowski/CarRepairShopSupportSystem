@@ -228,6 +228,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VehicleBrandController.cs" />
     <Compile Include="Controllers\VehicleColourController.cs" />
@@ -307,6 +308,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Service\" />
+    <Folder Include="Views\Timetable\" />
     <Folder Include="Views\User\" />
     <Folder Include="Views\VehicleBrand\" />
     <Folder Include="Views\Vehicle\" />

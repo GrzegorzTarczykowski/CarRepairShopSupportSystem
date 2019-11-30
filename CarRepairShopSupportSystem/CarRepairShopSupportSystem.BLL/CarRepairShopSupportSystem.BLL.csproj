@@ -57,6 +57,7 @@
     <Compile Include="IService\IRegisterService.cs" />
     <Compile Include="IService\IRegularExpressionService.cs" />
     <Compile Include="IService\IServiceService.cs" />
+    <Compile Include="IService\ITimetableService.cs" />
     <Compile Include="IService\ITokenService.cs" />
     <Compile Include="IService\IVehicleBrandService.cs" />
     <Compile Include="IService\IVehicleEngineService.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Models\ResourceUri.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\Timetable.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserToken.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Service\RegisterService.cs" />
     <Compile Include="Service\RegularExpressionService.cs" />
     <Compile Include="Service\ServiceService.cs" />
+    <Compile Include="Service\TimetableService.cs" />
     <Compile Include="Service\TokenService.cs" />
     <Compile Include="Service\VehicleBrandService.cs" />
     <Compile Include="Service\VehicleEngineService.cs" />

@@ -22,6 +22,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<Timetable> Timetables { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleBrand> VehicleBrands { get; set; }

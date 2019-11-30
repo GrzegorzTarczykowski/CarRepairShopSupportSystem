@@ -38,7 +38,8 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnTimetable_Click(object sender, EventArgs e)
         {
-            
+            Intent nextActivity = new Intent(this, typeof(TimetableActivity));
+            StartActivityForResult(nextActivity, serviceListRequestCode);
         }
 
         private void BtnVehiclePart_Click(object sender, EventArgs e)
