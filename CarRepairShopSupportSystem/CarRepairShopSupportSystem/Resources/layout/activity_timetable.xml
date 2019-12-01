@@ -16,6 +16,45 @@
             android:id="@+id/spinnerMonth"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="Nd"
+                android:width="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Pn"
+                android:width="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Wt"
+                android:width="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Sr"
+                android:width="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Cz"
+                android:width="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Pt"
+                android:width="55dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Sb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <GridView
             android:id="@+id/gvCalendar"
             android:layout_width="fill_parent"
@@ -27,18 +66,27 @@
             android:stretchMode="spacingWidthUniform"
             android:scrollbars="vertical"
             android:background="@android:color/darker_gray"/>
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
         <GridView
             android:id="@+id/gvTimetable"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:columnWidth="400dp"
             android:numColumns="1"
-            android:verticalSpacing="24dp"
+            android:verticalSpacing="5dp"
             android:horizontalSpacing="10dp"
             android:stretchMode="spacingWidthUniform"
             android:scrollbars="vertical"/>
+        <TextView
+            android:id="@+id/tvSelectedTimetable"
+            android:textSize="20dp"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Zatwierdz termin"
+            android:enabled="false"
+            android:id="@+id/btnSubmitSelectedTimetable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

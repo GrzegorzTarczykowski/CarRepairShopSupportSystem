@@ -15,9 +15,9 @@ namespace CarRepairShopSupportSystem.Adapter
     internal class SpinKeyValuePairAdapter : ArrayAdapter<string>
     {
         private readonly Context context;
-        private readonly KeyValuePair<int, string>[] keyValuePair;
+        private readonly KeyValuePair<long, string>[] keyValuePair;
 
-        public SpinKeyValuePairAdapter(Context context, KeyValuePair<int, string>[] keyValuePair) 
+        public SpinKeyValuePairAdapter(Context context, KeyValuePair<long, string>[] keyValuePair) 
             : base(context, Android.Resource.Layout.SimpleSpinnerItem, keyValuePair.Select(kvp => kvp.Value).ToArray())
         {
             this.context = context;

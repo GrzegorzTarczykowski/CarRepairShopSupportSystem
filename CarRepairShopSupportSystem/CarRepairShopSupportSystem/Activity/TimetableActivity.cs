@@ -14,7 +14,9 @@ using CarRepairShopSupportSystem.Adapter;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
+using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
+using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
@@ -22,8 +24,10 @@ namespace CarRepairShopSupportSystem.Activity
     public class TimetableActivity : AppCompatActivity
     {
         private readonly ITimetableService timetableService;
+        IEnumerable<TimetablePerDay> timetablesPerDayEnumer;
+        DateTime selectedDateTime;
         GridView gvCalendar;
-        GridView gvTimetable; 
+        GridView gvTimetable;
 
         public TimetableActivity()
         {
@@ -34,27 +38,92 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_timetable);
-
-            Spinner spinnerMonth = FindViewById<Spinner>(Resource.Id.spinnerMonth);
-            List<int> monthList = new List<int> { DateTime.Now.Month, DateTime.Now.Month + 1, DateTime.Now.Month + 2 };
-            spinnerMonth.Adapter = new SpinKeyValuePairAdapter(this, monthList.ToDictionary(ml => ml, ml => ((Month)ml).GetDescription()).ToArray());
-
             gvCalendar = (GridView)FindViewById(Resource.Id.gvCalendar);
-            gvCalendar.Adapter = new CalendarAdapter(this);
             gvCalendar.ItemClick += GvCalendar_ItemClick;
             gvTimetable = (GridView)FindViewById(Resource.Id.gvTimetable);
-            gvTimetable.Adapter = new TimetableAdapter(this);
             gvTimetable.ItemClick += GvTimetable_ItemClick;
+
+            DateTime dateTimeNow = DateTime.Now;
+            Spinner spinnerMonth = FindViewById<Spinner>(Resource.Id.spinnerMonth);
+            List<DateTime> dateTimeList = new List<DateTime> { dateTimeNow, dateTimeNow.AddMonths(1), dateTimeNow.AddMonths(2) };
+            spinnerMonth.Adapter = new SpinKeyValuePairAdapter(this, dateTimeList.ToDictionary(dtl => dtl.Ticks, dtl => $"{((Month)dtl.Month).GetDescription()} {dtl.Year}").ToArray());
+            spinnerMonth.ItemSelected += SpinnerMonth_ItemSelected;
+            Button btnSubmitSelectedTimetable = FindViewById<Button>(Resource.Id.btnSubmitSelectedTimetable);
+            btnSubmitSelectedTimetable.Click += BtnSubmitSelectedTimetable_Click;
         }
 
-        private void GvTimetable_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void BtnSubmitSelectedTimetable_Click(object sender, EventArgs e)
         {
+            Intent intent = new Intent(this, typeof(OrderEditorActivity));
+            intent.PutExtra("SelectedDateTime", JsonConvert.SerializeObject(selectedDateTime));
+            SetResult(Result.Ok, intent);
+            Finish();
+        }
 
+        private void SpinnerMonth_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            selectedDateTime = new DateTime(e.Id);
+            timetablesPerDayEnumer = timetableService.GetTimetableListPerMonth(selectedDateTime.Year, selectedDateTime.Month)
+                                                     .GroupBy(x => x.DateTime.Day)
+                                                     .Select(x => new TimetablePerDay
+                                                     { 
+                                                        Day = x.Key,
+                                                        SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
+                                                        SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
+                                                        SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
+                                                        SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
+                                                     });
+
+            gvCalendar.Adapter = new CalendarAdapter(this, selectedDateTime, timetablesPerDayEnumer);
+            gvTimetable.Adapter = null;
+            TextView tvSelectedTimetable = FindViewById<TextView>(Resource.Id.tvSelectedTimetable);
+            tvSelectedTimetable.Visibility = ViewStates.Invisible;
+            FindViewById<Button>(Resource.Id.btnSubmitSelectedTimetable).Enabled = false;
         }
 
         private void GvCalendar_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            IEnumerable<Timetable> timetables = timetableService.GetTimetableListPerDay(selectedDateTime.Year, selectedDateTime.Month, (int)e.Id);
+                                          
+            TimetablePerDay timetablePerDay = timetablesPerDayEnumer.FirstOrDefault(tpd => tpd.Day == e.Id);
+            timetablePerDay = timetables.GroupBy(x => x.DateTime.Day)
+                                        .Select(x => new TimetablePerDay
+                                        {
+                                            Day = x.Key,
+                                            SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
+                                            SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
+                                            SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
+                                            SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
+                                        })
+                                        .FirstOrDefault();
 
+            List<TimetablePerHour> timetablePerHourList = timetables.GroupBy(x => x.DateTime.Hour)
+                                                                    .Select(x => new TimetablePerHour
+                                                                    {
+                                                                        Hour = x.Key,
+                                                                        SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
+                                                                        SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
+                                                                        SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
+                                                                        SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
+                                                                    })
+                                                                    .ToList();
+
+            gvTimetable.Adapter = new TimetableAdapter(this, timetablePerHourList);
+            e.View.SetBackgroundColor(Android.Graphics.Color.Blue);
+            selectedDateTime = new DateTime(selectedDateTime.Year, selectedDateTime.Month, (int)e.Id);
+            TextView tvSelectedTimetable = FindViewById<TextView>(Resource.Id.tvSelectedTimetable);
+            tvSelectedTimetable.Visibility = ViewStates.Invisible;
+            FindViewById<Button>(Resource.Id.btnSubmitSelectedTimetable).Enabled = false;
+        }
+
+        private void GvTimetable_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            e.View.SetBackgroundColor(Android.Graphics.Color.Blue);
+            selectedDateTime = new DateTime(selectedDateTime.Year, selectedDateTime.Month, selectedDateTime.Day, (int)e.Id, 0, 0);
+            TextView tvSelectedTimetable = FindViewById<TextView>(Resource.Id.tvSelectedTimetable);
+            tvSelectedTimetable.Text = selectedDateTime.ToString();
+            tvSelectedTimetable.Visibility = ViewStates.Visible;
+            FindViewById<Button>(Resource.Id.btnSubmitSelectedTimetable).Enabled = true;
         }
     }
 }

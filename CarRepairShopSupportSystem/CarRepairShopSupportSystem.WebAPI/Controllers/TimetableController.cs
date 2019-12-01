@@ -22,7 +22,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         // GET api/<controller>
         public IEnumerable<Timetable> GetPerHour([FromUri]int year, int month, int day, int hour)
         {
-            return GetByBase(t => t.DateTime == new DateTime(year, month, day, hour, 0, 0));
+            DateTime dateTimeFrom = new DateTime(year, month, day, hour, 0, 0);
+            DateTime dateTimeTo = new DateTime(year, month, day, hour, 0, 0).AddHours(1);
+            return GetByBase(t => t.DateTime >= dateTimeFrom && t.DateTime < dateTimeTo);
         }
 
         [Route("api/Timetable/GetPerDay")]
@@ -31,7 +33,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         // GET api/<controller>
         public IEnumerable<Timetable> GetPerDay([FromUri]int year, int month, int day)
         {
-            return GetByBase(t => t.DateTime == new DateTime(year, month, day));
+            DateTime dateTimeFrom = new DateTime(year, month, day);
+            DateTime dateTimeTo = new DateTime(year, month, day).AddDays(1);
+            return GetByBase(t => t.DateTime >= dateTimeFrom && t.DateTime < dateTimeTo);
         }
 
         [Route("api/Timetable/GetPerMonth")]
@@ -40,7 +44,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         // GET api/<controller>
         public IEnumerable<Timetable> GetPerMonth([FromUri]int year, int month)
         {
-            return GetByBase(t => t.DateTime == new DateTime(year, month, 0));
+            DateTime dateTimeFrom = new DateTime(year, month, 1);
+            DateTime dateTimeTo = new DateTime(year, month, 1).AddMonths(1);
+            return GetByBase(t => t.DateTime >= dateTimeFrom && t.DateTime < dateTimeTo);
         }
 
         [Authorize(Roles = "SuperAdmin")]

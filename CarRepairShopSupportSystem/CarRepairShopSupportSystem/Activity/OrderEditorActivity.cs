@@ -18,6 +18,7 @@ namespace CarRepairShopSupportSystem.Activity
     public class OrderEditorActivity : AppCompatActivity
     {
         private const int serviceListRequestCode = 1;
+        private const int timetableRequestCode = 2;
         private IList<BLL.Models.Service> selectedServiceList;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,7 +40,7 @@ namespace CarRepairShopSupportSystem.Activity
         private void BtnTimetable_Click(object sender, EventArgs e)
         {
             Intent nextActivity = new Intent(this, typeof(TimetableActivity));
-            StartActivityForResult(nextActivity, serviceListRequestCode);
+            StartActivityForResult(nextActivity, timetableRequestCode);
         }
 
         private void BtnVehiclePart_Click(object sender, EventArgs e)
@@ -63,6 +64,14 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(data.GetStringExtra("SelectedServiceList"));
                     FindViewById<TextView>(Resource.Id.tvTotalCostOrder).Text = selectedServiceList.Sum(ss => ss.Price).ToString();
+                }
+            }
+            else if (requestCode == timetableRequestCode)
+            {
+                if (resultCode == Result.Ok)
+                {
+                    DateTime dateTime = JsonConvert.DeserializeObject<DateTime>(data.GetStringExtra("SelectedDateTime"));
+                    FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text = dateTime.ToString();
                 }
             }
         }
