@@ -22,8 +22,9 @@ namespace CarRepairShopSupportSystem.Adapter
         private readonly IEnumerable<TimetablePerDay> timetablePerDayEnumer;
         private readonly int daysInMonth;
         private readonly DayOfWeek dayOfWeekFirstDayOfMouth;
+        private readonly int? selectedPosition;
 
-        public CalendarAdapter(Context context, DateTime dateTime, IEnumerable<TimetablePerDay> timetablePerDayEnumer)
+        public CalendarAdapter(Context context, DateTime dateTime, IEnumerable<TimetablePerDay> timetablePerDayEnumer, int? selectedPosition)
         {
             Calendar calendar = new GregorianCalendar();
             daysInMonth = calendar.GetDaysInMonth(dateTime.Year, dateTime.Month);
@@ -31,6 +32,7 @@ namespace CarRepairShopSupportSystem.Adapter
             dayOfWeekFirstDayOfMouth = calendar.GetDayOfWeek(dateTimeFirstDayOfMouth);
             this.context = context;
             this.timetablePerDayEnumer = timetablePerDayEnumer;
+            this.selectedPosition = selectedPosition;
         }
 
         public override int Count => (daysInMonth + (int)dayOfWeekFirstDayOfMouth);
@@ -58,7 +60,14 @@ namespace CarRepairShopSupportSystem.Adapter
                     textView.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
                     if (timetablePerDayEnumer.FirstOrDefault(tpd => tpd.Day == (1 + position - (int)dayOfWeekFirstDayOfMouth))?.IsAvailableEmployeesForCustomer ?? false)
                     {
-                        textView.SetBackgroundColor(Android.Graphics.Color.Green);
+                        if (position == selectedPosition)
+                        {
+                            textView.SetBackgroundColor(Android.Graphics.Color.Blue);
+                        }
+                        else
+                        {
+                            textView.SetBackgroundColor(Android.Graphics.Color.Green);
+                        }
                     }
                     else
                     {

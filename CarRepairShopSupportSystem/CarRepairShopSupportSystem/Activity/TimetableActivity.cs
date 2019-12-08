@@ -63,52 +63,35 @@ namespace CarRepairShopSupportSystem.Activity
         private void SpinnerMonth_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             selectedDateTime = new DateTime(e.Id);
-            timetablesPerDayEnumer = timetableService.GetTimetableListPerMonth(selectedDateTime.Year, selectedDateTime.Month)
-                                                     .GroupBy(x => x.DateTime.Day)
-                                                     .Select(x => new TimetablePerDay
-                                                     { 
-                                                        Day = x.Key,
-                                                        SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
-                                                        SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
-                                                        SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
-                                                        SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
-                                                     });
-
-            gvCalendar.Adapter = new CalendarAdapter(this, selectedDateTime, timetablesPerDayEnumer);
+            SetGvCalendarAdapter(null);
             gvTimetable.Adapter = null;
             TextView tvSelectedTimetable = FindViewById<TextView>(Resource.Id.tvSelectedTimetable);
             tvSelectedTimetable.Visibility = ViewStates.Invisible;
             FindViewById<Button>(Resource.Id.btnSubmitSelectedTimetable).Enabled = false;
         }
 
+        private void SetGvCalendarAdapter(int? selectedPosition)
+        {
+            timetablesPerDayEnumer = timetableService.GetTimetableListPerMonth(selectedDateTime.Year, selectedDateTime.Month)
+                                                     .Where(x => x.DateTime >= DateTime.Now)
+                                                     .GroupBy(x => x.DateTime.Day)
+                                                     .Select(x => new TimetablePerDay
+                                                     {
+                                                         Day = x.Key,
+                                                         SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
+                                                         SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
+                                                         SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
+                                                         SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
+                                                     });
+
+            gvCalendar.Adapter = new CalendarAdapter(this, selectedDateTime, timetablesPerDayEnumer, selectedPosition);
+        }
+
         private void GvCalendar_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            IEnumerable<Timetable> timetables = timetableService.GetTimetableListPerDay(selectedDateTime.Year, selectedDateTime.Month, (int)e.Id);
-                                          
-            TimetablePerDay timetablePerDay = timetablesPerDayEnumer.FirstOrDefault(tpd => tpd.Day == e.Id);
-            timetablePerDay = timetables.GroupBy(x => x.DateTime.Day)
-                                        .Select(x => new TimetablePerDay
-                                        {
-                                            Day = x.Key,
-                                            SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
-                                            SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
-                                            SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
-                                            SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
-                                        })
-                                        .FirstOrDefault();
-
-            List<TimetablePerHour> timetablePerHourList = timetables.GroupBy(x => x.DateTime.Hour)
-                                                                    .Select(x => new TimetablePerHour
-                                                                    {
-                                                                        Hour = x.Key,
-                                                                        SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
-                                                                        SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
-                                                                        SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
-                                                                        SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
-                                                                    })
-                                                                    .ToList();
-
-            gvTimetable.Adapter = new TimetableAdapter(this, timetablePerHourList);
+            selectedDateTime = new DateTime(selectedDateTime.Year, selectedDateTime.Month, (int)e.Id);
+            SetGvCalendarAdapter(e.Position);
+            SetGvTimetableAdapter(null);
             e.View.SetBackgroundColor(Android.Graphics.Color.Blue);
             selectedDateTime = new DateTime(selectedDateTime.Year, selectedDateTime.Month, (int)e.Id);
             TextView tvSelectedTimetable = FindViewById<TextView>(Resource.Id.tvSelectedTimetable);
@@ -116,8 +99,27 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<Button>(Resource.Id.btnSubmitSelectedTimetable).Enabled = false;
         }
 
+        private void SetGvTimetableAdapter(int? selectedPosition)
+        {
+            List<TimetablePerHour> timetablePerHourList = timetableService.GetTimetableListPerDay(selectedDateTime.Year, selectedDateTime.Month, selectedDateTime.Day)
+                                                                          .Where(x => x.DateTime >= DateTime.Now)
+                                                                          .GroupBy(x => x.DateTime.Hour)
+                                                                          .Select(x => new TimetablePerHour
+                                                                          {
+                                                                              Hour = x.Key,
+                                                                              SumNumberOfEmployeesForCustomer = x.Sum(item => item.NumberOfEmployeesForCustomer),
+                                                                              SumNumberOfEmployeesReservedForCustomer = x.Sum(item => item.NumberOfEmployeesReservedForCustomer),
+                                                                              SumNumberOfEmployeesForManager = x.Sum(item => item.NumberOfEmployeesForManager),
+                                                                              SumNumberOfEmployeesReservedForManager = x.Sum(item => item.NumberOfEmployeesReservedForManager),
+                                                                          })
+                                                                          .ToList();
+
+            gvTimetable.Adapter = new TimetableAdapter(this, timetablePerHourList, selectedPosition);
+        }
+
         private void GvTimetable_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            SetGvTimetableAdapter(e.Position);
             e.View.SetBackgroundColor(Android.Graphics.Color.Blue);
             selectedDateTime = new DateTime(selectedDateTime.Year, selectedDateTime.Month, selectedDateTime.Day, (int)e.Id, 0, 0);
             TextView tvSelectedTimetable = FindViewById<TextView>(Resource.Id.tvSelectedTimetable);

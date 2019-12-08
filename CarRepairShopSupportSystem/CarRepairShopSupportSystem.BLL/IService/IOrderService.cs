@@ -11,6 +11,7 @@ namespace CarRepairShopSupportSystem.BLL.IService
     {
         OperationResult AddVehicleOrder(Order order);
         OperationResult EditVehicleOrder(Order order);
+        Order GetOrderByOrderId(int orderId);
         IEnumerable<Order> GetOrderListByVehicleId(int vehicleId);
     }
 }

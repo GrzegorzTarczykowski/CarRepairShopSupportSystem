@@ -19,11 +19,13 @@ namespace CarRepairShopSupportSystem.Adapter
     {
         private readonly Context context;
         private readonly IList<TimetablePerHour> timetablePerHourList;
+        private readonly int? selectedPosition;
 
-        public TimetableAdapter(Context context, IList<TimetablePerHour> timetablePerHourList)
+        public TimetableAdapter(Context context, IList<TimetablePerHour> timetablePerHourList, int? selectedPosition)
         {
             this.context = context;
             this.timetablePerHourList = timetablePerHourList;
+            this.selectedPosition = selectedPosition;
         }
 
         public override int Count => timetablePerHourList.Count;
@@ -50,7 +52,14 @@ namespace CarRepairShopSupportSystem.Adapter
                 textView.Text = $"      Godzina: {timetablePerHour.Hour}:00";
                 if (timetablePerHour.IsAvailableEmployeesForCustomer)
                 {
-                    textView.SetBackgroundColor(Android.Graphics.Color.Green);
+                    if (position == selectedPosition)
+                    {
+                        textView.SetBackgroundColor(Android.Graphics.Color.Blue);
+                    }
+                    else
+                    {
+                        textView.SetBackgroundColor(Android.Graphics.Color.Green);
+                    }
                 }
                 else
                 {

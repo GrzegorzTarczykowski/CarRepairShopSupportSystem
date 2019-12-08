@@ -48,4 +48,14 @@ namespace CarRepairShopSupportSystem.BLL.Enums
         [Description("Grudzień")]
         December = 12
     }
+
+    public enum OrderStatusId
+    {
+        [Description("Zaplanowana")]
+        Planned = 1,
+        [Description("W trakcie")]
+        InProgress = 2,
+        [Description("Zakończona")]
+        Completed = 3
+    }
 }

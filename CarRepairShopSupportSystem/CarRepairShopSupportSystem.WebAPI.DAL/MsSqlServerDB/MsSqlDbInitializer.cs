@@ -26,6 +26,14 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             context.Clients.AddRange(defaultClients);
 
+            IList<OrderStatus> defaultOrderStatuses = new List<OrderStatus>();
+
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"{OrderStatusId.Planned}" });
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"{OrderStatusId.InProgress}" });
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"{OrderStatusId.Completed}" });
+
+            context.OrderStatuses.AddRange(defaultOrderStatuses);
+
             IList<Permission> defaultPermissions = new List<Permission>();
 
             defaultPermissions.Add(new Permission() { Name = $"{PermissionId.SuperAdmin}" });
@@ -178,6 +186,15 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
             defaultVehicleTypes.Add(new VehicleType() { Name = "Big Truck" });
 
             context.VehicleTypes.AddRange(defaultVehicleTypes);
+
+            IList<VehiclePart> defaultVehicleParts = new List<VehiclePart>();
+
+            defaultVehicleParts.Add(new VehiclePart() { Name = "Opona", Price = 150.00M });
+            defaultVehicleParts.Add(new VehiclePart() { Name = "Felga", Price = 120.00M });
+            defaultVehicleParts.Add(new VehiclePart() { Name = "Olej", Price = 150.00M });
+            defaultVehicleParts.Add(new VehiclePart() { Name = "Filtr", Price = 100.00M });
+
+            context.VehicleParts.AddRange(defaultVehicleParts);
 
             IList<Vehicle> defaultVehicles = new List<Vehicle>();
 

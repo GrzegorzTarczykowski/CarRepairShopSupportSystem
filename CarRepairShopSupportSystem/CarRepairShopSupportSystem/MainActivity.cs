@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using CarRepairShopSupportSystem.Activity;
 using CarRepairShopSupportSystem.BLL.Service;
 using CarRepairShopSupportSystem.BLL.IService;
+using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.Extensions;
 
 namespace CarRepairShopSupportSystem
 {
@@ -55,6 +57,7 @@ namespace CarRepairShopSupportSystem
         private void TxtViewRegister_Click(object sender, EventArgs e)
         {
             Intent nextActivity = new Intent(this, typeof(RegisterActivity));
+            nextActivity.PutExtra(nameof(OperationType), OperationType.Add.GetDescription());
             StartActivityForResult(nextActivity, registerRequestCode);
         }
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -54,7 +54,6 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/tvPlannedStartDateOfRepair"
-                        android:text="01-01-1900"
                         android:textSize="25dp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"/>
@@ -65,7 +64,6 @@
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:id="@+id/tvPlannedEndDateOfRepair"
-                        android:text="01-01-1900"
                         android:textSize="25dp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"/>

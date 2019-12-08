@@ -14,27 +14,29 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    internal class VehicleAdapter : BaseAdapter
+    class VehiclePartAdapter : BaseAdapter
     {
         private readonly Context context;
-        private readonly Vehicle[] vehicles;
+        private readonly VehiclePart[] vehicleParts;
+        private readonly VehiclePart[] selectedVehicleParts;
 
-        public VehicleAdapter(Context context, Vehicle[] vehicles)
+        public VehiclePartAdapter(Context context, VehiclePart[] vehicleParts, VehiclePart[] selectedVehicleParts)
         {
             this.context = context;
-            this.vehicles = vehicles;
+            this.vehicleParts = vehicleParts;
+            this.selectedVehicleParts = selectedVehicleParts;
         }
 
-        public override int Count => vehicles.Length;
+        public override int Count => vehicleParts.Length;
 
         public override Java.Lang.Object GetItem(int position)
         {
-            return JsonConvert.SerializeObject(vehicles[position]);
+            return JsonConvert.SerializeObject(vehicleParts[position]);
         }
 
         public override long GetItemId(int position)
         {
-            return vehicles[position].VehicleId;
+            return vehicleParts[position].VehiclePartId;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -48,21 +50,30 @@ namespace CarRepairShopSupportSystem.Adapter
                 TextView tvBrandNameAndModelName = new TextView(context)
                 {
                     TextSize = 40,
-                    Text = $"  {vehicles[position].VehicleBrandName} {vehicles[position].VehicleModelName}"
+                    Text = $"  {vehicleParts[position].Name}"
                 };
                 linearLayout.AddView(tvBrandNameAndModelName);
                 TextView tvRegistrationNumbers = new TextView(context)
                 {
                     TextSize = 20,
-                    Text = $"  Numer rejestracyjny: {vehicles[position].RegistrationNumbers}"
+                    Text = $"Cena: {vehicleParts[position].Price} [PLN]"
                 };
                 linearLayout.AddView(tvRegistrationNumbers);
+
+                if (selectedVehicleParts.Any(svp => svp.VehiclePartId == vehicleParts[position].VehiclePartId))
+                {
+                    linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
+                }
+                else
+                {
+                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                }
             }
             else
             {
                 linearLayout = (LinearLayout)convertView;
             }
-            
+
             return linearLayout;
         }
     }

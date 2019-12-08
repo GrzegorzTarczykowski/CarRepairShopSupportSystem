@@ -13,4 +13,11 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Enums
         User = 3,
         Guest = 4
     }
+
+    public enum OrderStatusId
+    {
+        Planned = 1,
+        InProgress = 2,
+        Completed = 3
+    }
 }

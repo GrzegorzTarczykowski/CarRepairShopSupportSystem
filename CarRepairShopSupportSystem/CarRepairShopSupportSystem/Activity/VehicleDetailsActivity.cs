@@ -52,14 +52,14 @@ namespace CarRepairShopSupportSystem.Activity
         private void GvOrderList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Intent nextActivity = new Intent(this, typeof(OrderDetailsActivity));
-            nextActivity.PutExtra("VehicleDetails", JsonConvert.SerializeObject(vehicle));
+            nextActivity.PutExtra("OrderDetails", JsonConvert.SerializeObject(orders[e.Position]));
             StartActivityForResult(nextActivity, orderDetailsRequestCode);
         }
 
         private void BtnAddOrder_Click(object sender, EventArgs e)
         {
             Intent nextActivity = new Intent(this, typeof(OrderEditorActivity));
-            nextActivity.PutExtra("VehicleDetails", JsonConvert.SerializeObject(vehicle));
+            nextActivity.PutExtra("VehicleId", JsonConvert.SerializeObject(vehicle.VehicleId));
             StartActivityForResult(nextActivity, orderEditorRequestCode);
         }
 
@@ -80,8 +80,8 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     RefreshVehicleDetailsList(data);
                 }
-                RefreshGvOrderList(FindViewById<GridView>(Resource.Id.gvOrderList));
             }
+            RefreshGvOrderList(FindViewById<GridView>(Resource.Id.gvOrderList));
         }
 
         private void RefreshVehicleDetailsList(Intent intent)

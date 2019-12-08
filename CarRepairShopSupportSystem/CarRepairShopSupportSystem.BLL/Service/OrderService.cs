@@ -62,6 +62,11 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
         }
 
+        public Order GetOrderByOrderId(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Order> GetOrderListByVehicleId(int vehicleId)
         {
             try

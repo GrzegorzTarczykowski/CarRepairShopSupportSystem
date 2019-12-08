@@ -68,5 +68,21 @@ namespace CarRepairShopSupportSystem.BLL.Service
                 throw;
             }
         }
+
+        public HttpResponseMessage Delete(string requestUri)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessTokenService.GetAccessToken());
+                    return client.DeleteAsync(Setting.addressAPI + requestUri).Result;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

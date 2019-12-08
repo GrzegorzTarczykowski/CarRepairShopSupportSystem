@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundMainGradientSelector">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridView
+            android:id="@+id/gvMessageList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="400dp"
+            android:minHeight="600dp"
+            android:numColumns="1"
+            android:verticalSpacing="24dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="spacingWidthUniform"
+            android:scrollbars="vertical"/>
+        <EditText
+            android:id="@+id/etMessageCreateor"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="5"
+            android:lines="5"/>
+        <Button
+            android:id="@+id/btnSendMessage"
+            android:text="Wyślij wiadomość"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

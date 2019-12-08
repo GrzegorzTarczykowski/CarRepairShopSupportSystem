@@ -11,23 +11,19 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.Service
 {
-    public class RegisterService : IRegisterService
+    public class UserService : IUserService
     {
         private readonly IHttpClientService httpClientService;
-        private readonly IApplicationSessionService applicationSessionService;
 
-        public RegisterService(IHttpClientService httpClientService, IApplicationSessionService applicationSessionService)
+        public UserService(IHttpClientService httpClientService)
         {
             this.httpClientService = httpClientService;
-            this.applicationSessionService = applicationSessionService;
         }
 
-        public OperationResult Register(User user)
+        public OperationResult AddUser(User user)
         {
             try
             {
-                ApplicationSession.userName = "TestGuest";
-                ApplicationSession.userPassword = "1";
                 HttpResponseMessage tokenResponse = httpClientService.Post("api/User", user);
 
                 if (tokenResponse.IsSuccessStatusCode)
@@ -43,9 +39,26 @@ namespace CarRepairShopSupportSystem.BLL.Service
             {
                 return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z rejestracją" };
             }
-            finally
+        }
+
+        public OperationResult EditUser(User user)
+        {
+            try
             {
-                applicationSessionService.ClearApplicationSession();
+                HttpResponseMessage tokenResponse = httpClientService.Put("api/User", user);
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z edycja użytkownika" };
             }
         }
     }

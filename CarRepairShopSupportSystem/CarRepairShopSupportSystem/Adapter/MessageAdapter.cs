@@ -10,32 +10,31 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Models;
-using Java.Lang;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    class OrderAdapter : BaseAdapter
+    class MessageAdapter : BaseAdapter
     {
         private readonly Context context;
-        private readonly Order[] orders;
+        private readonly BLL.Models.Message[] messages;
 
-        public OrderAdapter(Context context, Order[] orders)
+        public MessageAdapter(Context context, BLL.Models.Message[] messages)
         {
             this.context = context;
-            this.orders = orders;
+            this.messages = messages;
         }
 
-        public override int Count => orders.Length;
+        public override int Count => messages.Length;
 
         public override Java.Lang.Object GetItem(int position)
         {
-            return JsonConvert.SerializeObject(orders[position]);
+            return JsonConvert.SerializeObject(messages[position]);
         }
 
         public override long GetItemId(int position)
         {
-            return orders[position].VehicleId;
+            return messages[position].MessageId;
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -49,7 +48,7 @@ namespace CarRepairShopSupportSystem.Adapter
                 TextView tvBrandNameAndModelName = new TextView(context)
                 {
                     TextSize = 40,
-                    Text = $"  {position}. Status zlecenia: {orders[position].OrderStatusName}"
+                    Text = $"  {position}. Status zlecenia: {messages[position].Content}"
                 };
                 linearLayout.AddView(tvBrandNameAndModelName);
             }

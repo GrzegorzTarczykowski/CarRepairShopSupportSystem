@@ -12,5 +12,6 @@ namespace CarRepairShopSupportSystem.BLL.IService
         HttpResponseMessage Get(string requestUri);
         HttpResponseMessage Post(string requestUri, object content);
         HttpResponseMessage Put(string requestUri, object content);
+        HttpResponseMessage Delete(string requestUri);
     }
 }

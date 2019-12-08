@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.IService
 {
-    public interface IRegisterService
+    public interface IUserService
     {
-        OperationResult Register(User user);
+        OperationResult AddUser(User user);
+        OperationResult EditUser(User user);
     }
 }

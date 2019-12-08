@@ -11,23 +11,27 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "Rejestracja")]
+    [Activity(Label = "Konto")]
     public class RegisterActivity : AppCompatActivity
     {
-        private readonly IRegisterService registerService;
+        private readonly IUserService userService;
         private readonly IEmailService emailService;
         private readonly IRegularExpressionService regularExpressionService;
+        private readonly IApplicationSessionService applicationSessionService;
+
         public RegisterActivity()
         {
-            registerService = new RegisterService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
+            userService = new UserService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
             emailService = new EmailService();
             regularExpressionService = new RegularExpressionService();
+            applicationSessionService = new ApplicationSessionService();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -35,6 +39,24 @@ namespace CarRepairShopSupportSystem.Activity
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_register);
             FindViewById<Button>(Resource.Id.btnRegister).Click += BtnRegister_Click;
+            if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
+            {
+                User user = applicationSessionService.GetUserFromApplicationSession();
+                FindViewById<EditText>(Resource.Id.editTextUsername).Enabled = false;
+                FindViewById<EditText>(Resource.Id.editTextFirstName).Enabled = false;
+                FindViewById<EditText>(Resource.Id.editTextLastName).Enabled = false;
+                
+                FindViewById<EditText>(Resource.Id.tvUserDetailsTitle).Text = "Dane o koncie:";
+                FindViewById<EditText>(Resource.Id.editTextUsername).Text = user.Username;
+                FindViewById<EditText>(Resource.Id.editTextFirstName).Text = user.FirstName;
+                FindViewById<EditText>(Resource.Id.editTextLastName).Text = user.LastName;
+                FindViewById<EditText>(Resource.Id.editTextEmail).Text = user.Email;
+                FindViewById<EditText>(Resource.Id.editTextPhoneNumber).Text = user.PhoneNumber.ToString();
+                FindViewById<EditText>(Resource.Id.editTextPassword).Text = user.Password;
+                FindViewById<EditText>(Resource.Id.editTextConfirmPassword).Text = user.Password;
+
+                FindViewById<Button>(Resource.Id.btnRegister).Text = "Zapisz zmiany";
+            }
         }
 
         private void BtnRegister_Click(object sender, EventArgs e)
@@ -49,7 +71,7 @@ namespace CarRepairShopSupportSystem.Activity
 
             if (string.IsNullOrWhiteSpace(textUsername))
             {
-                Toast.MakeText(Application.Context, "Uzupełnij nazwe użytkownika", ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, "Uzupełnij nazwę użytkownika", ToastLength.Long).Show();
             }
             else if (string.IsNullOrWhiteSpace(textFirstName))
             {
@@ -57,15 +79,15 @@ namespace CarRepairShopSupportSystem.Activity
             }
             else if (!regularExpressionService.IsMatchOnlyAlphabeticCharacters(textFirstName))
             {
-                Toast.MakeText(Application.Context, "Imię musi posiadać wyłacznie litry", ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, "Imię musi posiadać wyłacznie litery", ToastLength.Long).Show();
             }
             else if (string.IsNullOrWhiteSpace(textLastName))
             {
-                Toast.MakeText(Application.Context, "Uzupełnij nazwiesko", ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, "Uzupełnij nazwisko", ToastLength.Long).Show();
             }
             else if (!regularExpressionService.IsMatchOnlyAlphabeticCharacters(textLastName))
             {
-                Toast.MakeText(Application.Context, "Nazwisko musi posiadać wyłacznie litry", ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, "Nazwisko musi posiadać wyłącznie litery", ToastLength.Long).Show();
             }
             else if (string.IsNullOrWhiteSpace(textEmail))
             {
@@ -93,11 +115,11 @@ namespace CarRepairShopSupportSystem.Activity
             }
             else if (string.IsNullOrWhiteSpace(textConfirmPassword))
             {
-                Toast.MakeText(Application.Context, "Uzupełnij powtorne hasło", ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, "Uzupełnij powtórne hasło", ToastLength.Long).Show();
             }
             else if (textPassword != textConfirmPassword)
             {
-                Toast.MakeText(Application.Context, "Hasła są rózne", ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, "Hasła są różne", ToastLength.Long).Show();
             }
             else
             {
@@ -111,7 +133,19 @@ namespace CarRepairShopSupportSystem.Activity
                     PhoneNumber = phoneNumber
                 };
 
-                OperationResult operationResult = registerService.Register(user);
+                OperationResult operationResult = null;
+                if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
+                {
+                    operationResult = userService.EditUser(user);
+                }
+                else
+                {
+                    ApplicationSession.userName = "TestGuest";
+                    ApplicationSession.userPassword = "1";
+                    operationResult = userService.AddUser(user);
+                    applicationSessionService.ClearApplicationSession();
+                }
+                    
                 if (operationResult.ResultCode == ResultCode.Successful)
                 {
                     SetResult(Result.Ok);
