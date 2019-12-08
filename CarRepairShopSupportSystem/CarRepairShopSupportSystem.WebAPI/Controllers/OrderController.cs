@@ -44,7 +44,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 });
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         // GET api/<controller>/5
         public Order Get(int id)

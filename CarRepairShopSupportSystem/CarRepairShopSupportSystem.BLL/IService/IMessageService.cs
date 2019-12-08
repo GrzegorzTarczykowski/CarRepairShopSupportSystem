@@ -10,6 +10,7 @@ namespace CarRepairShopSupportSystem.BLL.IService
     public interface IMessageService
     {
         OperationResult SendMessage(Message message);
-        IEnumerable<Message> GetMessageListByOrderIdAndUserReceiverId(int orderId, int userReceiverId);
+        IEnumerable<Message> GetMessageListByOrderId(int orderId);
+        IEnumerable<Message> GetMessageListByOrderIdAndUserId(int orderId, int userId);
     }
 }

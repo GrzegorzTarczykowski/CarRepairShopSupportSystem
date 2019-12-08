@@ -40,8 +40,7 @@ namespace CarRepairShopSupportSystem.Activity
             SetContentView(Resource.Layout.activity_orderDetails);
 
             FindViewById<Button>(Resource.Id.btnService).Click += BtnService_Click;
-            FindViewById<Button>(Resource.Id.btnSentMessages).Click += BtnSentMessages_Click;
-            FindViewById<Button>(Resource.Id.btnReceivedMessages).Click += BtnReceivedMessages_Click;
+            FindViewById<Button>(Resource.Id.btnMessages).Click += BtnMessages_Click;
             FindViewById<Button>(Resource.Id.btnDeleteOrder).Click += BtnDeleteOrder_Click;
             FindViewById<Button>(Resource.Id.btnNextOrder).Click += BtnNextOrder_Click;
             order = JsonConvert.DeserializeObject<Order>(Intent.GetStringExtra("OrderDetails"));
@@ -57,14 +56,11 @@ namespace CarRepairShopSupportSystem.Activity
             //throw new NotImplementedException();
         }
 
-        private void BtnReceivedMessages_Click(object sender, EventArgs e)
+        private void BtnMessages_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
-        }
-
-        private void BtnSentMessages_Click(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
+            Intent nextActivity = new Intent(this, typeof(MessageActivity));
+            nextActivity.PutExtra("OrderId", order.OrderId.ToString());
+            StartActivityForResult(nextActivity, serviceListRequestCode);
         }
 
         private void BtnService_Click(object sender, EventArgs e)

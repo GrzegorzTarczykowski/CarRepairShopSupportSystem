@@ -100,13 +100,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <Button
-            android:text="Napisz wiadomość"
-            android:id="@+id/btnSentMessages"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:text="Odebrane wiadomości"
-            android:id="@+id/btnReceivedMessages"
+            android:text="Wiadomości"
+            android:id="@+id/btnMessages"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <Button

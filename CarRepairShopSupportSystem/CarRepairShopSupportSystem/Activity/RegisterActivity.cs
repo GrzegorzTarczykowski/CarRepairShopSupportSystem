@@ -46,7 +46,7 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<EditText>(Resource.Id.editTextFirstName).Enabled = false;
                 FindViewById<EditText>(Resource.Id.editTextLastName).Enabled = false;
                 
-                FindViewById<EditText>(Resource.Id.tvUserDetailsTitle).Text = "Dane o koncie:";
+                FindViewById<TextView>(Resource.Id.tvUserDetailsTitle).Text = "Dane o koncie:";
                 FindViewById<EditText>(Resource.Id.editTextUsername).Text = user.Username;
                 FindViewById<EditText>(Resource.Id.editTextFirstName).Text = user.FirstName;
                 FindViewById<EditText>(Resource.Id.editTextLastName).Text = user.LastName;

@@ -15,8 +15,10 @@ namespace CarRepairShopSupportSystem.BLL.Models
 
         public int OrderId { get; set; }
         public int UserSenderId { get; set; }
-        public User UserSender { get; set; }
+        public string UserSenderFirstName { get; set; }
+        public string UserSenderLastName { get; set; }
         public int UserReceiverId { get; set; }
-        public User UserReceiver { get; set; }
+        public string UserReceiverFirstName { get; set; }
+        public string UserReceiverLastName { get; set; }
     }
 }

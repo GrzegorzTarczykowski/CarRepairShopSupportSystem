@@ -18,11 +18,13 @@ namespace CarRepairShopSupportSystem.Adapter
     {
         private readonly Context context;
         private readonly BLL.Models.Message[] messages;
+        private readonly int userId;
 
-        public MessageAdapter(Context context, BLL.Models.Message[] messages)
+        public MessageAdapter(Context context, BLL.Models.Message[] messages, int userId)
         {
             this.context = context;
             this.messages = messages;
+            this.userId = userId;
         }
 
         public override int Count => messages.Length;
@@ -45,12 +47,27 @@ namespace CarRepairShopSupportSystem.Adapter
             {
                 linearLayout = new LinearLayout(context);
                 linearLayout.Orientation = Orientation.Vertical;
-                TextView tvBrandNameAndModelName = new TextView(context)
+                TextView tvMessageUserSender = new TextView(context)
                 {
-                    TextSize = 40,
-                    Text = $"  {position}. Status zlecenia: {messages[position].Content}"
+                    TextSize = 15,
+                    Text = $" {messages[position].UserSenderFirstName} {messages[position].UserSenderLastName} {messages[position].SentDate}"
                 };
-                linearLayout.AddView(tvBrandNameAndModelName);
+                linearLayout.AddView(tvMessageUserSender);
+                TextView tvMessageContent = new TextView(context)
+                {
+                    TextSize = 20,
+                    Text = $"  {messages[position].Content}"
+                };
+                linearLayout.AddView(tvMessageContent);
+
+                if (messages[position].UserSenderId == userId)
+                {
+                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Orange);
+                }
+                else
+                {
+                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Yellow);
+                }
             }
             else
             {

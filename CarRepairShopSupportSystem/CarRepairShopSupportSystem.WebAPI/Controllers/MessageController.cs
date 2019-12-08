@@ -20,12 +20,12 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.messageService = messageService;
         }
 
-        [Route("api/Order/GetByOrderIdAndUserReceiverId")]
-        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        [Route("api/Message/GetByOrderId")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpGet]
-        public IEnumerable<Models.Message> GetByOrderIdAndUserReceiverId([FromUri]int orderId, int userReceiverId)
+        public IEnumerable<Models.Message> GetByOrderId([FromUri]int orderId)
         {
-            return messageService.GetMessageListByOrderIdAndUserReceiverId(orderId, userReceiverId)
+            return messageService.GetMessageListByOrderId(orderId)
                 ?.Select(m => new Models.Message
                 {
                     MessageId = m.MessageId,
@@ -34,7 +34,33 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     SentDate = m.SentDate,
                     OrderId = m.OrderId,
                     UserSenderId = m.UserSenderId,
-                    UserReceiverId = m.UserReceiverId
+                    UserSenderFirstName = m.UserSender.FirstName,
+                    UserSenderLastName = m.UserSender.LastName,
+                    UserReceiverId = m.UserReceiverId,
+                    UserReceiverFirstName = m.UserReceiver.FirstName,
+                    UserReceiverLastName = m.UserReceiver.LastName,
+                });
+        }
+
+        [Route("api/Message/GetByOrderIdAndUserId")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        [HttpGet]
+        public IEnumerable<Models.Message> GetByOrderIdAndUserId([FromUri]int orderId, int userId)
+        {
+            return messageService.GetMessageListByOrderIdAndUserId(orderId, userId)
+                ?.Select(m => new Models.Message
+                {
+                    MessageId = m.MessageId,
+                    Title = m.Title,
+                    Content = m.Content,
+                    SentDate = m.SentDate,
+                    OrderId = m.OrderId,
+                    UserSenderId = m.UserSenderId,
+                    UserSenderFirstName = m.UserSender.FirstName,
+                    UserSenderLastName = m.UserSender.LastName,
+                    UserReceiverId = m.UserReceiverId,
+                    UserReceiverFirstName = m.UserReceiver.FirstName,
+                    UserReceiverLastName = m.UserReceiver.LastName,
                 });
         }
 
@@ -54,7 +80,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return PostBase(value);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]Message value)

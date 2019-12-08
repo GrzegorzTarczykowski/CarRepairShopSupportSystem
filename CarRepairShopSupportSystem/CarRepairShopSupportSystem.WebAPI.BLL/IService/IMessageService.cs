@@ -10,6 +10,7 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.IService
     public interface IMessageService
     {
         bool SendMessage(Message message);
-        IEnumerable<Message> GetMessageListByOrderIdAndUserReceiverId(int orderId, int userReceiverId);
+        IEnumerable<Message> GetMessageListByOrderId(int orderId);
+        IEnumerable<Message> GetMessageListByOrderIdAndUserId(int orderId, int userId);
     }
 }

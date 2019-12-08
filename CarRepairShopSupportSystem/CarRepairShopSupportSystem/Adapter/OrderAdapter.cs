@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.Models;
 using Java.Lang;
 using Newtonsoft.Json;
@@ -46,12 +48,12 @@ namespace CarRepairShopSupportSystem.Adapter
             {
                 linearLayout = new LinearLayout(context);
                 linearLayout.Orientation = Orientation.Vertical;
-                TextView tvBrandNameAndModelName = new TextView(context)
+                TextView tvOrderInfo = new TextView(context)
                 {
-                    TextSize = 40,
-                    Text = $"  {position}. Status zlecenia: {orders[position].OrderStatusName}"
+                    TextSize = 20,
+                    Text = $" {position + 1}. Data zlecenia: {orders[position].CreateDate} Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
                 };
-                linearLayout.AddView(tvBrandNameAndModelName);
+                linearLayout.AddView(tvOrderInfo);
             }
             else
             {

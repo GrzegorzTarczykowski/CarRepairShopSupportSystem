@@ -102,6 +102,10 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                                                 20, 10, 150, 5, 15, 45, 60, 80,
                                                                 20, 10, 150, 5, 15, 45, 60, 80 }
                                         , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
+                                        , FirstName = "Grzegorz"
+                                        , LastName = "TestAdmin"
+                                        , Email = "jakis@wp.pl"
+                                        , PhoneNumber = 986594394
                                         , CreateDate = DateTime.Now
                                         , LastLogin = DateTime.Now
                                         , PermissionId = 2
@@ -113,6 +117,10 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                                                 20, 10, 150, 5, 15, 45, 60, 80,
                                                                 20, 10, 150, 5, 15, 45, 60, 80 }
                                         , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
+                                        , FirstName = "Grzegorz"
+                                        , LastName = "TestUser"
+                                        , Email = "jakis@wp.pl"
+                                        , PhoneNumber = 986594394
                                         , CreateDate = DateTime.Now
                                         , LastLogin = DateTime.Now
                                         , PermissionId = 3
@@ -124,6 +132,10 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                                                 20, 10, 150, 5, 15, 45, 60, 80,
                                                                 20, 10, 150, 5, 15, 45, 60, 80 }
                                         , Password = "NO8Qsz2QXnlMQ4x9K1tNzhsDVhudR9QOai2DSfRRZ2UOMePNt5NqjnGksUJtBNwuYC7lQpFsJr1hcQLUWiBjcQ==" //"1"
+                                        , FirstName = "Wiesław"
+                                        , LastName = "TestGuest"
+                                        , Email = "jakis@wp.pl"
+                                        , PhoneNumber = 986594394
                                         , CreateDate = DateTime.Now
                                         , LastLogin = DateTime.Now
                                         , PermissionId = 4

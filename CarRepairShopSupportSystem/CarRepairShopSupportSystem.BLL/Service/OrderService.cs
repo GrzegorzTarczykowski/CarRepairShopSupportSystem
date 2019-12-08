@@ -64,7 +64,20 @@ namespace CarRepairShopSupportSystem.BLL.Service
 
         public Order GetOrderByOrderId(int orderId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Order/{orderId}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    return JsonConvert.DeserializeObject<Order>(JsonContent);
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public IEnumerable<Order> GetOrderListByVehicleId(int vehicleId)

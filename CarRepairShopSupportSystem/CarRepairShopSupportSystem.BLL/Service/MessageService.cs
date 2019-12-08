@@ -1,4 +1,5 @@
-﻿using CarRepairShopSupportSystem.BLL.IService;
+﻿using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using Newtonsoft.Json;
 using System;
@@ -19,11 +20,33 @@ namespace CarRepairShopSupportSystem.BLL.Service
             this.httpClientService = httpClientService;
         }
 
-        public IEnumerable<Message> GetMessageListByOrderIdAndUserReceiverId(int orderId, int userReceiverId)
+        public IEnumerable<Message> GetMessageListByOrderId(int orderId)
         {
             try
             {
-                HttpResponseMessage APIResponse = httpClientService.Get($"api/Message/GetByOrderIdAndUserReceiverId?orderId={orderId}&userReceiverId={userReceiverId}");
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Message/GetByOrderId?orderId={orderId}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<Message> matchingOrderList = JsonConvert.DeserializeObject<IEnumerable<Message>>(JsonContent);
+                    if (matchingOrderList != null)
+                    {
+                        return matchingOrderList;
+                    }
+                }
+                return Enumerable.Empty<Message>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Message> GetMessageListByOrderIdAndUserId(int orderId, int userId)
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Message/GetByOrderIdAndUserId?orderId={orderId}&userId={userId}");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
@@ -43,7 +66,23 @@ namespace CarRepairShopSupportSystem.BLL.Service
 
         public OperationResult SendMessage(Message message)
         {
-            throw new NotImplementedException();
+            try
+            {
+                HttpResponseMessage tokenResponse = httpClientService.Post("api/Message", message);
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z wysłanie wiadomości" };
+            }
         }
     }
 }
