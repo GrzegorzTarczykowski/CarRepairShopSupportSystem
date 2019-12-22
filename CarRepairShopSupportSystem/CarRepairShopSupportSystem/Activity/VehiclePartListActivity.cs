@@ -11,6 +11,8 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.Adapter;
+using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
@@ -21,6 +23,7 @@ namespace CarRepairShopSupportSystem.Activity
     [Activity(Label = "VehiclePartListActivity")]
     public class VehiclePartListActivity : AppCompatActivity
     {
+        private const int vehiclePartRequestCode = 1;
         private readonly IVehiclePartService vehiclePartService;
         private IList<VehiclePart> vehiclePartList;
         private IList<VehiclePart> selectedVehiclePartList;
@@ -37,8 +40,18 @@ namespace CarRepairShopSupportSystem.Activity
             GridView gvVehiclePartList = FindViewById<GridView>(Resource.Id.gvVehiclePartList);
             RefreshGvVehiclePartList(gvVehiclePartList);
             gvVehiclePartList.ItemClick += GvVehiclePartList_ItemClick;
-            FindViewById<Button>(Resource.Id.btnAddVehiclePart).Click += BtnAddVehiclePart_Click;
-            FindViewById<Button>(Resource.Id.btnSubmitSelectedVehicleParts).Click += BtnSubmitSelectedVehicleParts_Click;
+            if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
+            {
+                Button btnAddVehiclePart = FindViewById<Button>(Resource.Id.btnAddVehiclePart);
+                btnAddVehiclePart.Click += BtnAddVehiclePart_Click;
+                btnAddVehiclePart.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                Button btnSubmitSelectedVehicleParts = FindViewById<Button>(Resource.Id.btnSubmitSelectedVehicleParts);
+                btnSubmitSelectedVehicleParts.Click += BtnSubmitSelectedVehicleParts_Click;
+                btnSubmitSelectedVehicleParts.Visibility = ViewStates.Visible;
+            }
         }
 
         private void RefreshGvVehiclePartList(GridView gvVehiclePartList)
@@ -50,16 +63,25 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void GvVehiclePartList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            VehiclePart vehiclePart = selectedVehiclePartList.FirstOrDefault(svp => svp.VehiclePartId == vehiclePartList[e.Position].VehiclePartId);
-            if (vehiclePart != null)
+            if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-                ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.Transparent);
-                selectedVehiclePartList.Remove(vehiclePart);
+                Intent nextActivity = new Intent(this, typeof(VehiclePartActivity));
+                nextActivity.PutExtra("SelectedVehiclePart", JsonConvert.SerializeObject(vehiclePartList[e.Position]));
+                StartActivityForResult(nextActivity, vehiclePartRequestCode);
             }
             else
             {
-                ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.GreenYellow);
-                selectedVehiclePartList.Add(vehiclePartList[e.Position]);
+                VehiclePart vehiclePart = selectedVehiclePartList.FirstOrDefault(svp => svp.VehiclePartId == vehiclePartList[e.Position].VehiclePartId);
+                if (vehiclePart != null)
+                {
+                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.Transparent);
+                    selectedVehiclePartList.Remove(vehiclePart);
+                }
+                else
+                {
+                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.GreenYellow);
+                    selectedVehiclePartList.Add(vehiclePartList[e.Position]);
+                }
             }
         }
 
@@ -73,7 +95,8 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnAddVehiclePart_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            Intent nextActivity = new Intent(this, typeof(VehiclePartActivity));
+            StartActivityForResult(nextActivity, vehiclePartRequestCode);
         }
     }
 }

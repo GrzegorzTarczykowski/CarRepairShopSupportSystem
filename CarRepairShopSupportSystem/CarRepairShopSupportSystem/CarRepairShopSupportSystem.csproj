@@ -67,11 +67,13 @@
     <Compile Include="Activity\OrderDetailsActivity.cs" />
     <Compile Include="Activity\OrderEditorActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
+    <Compile Include="Activity\ServiceActivity.cs" />
     <Compile Include="Activity\ServiceListActivity.cs" />
     <Compile Include="Activity\TimetableActivity.cs" />
     <Compile Include="Activity\VehicleActivity.cs" />
     <Compile Include="Activity\VehicleDetailsActivity.cs" />
     <Compile Include="Activity\VehicleListActivity.cs" />
+    <Compile Include="Activity\VehiclePartActivity.cs" />
     <Compile Include="Activity\VehiclePartListActivity.cs" />
     <Compile Include="Adapter\CalendarAdapter.cs" />
     <Compile Include="Adapter\MessageAdapter.cs" />
@@ -191,6 +193,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_message.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_service.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_vehiclePart.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,25 +11,51 @@
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-            <Button
-                android:text="Moje pojazdy"
-                android:id="@+id/btnMyVehicle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:text="Moje konto"
-                android:id="@+id/btnMyAccount"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:text="Kontakt z warsztatem"
-                android:id="@+id/btnContact"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:text="Wyloguj"
-                android:id="@+id/btnLogout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+        <Button
+            android:text="Moje pojazdy"
+            android:id="@+id/btnMyVehicle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Moje konto"
+            android:id="@+id/btnMyAccount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Kontakt z warsztatem"
+            android:id="@+id/btnContact"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Harmonogram dnia pracy"
+            android:id="@+id/btnDayTimetable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Harmonogram warsztatu"
+            android:id="@+id/btnTimetableManagement"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Usługi"
+            android:id="@+id/btnServiceManagement"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Czesc"
+            android:id="@+id/btnVehiclePartManagement"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Pracownicy"
+            android:id="@+id/btnWorkersManagement"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Wyloguj"
+            android:id="@+id/btnLogout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </LinearLayout>

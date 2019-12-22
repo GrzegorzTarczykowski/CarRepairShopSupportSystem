@@ -11,6 +11,8 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.Adapter;
+using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Service;
 using Newtonsoft.Json;
@@ -20,6 +22,7 @@ namespace CarRepairShopSupportSystem.Activity
     [Activity(Label = "Lista usług")]
     public class ServiceListActivity : AppCompatActivity
     {
+        private const int serviceRequestCode = 1;
         private readonly IServiceService serviceService;
         private IList<BLL.Models.Service> serviceList;
         private IList<BLL.Models.Service> selectedServiceList;
@@ -36,8 +39,18 @@ namespace CarRepairShopSupportSystem.Activity
             GridView gvServiceList = FindViewById<GridView>(Resource.Id.gvServiceList);
             RefreshGvServiceList(gvServiceList);
             gvServiceList.ItemClick += GvServiceList_ItemClick;
-            FindViewById<Button>(Resource.Id.btnAddService).Click += BtnAddService_Click;
-            FindViewById<Button>(Resource.Id.btnSubmitSelectedServices).Click += BtnSubmitSelectedServices_Click;
+            if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
+            {
+                Button btnAddService = FindViewById<Button>(Resource.Id.btnAddService);
+                btnAddService.Click += BtnAddService_Click;
+                btnAddService.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                Button btnSubmitSelectedServices = FindViewById<Button>(Resource.Id.btnSubmitSelectedServices);
+                btnSubmitSelectedServices.Click += BtnSubmitSelectedServices_Click;
+                btnSubmitSelectedServices.Visibility = ViewStates.Visible;
+            }
         }
 
         private void RefreshGvServiceList(GridView gvServiceList)
@@ -49,17 +62,26 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void GvServiceList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            BLL.Models.Service service = selectedServiceList.FirstOrDefault(ss => ss.ServiceId == serviceList[e.Position].ServiceId);
-            if (service != null)
+            if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-                ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.Transparent);
-                selectedServiceList.Remove(service);
+                Intent nextActivity = new Intent(this, typeof(ServiceActivity));
+                nextActivity.PutExtra("SelectedService", JsonConvert.SerializeObject(serviceList[e.Position]));
+                StartActivityForResult(nextActivity, serviceRequestCode);
             }
             else
             {
-                ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.GreenYellow);
-                selectedServiceList.Add(serviceList[e.Position]);
-            }
+                BLL.Models.Service service = selectedServiceList.FirstOrDefault(ss => ss.ServiceId == serviceList[e.Position].ServiceId);
+                if (service != null)
+                {
+                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.Transparent);
+                    selectedServiceList.Remove(service);
+                }
+                else
+                {
+                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.GreenYellow);
+                    selectedServiceList.Add(serviceList[e.Position]);
+                }
+            } 
         }
 
         private void BtnSubmitSelectedServices_Click(object sender, EventArgs e)
@@ -72,7 +94,8 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnAddService_Click(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            Intent nextActivity = new Intent(this, typeof(ServiceActivity));
+            StartActivityForResult(nextActivity, serviceRequestCode);
         }
     }
 }
