@@ -1,4 +1,5 @@
-﻿using CarRepairShopSupportSystem.BLL.IService;
+﻿using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using Newtonsoft.Json;
 using System;
@@ -17,6 +18,48 @@ namespace CarRepairShopSupportSystem.BLL.Service
         public VehiclePartService(IHttpClientService httpClientService)
         {
             this.httpClientService = httpClientService;
+        }
+
+        public OperationResult AddVehiclePart(VehiclePart vehiclePart)
+        {
+            try
+            {
+                HttpResponseMessage tokenResponse = httpClientService.Post("api/VehiclePart", vehiclePart);
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z dodaniem częsci pojazdu" };
+            }
+        }
+
+        public OperationResult EditVehiclePart(VehiclePart vehiclePart)
+        {
+            try
+            {
+                HttpResponseMessage tokenResponse = httpClientService.Put("api/VehiclePart", vehiclePart);
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z edycja częsci pojazdu" };
+            }
         }
 
         public IEnumerable<VehiclePart> GetAllVehiclePartList()

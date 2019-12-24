@@ -1,8 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundMainGradientSelector">
-    
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Nazwa usług:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editServiceName"
+            android:focusable="true"
+            android:hint="Podaj nazwę usługi"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Numer rejestracyjny:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editServiceDescription"
+            android:hint="Podaj opis usługi"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Cena:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editServicePrice"
+            android:hint="Podaj cene usługi"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Dodaj / Modyfikuj"
+            android:id="@+id/btnSubmitService"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

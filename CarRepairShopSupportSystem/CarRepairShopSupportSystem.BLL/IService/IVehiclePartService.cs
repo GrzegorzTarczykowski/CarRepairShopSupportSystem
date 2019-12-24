@@ -9,6 +9,8 @@ namespace CarRepairShopSupportSystem.BLL.IService
 {
     public interface IVehiclePartService
     {
+        OperationResult AddVehiclePart(VehiclePart vehiclePart);
+        OperationResult EditVehiclePart(VehiclePart vehiclePart);
         IEnumerable<VehiclePart> GetAllVehiclePartList();
     }
 }

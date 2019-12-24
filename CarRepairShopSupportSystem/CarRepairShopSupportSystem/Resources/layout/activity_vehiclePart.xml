@@ -4,5 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundMainGradientSelector">
-    
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Nazwa części:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editVehiclePartName"
+            android:hint="Podaj nazwe części"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Cena:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editVehiclePartPrice"
+            android:hint="Podaj cene za część"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Dodaj / Modyfikuj"
+            android:id="@+id/btnSubmitVehiclePart"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
