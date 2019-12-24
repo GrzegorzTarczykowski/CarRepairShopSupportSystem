@@ -57,7 +57,7 @@ namespace CarRepairShopSupportSystem.Activity
         private void RefreshGvVehiclePartList(GridView gvVehiclePartList)
         {
             vehiclePartList = vehiclePartService.GetAllVehiclePartList().ToList();
-            selectedVehiclePartList = JsonConvert.DeserializeObject<IList<VehiclePart>>(Intent.GetStringExtra("SelectedVehiclePartList")) ?? new List<VehiclePart>();
+            selectedVehiclePartList = JsonConvert.DeserializeObject<IList<VehiclePart>>(Intent.GetStringExtra("SelectedVehiclePartList") ?? string.Empty) ?? new List<VehiclePart>();
             gvVehiclePartList.Adapter = new VehiclePartAdapter(this, vehiclePartList.ToArray(), selectedVehiclePartList.ToArray());
         }
 
@@ -97,6 +97,16 @@ namespace CarRepairShopSupportSystem.Activity
         {
             Intent nextActivity = new Intent(this, typeof(VehiclePartActivity));
             StartActivityForResult(nextActivity, vehiclePartRequestCode);
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (requestCode == vehiclePartRequestCode)
+            {
+                GridView gvVehiclePartList = FindViewById<GridView>(Resource.Id.gvVehiclePartList);
+                RefreshGvVehiclePartList(gvVehiclePartList);
+            }
         }
     }
 }

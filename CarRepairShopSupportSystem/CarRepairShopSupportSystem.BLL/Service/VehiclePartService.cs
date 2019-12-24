@@ -41,6 +41,27 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
         }
 
+        public OperationResult DeleteVehiclePart(int vehiclePartId)
+        {
+            try
+            {
+                HttpResponseMessage tokenResponse = httpClientService.Delete($"api/VehiclePart/{vehiclePartId}");
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z usuwaniem częsci pojazdu" };
+            }
+        }
+
         public OperationResult EditVehiclePart(VehiclePart vehiclePart)
         {
             try

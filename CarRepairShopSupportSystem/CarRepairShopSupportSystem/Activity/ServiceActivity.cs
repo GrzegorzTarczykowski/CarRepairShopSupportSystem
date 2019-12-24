@@ -33,7 +33,7 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_service);
-            selectedService = JsonConvert.DeserializeObject<BLL.Models.Service>(Intent.GetStringExtra("SelectedService"));
+            selectedService = JsonConvert.DeserializeObject<BLL.Models.Service>(Intent.GetStringExtra("SelectedService") ?? string.Empty);
             Button btnSubmitService = FindViewById<Button>(Resource.Id.btnSubmitService);
             btnSubmitService.Click += BtnSubmitService_Click;
             if (selectedService != null)
@@ -42,10 +42,27 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<EditText>(Resource.Id.editServiceName).Text = selectedService.Name;
                 FindViewById<EditText>(Resource.Id.editServiceDescription).Text = selectedService.Description;
                 FindViewById<EditText>(Resource.Id.editServicePrice).Text = selectedService.Price.ToString();
+                FindViewById<Button>(Resource.Id.btnDeleteService).Click += BtnDeleteService_Click;
             }
             else
             {
                 btnSubmitService.Text = "Dodaj";
+                FindViewById<Button>(Resource.Id.btnDeleteService).Visibility = ViewStates.Gone;
+            }
+        }
+
+        private void BtnDeleteService_Click(object sender, EventArgs e)
+        {
+            OperationResult operationResult = serviceService.DeleteService(selectedService.ServiceId);
+
+            if (operationResult.ResultCode == ResultCode.Successful)
+            {
+                SetResult(Result.Ok);
+                this.Finish();
+            }
+            else
+            {
+                Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
             }
         }
 

@@ -41,6 +41,27 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
         }
 
+        public OperationResult DeleteService(int serviceId)
+        {
+            try
+            {
+                HttpResponseMessage tokenResponse = httpClientService.Delete($"api/Service/{serviceId}");
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z usuwaniem usługi" };
+            }
+        }
+
         public OperationResult EditService(Models.Service service)
         {
             try

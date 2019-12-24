@@ -33,7 +33,7 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_vehiclePart);
-            selectedVehiclePart = JsonConvert.DeserializeObject<VehiclePart>(Intent.GetStringExtra("SelectedVehiclePart"));
+            selectedVehiclePart = JsonConvert.DeserializeObject<VehiclePart>(Intent.GetStringExtra("SelectedVehiclePart") ?? string.Empty);
             Button btnSubmitVehiclePart = FindViewById<Button>(Resource.Id.btnSubmitVehiclePart);
             btnSubmitVehiclePart.Click += BtnSubmitVehiclePart_Click;
             if (selectedVehiclePart != null)
@@ -41,10 +41,27 @@ namespace CarRepairShopSupportSystem.Activity
                 btnSubmitVehiclePart.Text = "Modyfikuj";
                 FindViewById<EditText>(Resource.Id.editVehiclePartName).Text = selectedVehiclePart.Name;
                 FindViewById<EditText>(Resource.Id.editVehiclePartPrice).Text = selectedVehiclePart.Price.ToString();
+                FindViewById<Button>(Resource.Id.btnDeleteVehiclePart).Click += BtnDeleteVehiclePart_Click;
             }
             else
             {
                 btnSubmitVehiclePart.Text = "Dodaj";
+                FindViewById<Button>(Resource.Id.btnDeleteVehiclePart).Visibility = ViewStates.Gone;
+            }
+        }
+
+        private void BtnDeleteVehiclePart_Click(object sender, EventArgs e)
+        {
+            OperationResult operationResult = vehiclePartService.DeleteVehiclePart(selectedVehiclePart.VehiclePartId);
+
+            if (operationResult.ResultCode == ResultCode.Successful)
+            {
+                SetResult(Result.Ok);
+                this.Finish();
+            }
+            else
+            {
+                Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
             }
         }
 

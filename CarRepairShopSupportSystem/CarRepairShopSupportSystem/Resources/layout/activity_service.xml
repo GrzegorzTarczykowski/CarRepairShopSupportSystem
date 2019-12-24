@@ -22,7 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <TextView
-            android:text="Numer rejestracyjny:"
+            android:text="Opis:"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <EditText
@@ -44,6 +44,12 @@
         <Button
             android:text="Dodaj / Modyfikuj"
             android:id="@+id/btnSubmitService"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Usuń"
+            android:background="@android:color/holo_red_dark"
+            android:id="@+id/btnDeleteService"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

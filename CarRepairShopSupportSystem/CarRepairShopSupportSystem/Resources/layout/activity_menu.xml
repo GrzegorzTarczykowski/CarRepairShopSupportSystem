@@ -42,7 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
         <Button
-            android:text="Czesc"
+            android:text="Części"
             android:id="@+id/btnVehiclePartManagement"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>

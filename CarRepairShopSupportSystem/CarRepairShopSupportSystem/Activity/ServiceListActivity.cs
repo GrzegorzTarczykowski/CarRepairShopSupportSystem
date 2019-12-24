@@ -56,7 +56,7 @@ namespace CarRepairShopSupportSystem.Activity
         private void RefreshGvServiceList(GridView gvServiceList)
         {
             serviceList = serviceService.GetAllServiceList().ToList();
-            selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(Intent.GetStringExtra("SelectedServiceList")) ?? new List<BLL.Models.Service>();
+            selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(Intent.GetStringExtra("SelectedServiceList") ?? string.Empty) ?? new List<BLL.Models.Service>();
             gvServiceList.Adapter = new ServiceAdapter(this, serviceList.ToArray(), selectedServiceList.ToArray());
         }
 
@@ -96,6 +96,16 @@ namespace CarRepairShopSupportSystem.Activity
         {
             Intent nextActivity = new Intent(this, typeof(ServiceActivity));
             StartActivityForResult(nextActivity, serviceRequestCode);
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (requestCode == serviceRequestCode)
+            {
+                GridView gvServiceList = FindViewById<GridView>(Resource.Id.gvServiceList);
+                RefreshGvServiceList(gvServiceList);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ namespace CarRepairShopSupportSystem.BLL.IService
     public interface IServiceService
     {
         OperationResult AddService(Models.Service service);
+        OperationResult DeleteService(int serviceId);
         OperationResult EditService(Models.Service service);
         IEnumerable<Models.Service> GetAllServiceList();
     }

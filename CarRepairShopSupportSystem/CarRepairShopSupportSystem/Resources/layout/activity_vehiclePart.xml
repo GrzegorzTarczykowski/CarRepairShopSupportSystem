@@ -35,5 +35,11 @@
             android:id="@+id/btnSubmitVehiclePart"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
+        <Button
+            android:text="Usuń"
+            android:background="@android:color/holo_red_dark"
+            android:id="@+id/btnDeleteVehiclePart"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>
