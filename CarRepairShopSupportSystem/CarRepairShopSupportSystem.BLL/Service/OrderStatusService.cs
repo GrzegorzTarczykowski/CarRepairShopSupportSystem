@@ -10,30 +10,30 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.Service
 {
-    public class VehicleTypeService : IVehicleTypeService
+    public class OrderStatusService : IOrderStatusService
     {
         private readonly IHttpClientService httpClientService;
 
-        public VehicleTypeService(IHttpClientService httpClientService)
+        public OrderStatusService(IHttpClientService httpClientService)
         {
             this.httpClientService = httpClientService;
         }
 
-        public IEnumerable<VehicleType> GetAllVehicleTypeList()
+        public IEnumerable<OrderStatus> GetAllOrderStatusList()
         {
             try
             {
-                HttpResponseMessage APIResponse = httpClientService.Get($"api/VehicleType");
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/OrderStatus");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
-                    IEnumerable<VehicleType> matchingVehicleTypeList = JsonConvert.DeserializeObject<IEnumerable<VehicleType>>(JsonContent);
-                    if (matchingVehicleTypeList != null)
+                    IEnumerable<OrderStatus> matchingOrderStatusList = JsonConvert.DeserializeObject<IEnumerable<OrderStatus>>(JsonContent);
+                    if (matchingOrderStatusList != null)
                     {
-                        return matchingVehicleTypeList;
+                        return matchingOrderStatusList;
                     }
                 }
-                return Enumerable.Empty<VehicleType>();
+                return Enumerable.Empty<OrderStatus>();
             }
             catch (Exception)
             {

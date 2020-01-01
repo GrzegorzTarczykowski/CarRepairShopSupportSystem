@@ -10,5 +10,6 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.IService
     public interface IOrderService
     {
         IEnumerable<Order> GetOrderListByVehicleId(int vehicleId);
+        IEnumerable<Order> GetOrderListByWorker(int userId);
     }
 }

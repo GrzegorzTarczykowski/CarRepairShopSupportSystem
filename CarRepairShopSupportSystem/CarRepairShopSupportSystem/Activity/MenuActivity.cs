@@ -24,6 +24,8 @@ namespace CarRepairShopSupportSystem.Activity
         private const int editUserRequestCode = 1;
         private const int serviceListRequestCode = 2;
         private const int vehiclePartListRequestCode = 3;
+        private const int orderManagerListRequestCode = 4;
+        private const int orderByWorkerListRequestCode = 4;
         private readonly IApplicationSessionService applicationSessionService;
 
         public MenuActivity()
@@ -90,10 +92,14 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnTimetableManagement_Click(object sender, EventArgs e)
         {
+            Intent nextActivity = new Intent(this, typeof(OrderManagerListActivity));
+            StartActivityForResult(nextActivity, orderManagerListRequestCode);
         }
 
         private void BtnDayTimetable_Click(object sender, EventArgs e)
         {
+            Intent nextActivity = new Intent(this, typeof(OrderByWorkerListActivity));
+            StartActivityForResult(nextActivity, orderByWorkerListRequestCode);
         }
 
         private void BtnContact_Click(object sender, EventArgs e)

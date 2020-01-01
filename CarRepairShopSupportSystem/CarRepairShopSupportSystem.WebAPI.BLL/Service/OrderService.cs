@@ -22,5 +22,10 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
         {
             return orderRepository.GetAll(nameof(OrderStatus)).Where(o => o.VehicleId == vehicleId);
         }
+
+        public IEnumerable<Order> GetOrderListByWorker(int userId)
+        {
+            return orderRepository.GetAll(nameof(OrderStatus)).Where(o => o.WorkByUsers.Any(u => u.UserId == userId));
+        }
     }
 }

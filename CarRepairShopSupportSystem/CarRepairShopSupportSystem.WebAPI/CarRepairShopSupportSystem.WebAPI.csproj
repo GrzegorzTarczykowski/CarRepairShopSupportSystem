@@ -228,6 +228,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderStatusController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -244,6 +245,7 @@
     </Compile>
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vehicle.cs" />
@@ -310,6 +312,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Message\" />
+    <Folder Include="Views\OrderStatus\" />
     <Folder Include="Views\Order\" />
     <Folder Include="Views\Service\" />
     <Folder Include="Views\Timetable\" />

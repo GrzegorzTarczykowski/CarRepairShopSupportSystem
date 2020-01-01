@@ -64,8 +64,10 @@
     <Compile Include="Activity\ContactActivity.cs" />
     <Compile Include="Activity\MenuActivity.cs" />
     <Compile Include="Activity\MessageActivity.cs" />
+    <Compile Include="Activity\OrderByWorkerListActivity.cs" />
     <Compile Include="Activity\OrderDetailsActivity.cs" />
     <Compile Include="Activity\OrderEditorActivity.cs" />
+    <Compile Include="Activity\OrderManagerListActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
     <Compile Include="Activity\ServiceActivity.cs" />
     <Compile Include="Activity\ServiceListActivity.cs" />
@@ -203,6 +205,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_vehiclePart.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_orderByWorkerList.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_orderManagerList.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

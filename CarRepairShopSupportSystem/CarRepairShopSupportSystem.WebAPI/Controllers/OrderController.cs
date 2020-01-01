@@ -22,12 +22,56 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.orderService = orderService;
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
+        // GET api/<controller>
+        public IEnumerable<Models.Order> Get()
+        {
+            return GetBase(nameof(OrderStatus))
+                ?.Select(o => new Models.Order
+                {
+                    OrderId = o.OrderId,
+                    TotalCost = o.TotalCost,
+                    Description = o.Description,
+                    CreateDate = o.CreateDate,
+                    PlannedStartDateOfRepair = o.PlannedStartDateOfRepair,
+                    StartDateOfRepair = o.StartDateOfRepair,
+                    PlannedEndDateOfRepair = o.PlannedEndDateOfRepair,
+                    EndDateOfRepair = o.EndDateOfRepair,
+                    OrderStatusId = o.OrderStatusId,
+                    OrderStatusName = o.OrderStatus.Name,
+                    VehicleId = o.VehicleId
+                });
+        }
+
         [Route("api/Order/GetByVehicleId")]
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         public IEnumerable<Models.Order> GetByVehicleId([FromUri]int vehicleId)
         {
             return orderService.GetOrderListByVehicleId(vehicleId)
+                ?.Select(o => new Models.Order
+                {
+                    OrderId = o.OrderId,
+                    TotalCost = o.TotalCost,
+                    Description = o.Description,
+                    CreateDate = o.CreateDate,
+                    PlannedStartDateOfRepair = o.PlannedStartDateOfRepair,
+                    StartDateOfRepair = o.StartDateOfRepair,
+                    PlannedEndDateOfRepair = o.PlannedEndDateOfRepair,
+                    EndDateOfRepair = o.EndDateOfRepair,
+                    OrderStatusId = o.OrderStatusId,
+                    OrderStatusName = o.OrderStatus.Name,
+                    VehicleId = o.VehicleId
+                });
+        }
+
+        [Route("api/Order/GetOrderListByWorker")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
+        [HttpGet]
+        public IEnumerable<Models.Order> GetOrderListByWorker([FromUri]int userId)
+        {
+            return orderService.GetOrderListByWorker(userId)
                 ?.Select(o => new Models.Order
                 {
                     OrderId = o.OrderId,

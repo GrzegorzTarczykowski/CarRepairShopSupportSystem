@@ -62,6 +62,28 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
         }
 
+        public IEnumerable<Order> GetAllOrderList()
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Order");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<Order> matchingOrderList = JsonConvert.DeserializeObject<IEnumerable<Order>>(JsonContent);
+                    if (matchingOrderList != null)
+                    {
+                        return matchingOrderList;
+                    }
+                }
+                return Enumerable.Empty<Order>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Order GetOrderByOrderId(int orderId)
         {
             try
@@ -85,6 +107,28 @@ namespace CarRepairShopSupportSystem.BLL.Service
             try
             {
                 HttpResponseMessage APIResponse = httpClientService.Get($"api/Order/GetByVehicleId?vehicleId={vehicleId}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<Order> matchingOrderList = JsonConvert.DeserializeObject<IEnumerable<Order>>(JsonContent);
+                    if (matchingOrderList != null)
+                    {
+                        return matchingOrderList;
+                    }
+                }
+                return Enumerable.Empty<Order>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Order> GetOrderListByWorker(int userId)
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Order/GetOrderListByWorker?userId={userId}");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;

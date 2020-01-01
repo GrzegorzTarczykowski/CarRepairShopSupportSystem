@@ -91,9 +91,9 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Repository
             set.Remove(entityToDelete);
         }
 
-        public void Remove(T entity)
+        public void Remove(int id)
         {
-            T entityToDelete = set.Find(entity);
+            T entityToDelete = set.Find(id);
             if (msSqlServerContext.Entry(entityToDelete).State == EntityState.Detached)
             {
                 set.Attach(entityToDelete);

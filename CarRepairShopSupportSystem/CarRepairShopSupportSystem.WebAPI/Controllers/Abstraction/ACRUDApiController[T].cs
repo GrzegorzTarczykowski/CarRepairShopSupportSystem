@@ -25,6 +25,15 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
         }
 
         [HttpGet]
+        internal protected IEnumerable<T> GetBase(params string[] includeProperties)
+        {
+            return BaseAction(delegate
+            {
+                return repository.GetAll(includeProperties);
+            });
+        }
+
+        [HttpGet]
         internal protected IEnumerable<T> GetByBase(Expression<Func<T, bool>> predicate)
         {
             return BaseAction(delegate 
@@ -107,7 +116,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
                 T entity = repository.FindById(id);
                 if (entity != null)
                 {
-                    repository.Remove(entity);
+                    repository.Remove(id);
                     repository.SaveChanges();
                     return new HttpResponseMessage(HttpStatusCode.OK);
                 }

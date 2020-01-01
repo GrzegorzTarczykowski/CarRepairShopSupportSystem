@@ -20,7 +20,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Abstraction
         bool Add(T entity);
         bool AddRange(IEnumerable<T> entities);
         void Remove(params object[] keyValues);
-        void Remove(T entity);
+        void Remove(int id);
         bool Edit(T entity);
         bool SaveChanges(T entity);
         Task<bool> SaveChangesAsync();

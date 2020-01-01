@@ -55,6 +55,7 @@
     <Compile Include="IService\ILoginService.cs" />
     <Compile Include="IService\IMessageService.cs" />
     <Compile Include="IService\IOrderService.cs" />
+    <Compile Include="IService\IOrderStatusService.cs" />
     <Compile Include="IService\IRegularExpressionService.cs" />
     <Compile Include="IService\IServiceService.cs" />
     <Compile Include="IService\ITimetableService.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\OperationResult.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\ResourceUri.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\Setting.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\MessageService.cs" />
     <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\OrderStatusService.cs" />
     <Compile Include="Service\RegularExpressionService.cs" />
     <Compile Include="Service\ServiceService.cs" />
     <Compile Include="Service\TimetableService.cs" />
