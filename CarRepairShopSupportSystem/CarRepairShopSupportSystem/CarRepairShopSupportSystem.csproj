@@ -77,12 +77,15 @@
     <Compile Include="Activity\VehicleListActivity.cs" />
     <Compile Include="Activity\VehiclePartActivity.cs" />
     <Compile Include="Activity\VehiclePartListActivity.cs" />
+    <Compile Include="Activity\WorkerListManagerActivity.cs" />
+    <Compile Include="Activity\WorkerManagerActivity.cs" />
     <Compile Include="Adapter\CalendarAdapter.cs" />
     <Compile Include="Adapter\MessageAdapter.cs" />
     <Compile Include="Adapter\OrderAdapter.cs" />
     <Compile Include="Adapter\ServiceAdapter.cs" />
     <Compile Include="Adapter\SpinKeyValuePairAdapter.cs" />
     <Compile Include="Adapter\TimetableAdapter.cs" />
+    <Compile Include="Adapter\UserAdapter.cs" />
     <Compile Include="Adapter\VehicleAdapter.cs" />
     <Compile Include="Adapter\VehiclePartAdapter.cs" />
     <Compile Include="Handler\AlertHandler.cs" />
@@ -215,6 +218,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\activity_orderManagerList.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_workerManager.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_workerListManager.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

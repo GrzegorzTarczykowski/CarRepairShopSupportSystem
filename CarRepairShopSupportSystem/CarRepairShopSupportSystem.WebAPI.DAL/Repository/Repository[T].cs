@@ -46,6 +46,32 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Repository
             return true;
         }
 
+        public void EditManyToMany<TMany>(Expression<Func<T, bool>> filter
+                                                , string collectionPropertyName
+                                                , string idPropertyName
+                                                , IEnumerable<object> updatedSet)
+        {
+            var previous = msSqlServerContext
+                .Set<T>()
+                .Include(collectionPropertyName)
+                .FirstOrDefault(filter);
+
+            IList<TMany> values = new List<TMany>();
+
+            foreach (var entry in updatedSet
+                                .Select(obj => (int)obj
+                                    .GetType()
+                                    .GetProperty(idPropertyName)
+                                    .GetValue(obj, null))
+                                .Select(value => (TMany)msSqlServerContext.Set(typeof(TMany)).Find(value)))
+            {
+                values.Add(entry);
+            }
+
+            msSqlServerContext.Entry(previous).Collection(collectionPropertyName).CurrentValue = values;
+            set.Attach(previous);
+        }
+
         public T FindById(int id)
         {
             return set.Find(id);

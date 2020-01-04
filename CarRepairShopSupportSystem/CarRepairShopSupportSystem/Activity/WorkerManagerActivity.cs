@@ -13,13 +13,13 @@ using Android.Widget;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "Kontakt")]
-    public class ContactActivity : AppCompatActivity
+    [Activity(Label = "Zarządzanie pracownikiem")]
+    public class WorkerManagerActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.activity_contact);
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.orderService = orderService;
         }
 
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>
         public IEnumerable<Models.Order> Get()
@@ -46,12 +46,13 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                         UserId = u.UserId,
                         FirstName = u.FirstName,
                         LastName = u.LastName,
+                        PermissionId = u.PermissionId
                     })
                 });
         }
 
         [Route("api/Order/GetByVehicleId")]
-        //[Authorize(Roles = "SuperAdmin, Admin, User")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         public IEnumerable<Models.Order> GetByVehicleId([FromUri]int vehicleId)
         {
@@ -74,12 +75,13 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                         UserId = u.UserId,
                         FirstName = u.FirstName,
                         LastName = u.LastName,
+                        PermissionId = u.PermissionId
                     })
                 });
         }
 
         [Route("api/Order/GetOrderListByWorker")]
-        //[Authorize(Roles = "SuperAdmin, Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpGet]
         public IEnumerable<Models.Order> GetOrderListByWorker([FromUri]int userId)
         {
@@ -102,6 +104,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                         UserId = u.UserId,
                         FirstName = u.FirstName,
                         LastName = u.LastName,
+                        PermissionId = u.PermissionId
                     })
                 });
         }
@@ -109,25 +112,92 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         // GET api/<controller>/5
-        public Order Get(int id)
+        public Models.Order Get(int id)
         {
-            return GetBase(id);
+            var order = GetBase(id);
+            return new Models.Order
+            {
+                OrderId = order.OrderId,
+                TotalCost = order.TotalCost,
+                Description = order.Description,
+                CreateDate = order.CreateDate,
+                PlannedStartDateOfRepair = order.PlannedStartDateOfRepair,
+                StartDateOfRepair = order.StartDateOfRepair,
+                PlannedEndDateOfRepair = order.PlannedEndDateOfRepair,
+                EndDateOfRepair = order.EndDateOfRepair,
+                OrderStatusId = order.OrderStatusId,
+                OrderStatusName = order.OrderStatus?.Name,
+                VehicleId = order.VehicleId,
+                WorkByUsers = order.WorkByUsers?.Select(u => new Models.User
+                {
+                    UserId = u.UserId,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    PermissionId = u.PermissionId
+                })
+            };
         }
 
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpPost]
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody]Order value)
+        public HttpResponseMessage Post([FromBody]Models.Order value)
         {
-            return PostBase(value);
+            Order order = new Order
+            {
+                OrderId = value.OrderId,
+                TotalCost = value.TotalCost,
+                Description = value.Description,
+                CreateDate = value.CreateDate,
+                PlannedStartDateOfRepair = value.PlannedStartDateOfRepair,
+                StartDateOfRepair = value.StartDateOfRepair,
+                PlannedEndDateOfRepair = value.PlannedEndDateOfRepair,
+                EndDateOfRepair = value.EndDateOfRepair,
+                OrderStatusId = value.OrderStatusId,
+                VehicleId = value.VehicleId
+            };
+
+            if (orderService.AddOrder(order))
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
+            }
         }
 
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpPut]
         // PUT api/<controller>/5
-        public HttpResponseMessage Put(int id, [FromBody]Order value)
+        public HttpResponseMessage Put(int id, [FromBody]Models.Order value)
         {
-            return PutBase(id == value.OrderId, value);
+            Order order = new Order
+            {
+                OrderId = value.OrderId,
+                TotalCost = value.TotalCost,
+                Description = value.Description,
+                CreateDate = value.CreateDate,
+                PlannedStartDateOfRepair = value.PlannedStartDateOfRepair,
+                StartDateOfRepair = value.StartDateOfRepair,
+                PlannedEndDateOfRepair = value.PlannedEndDateOfRepair,
+                EndDateOfRepair = value.EndDateOfRepair,
+                OrderStatusId = value.OrderStatusId,
+                VehicleId = value.VehicleId,
+                WorkByUsers = value.WorkByUsers?.Select(u => new User
+                {
+                    UserId = u.UserId
+                }).ToList()
+            };
+
+            if (id == order.OrderId && orderService.EditOrder(order))
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
+            }
         }
 
         [Authorize(Roles = "SuperAdmin")]

@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "TimetableActivity")]
+    [Activity(Label = "Harmonogram")]
     public class TimetableActivity : AppCompatActivity
     {
         private readonly ITimetableService timetableService;

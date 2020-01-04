@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "OrderManagerListActivity")]
+    [Activity(Label = "Zarządzanie listą zleceń")]
     public class OrderManagerListActivity : AppCompatActivity
     {
         private const int orderDetailsRequestCode = 1;
@@ -52,6 +52,12 @@ namespace CarRepairShopSupportSystem.Activity
         {
             orderList = orderService.GetAllOrderList().ToList();
             gvOrderManagerList.Adapter = new OrderAdapter(this, orderList.ToArray());
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            RefreshGvOrderManagerList(FindViewById<GridView>(Resource.Id.gvOrderManagerList));
         }
     }
 }

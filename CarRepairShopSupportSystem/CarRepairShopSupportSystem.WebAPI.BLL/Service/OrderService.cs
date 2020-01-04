@@ -27,5 +27,30 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
         {
             return orderRepository.GetAll(nameof(OrderStatus)).Where(o => o.WorkByUsers.Any(u => u.UserId == userId));
         }
+
+        public bool AddOrder(Order order)
+        {
+            orderRepository.Add(order);
+            orderRepository.SaveChanges();
+            return true;
+        }
+
+        public bool EditOrder(Order order)
+        {
+            ICollection<User> workByUsers = order.WorkByUsers;
+            order.WorkByUsers = null;
+            orderRepository.Edit(order);
+            orderRepository.SaveChanges();
+
+            if (workByUsers != null)
+            {
+                orderRepository.EditManyToMany<User>(o => o.OrderId == order.OrderId
+                                        , nameof(order.WorkByUsers)
+                                        , nameof(User.UserId)
+                                        , workByUsers);
+                orderRepository.SaveChanges();
+            }
+            return true;
+        }
     }
 }

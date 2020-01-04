@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "VehiclePartListActivity")]
+    [Activity(Label = "Lista części")]
     public class VehiclePartListActivity : AppCompatActivity
     {
         private const int vehiclePartRequestCode = 1;

@@ -129,7 +129,7 @@ namespace CarRepairShopSupportSystem.Activity
                 }
 
                 vehicle.EngineMileage = engineMileage;
-                vehicle.RegistrationNumbers = FindViewById<EditText>(Resource.Id.editRegistrationNumbers).Text;
+                vehicle.RegistrationNumbers = FindViewById<EditText>(Resource.Id.editRegistrationNumbers).Text.ToUpper();
                 vehicle.VehicleBrandId = vehicleBrandList[FindViewById<Spinner>(Resource.Id.spinnerVehicleBrand).SelectedItemPosition].VehicleBrandId;
                 vehicle.VehicleBrandName = vehicleBrandList[FindViewById<Spinner>(Resource.Id.spinnerVehicleBrand).SelectedItemPosition].Name;
                 vehicle.VehicleEngineId = vehicleEngineList[FindViewById<Spinner>(Resource.Id.spinnerVehicleEngine).SelectedItemPosition].VehicleEngineId;

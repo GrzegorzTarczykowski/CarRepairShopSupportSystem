@@ -1,0 +1,36 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundMainGradientSelector">
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="Dodaj pracownika"
+            android:id="@+id/btnAddWorker"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+        <Button
+            android:text="Zatwierdź wybranych pracowników"
+            android:id="@+id/btnSubmitSelectedWorker"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+        <GridView
+            android:id="@+id/gvWorkerList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:columnWidth="400dp"
+            android:numColumns="1"
+            android:verticalSpacing="24dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="spacingWidthUniform"
+            android:scrollbars="vertical"/>
+    </LinearLayout>
+</LinearLayout>

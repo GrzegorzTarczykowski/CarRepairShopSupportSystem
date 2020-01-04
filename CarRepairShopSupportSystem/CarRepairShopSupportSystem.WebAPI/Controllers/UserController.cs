@@ -71,7 +71,11 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 {
                     UserId = user.UserId,
                     PermissionId = user.PermissionId,
-                    PermissionName = user.Permission.Name
+                    PermissionName = user.Permission.Name,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Username = user.Username
                 };
             }
             return null;

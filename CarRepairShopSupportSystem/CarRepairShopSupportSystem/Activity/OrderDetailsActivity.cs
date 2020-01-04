@@ -18,27 +18,27 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "OrderDetailsActivity")]
+    [Activity(Label = "Szczegóły pojazdu")]
     public class OrderDetailsActivity : AppCompatActivity
     {
         private const int serviceListRequestCode = 1;
         private const int vehiclePartListRequestCode = 2;
+        private const int workerListManagerRequestCode = 3;
+        private IList<User> selectedWorkerList;
         private IList<BLL.Models.Service> selectedServiceList;
         private IList<VehiclePart> selectedVehiclePartList;
         private IList<OrderStatus> orderStatusList;
-        private IList<User> workerUserList;
         private decimal sumServicePrice;
         private decimal sumVehiclePartPrice;
         private Order order;
         private readonly IOrderService orderService;
         private readonly IOrderStatusService orderStatusService;
-        private readonly IUserService userService;
+        private bool isInitOrderStatus = true;
 
         public OrderDetailsActivity()
         {
             this.orderService = new OrderService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
             this.orderStatusService = new OrderStatusService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            this.userService = new UserService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -50,6 +50,7 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<Button>(Resource.Id.btnMessages).Click += BtnMessages_Click;
             FindViewById<Button>(Resource.Id.btnDeleteOrder).Click += BtnDeleteOrder_Click;
             order = JsonConvert.DeserializeObject<Order>(Intent.GetStringExtra("OrderDetails"));
+            selectedWorkerList = order.WorkByUsers.ToList();
 
             if (Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.Admin.ToString()
                 || Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.SuperAdmin.ToString())
@@ -60,49 +61,42 @@ namespace CarRepairShopSupportSystem.Activity
 
                 Spinner spinnerOrderStatusNameForWorker = FindViewById<Spinner>(Resource.Id.spinnerOrderStatusNameForWorker);
                 spinnerOrderStatusNameForWorker.Visibility = ViewStates.Visible;
-                spinnerOrderStatusNameForWorker.ItemSelected += SpinnerOrderStatusNameForWorker_ItemSelected;
                 orderStatusList = orderStatusService.GetAllOrderStatusList().ToList();
                 var orderStatusAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, orderStatusList.Select(os => os.Name).ToList());
                 orderStatusAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
                 spinnerOrderStatusNameForWorker.Adapter = orderStatusAdapter;
+                spinnerOrderStatusNameForWorker.ItemSelected += SpinnerOrderStatusNameForWorker_ItemSelected;
 
                 if (Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.SuperAdmin.ToString())
                 {
                     FindViewById<TextView>(Resource.Id.tvWorkByUsersLabel).Visibility = ViewStates.Gone;
                     FindViewById<TextView>(Resource.Id.tvWorkByUsers).Visibility = ViewStates.Gone;
-                    FindViewById<TextView>(Resource.Id.tvWorkByUsersLabelForSuperAdmin).Visibility = ViewStates.Visible;
-
-                    Spinner spinnerWorkByUsersForSuperAdmin = FindViewById<Spinner>(Resource.Id.spinnerWorkByUsersForSuperAdmin);
-                    spinnerWorkByUsersForSuperAdmin.Visibility = ViewStates.Visible;
-                    spinnerWorkByUsersForSuperAdmin.ItemSelected += SpinnerWorkByUsersForSuperAdmin_ItemSelected;
-                    workerUserList = userService.GetAllWorkerList().ToList();
-                    var workerUserListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, workerUserList.Select(u => $"{u.FirstName} {u.LastName}").ToList());
-                    workerUserListAdapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-                    spinnerWorkByUsersForSuperAdmin.Adapter = workerUserListAdapter;
+                    Button btnAddWorker = FindViewById<Button>(Resource.Id.btnAddWorker);
+                    btnAddWorker.Visibility = ViewStates.Visible;
+                    btnAddWorker.Click += BtnAddWorker_Click;
                 }
             }
         }
 
-        private void SpinnerWorkByUsersForSuperAdmin_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        private void BtnAddWorker_Click(object sender, EventArgs e)
         {
-            var workerUser = workerUserList[e.Position];
-            var workByUsersList = order.WorkByUsers.ToList();
-            workByUsersList.Add(workerUser);
-            order.WorkByUsers = workByUsersList;
-            OperationResult operationResult = orderService.EditVehicleOrder(order);
-
-            if (operationResult.ResultCode == ResultCode.Successful)
-            {
-                Toast.MakeText(Application.Context, "Zmieniono status zamówienia", ToastLength.Long).Show();
-            }
-            else
-            {
-                Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
-            }
+            Intent nextActivity = new Intent(this, typeof(WorkerListManagerActivity));
+            nextActivity.PutExtra("SelectedWorkerList", JsonConvert.SerializeObject(selectedWorkerList));
+            StartActivityForResult(nextActivity, workerListManagerRequestCode);
         }
 
         private void SpinnerOrderStatusNameForWorker_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
+            if (isInitOrderStatus)
+            {
+                var orderStatus = orderStatusList
+                    .FirstOrDefault(os => os.OrderStatusId == order.OrderStatusId);
+                FindViewById<Spinner>(Resource.Id.spinnerOrderStatusNameForWorker)
+                    .SetSelection(orderStatusList.IndexOf(orderStatus));
+                isInitOrderStatus = false;
+                return;
+            }
+
             order.OrderStatusId = orderStatusList[e.Position].OrderStatusId;
             OperationResult operationResult = orderService.EditVehicleOrder(order);
 
@@ -138,6 +132,7 @@ namespace CarRepairShopSupportSystem.Activity
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+            order = orderService.GetOrderByOrderId(order.OrderId);
             if (requestCode == serviceListRequestCode)
             {
                 if (resultCode == Result.Ok)
@@ -152,7 +147,24 @@ namespace CarRepairShopSupportSystem.Activity
                     selectedVehiclePartList = JsonConvert.DeserializeObject<IList<VehiclePart>>(data.GetStringExtra("SelectedVehiclePartList"));
                 }
             }
-            order = orderService.GetOrderByOrderId(order.OrderId);
+            if (requestCode == workerListManagerRequestCode)
+            {
+                if (resultCode == Result.Ok)
+                {
+                    selectedWorkerList = JsonConvert.DeserializeObject<IList<User>>(data.GetStringExtra("SelectedWorkerList"));
+                    order.WorkByUsers = selectedWorkerList;
+                    OperationResult operationResult = orderService.EditVehicleOrder(order);
+
+                    if (operationResult.ResultCode == ResultCode.Successful)
+                    {
+                        Toast.MakeText(Application.Context, "Przypisano pracowników", ToastLength.Long).Show();
+                    }
+                    else
+                    {
+                        Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
+                    }
+                }
+            }
             FindViewById<TextView>(Resource.Id.tvTotalCost).Text = $"{sumServicePrice + sumVehiclePartPrice}";
         }
     }

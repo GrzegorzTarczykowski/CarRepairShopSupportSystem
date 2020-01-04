@@ -22,6 +22,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Abstraction
         void Remove(params object[] keyValues);
         void Remove(int id);
         bool Edit(T entity);
+        void EditManyToMany<TMany>(Expression<Func<T, bool>> filter, string collectionPropertyName, string idPropertyName, IEnumerable<object> updatedSet);
         bool SaveChanges(T entity);
         Task<bool> SaveChangesAsync();
     }

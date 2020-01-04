@@ -113,6 +113,22 @@ namespace CarRepairShopSupportSystem.Activity
             {
                 Toast.MakeText(Application.Context, "Uzupełnij hasło", ToastLength.Long).Show();
             }
+            else if (textPassword.Length < 6)
+            {
+                Toast.MakeText(Application.Context, "Hasło musi mięc co najmniej 6 znaków", ToastLength.Long).Show();
+            }
+            else if (!textPassword.Any(char.IsDigit))
+            {
+                Toast.MakeText(Application.Context, "Hasło musi zawierać cyfry", ToastLength.Long).Show();
+            }
+            else if (!textPassword.Any(char.IsLetter))
+            {
+                Toast.MakeText(Application.Context, "Hasło musi zawierać litery", ToastLength.Long).Show();
+            }
+            else if (!textPassword.Any(char.IsUpper))
+            {
+                Toast.MakeText(Application.Context, "Hasło musi zawierać duże litery", ToastLength.Long).Show();
+            }
             else if (string.IsNullOrWhiteSpace(textConfirmPassword))
             {
                 Toast.MakeText(Application.Context, "Uzupełnij powtórne hasło", ToastLength.Long).Show();
