@@ -11,5 +11,7 @@ namespace CarRepairShopSupportSystem.BLL.IService
     {
         OperationResult AddUser(User user);
         OperationResult EditUser(User user);
+        IEnumerable<User> GetAllUserList();
+        IEnumerable<User> GetAllWorkerList();
     }
 }

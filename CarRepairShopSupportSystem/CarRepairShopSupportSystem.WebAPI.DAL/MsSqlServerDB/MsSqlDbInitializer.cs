@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 {
-    public class MsSqlDbInitializer : DropCreateDatabaseAlways<MsSqlServerContext>
+    //public class MsSqlDbInitializer : DropCreateDatabaseAlways<MsSqlServerContext>
+    public class MsSqlDbInitializer : CreateDatabaseIfNotExists<MsSqlServerContext>
     {
         protected override void Seed(MsSqlServerContext context)
         {
@@ -28,9 +29,9 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             IList<OrderStatus> defaultOrderStatuses = new List<OrderStatus>();
 
-            defaultOrderStatuses.Add(new OrderStatus() { Name = $"{OrderStatusId.Planned}" });
-            defaultOrderStatuses.Add(new OrderStatus() { Name = $"{OrderStatusId.InProgress}" });
-            defaultOrderStatuses.Add(new OrderStatus() { Name = $"{OrderStatusId.Completed}" });
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"Zaplanowane" });
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"W trakcie" });
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"Zakończone" });
 
             context.OrderStatuses.AddRange(defaultOrderStatuses);
 

@@ -16,11 +16,47 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
     {
         private readonly ILoginService loginService;
         private readonly IRegisterService registerService;
+        private readonly IUserService userService;
 
-        public UserController(IRepository<User> repository, ILoginService loginService, IRegisterService registerService) : base(repository)
+        public UserController(IRepository<User> repository, ILoginService loginService, IRegisterService registerService, IUserService userService) : base(repository)
         {
             this.loginService = loginService;
             this.registerService = registerService;
+            this.userService = userService;
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
+        // GET api/<controller>
+        public IEnumerable<Models.User> Get()
+        {
+            return GetBase()?.Select(u => new Models.User
+            {
+                Username = u.Username,
+                Password = u.Password,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber
+            });
+        }
+
+        [Route("api/User/GetAllWorkerList")]
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
+        public IEnumerable<Models.User> GetAllWorkerList()
+        {
+            return userService.GetAllWorkerList()
+                ?.Select(u => new Models.User
+                {
+                    UserId = u.UserId,
+                    Username = u.Username,
+                    Password = u.Password,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    PhoneNumber = u.PhoneNumber
+                });
         }
 
         [Authorize(Roles = "SuperAdmin, Admin, User")]

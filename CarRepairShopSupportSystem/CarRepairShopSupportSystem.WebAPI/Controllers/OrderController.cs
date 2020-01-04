@@ -22,7 +22,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.orderService = orderService;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>
         public IEnumerable<Models.Order> Get()
@@ -40,12 +40,18 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     EndDateOfRepair = o.EndDateOfRepair,
                     OrderStatusId = o.OrderStatusId,
                     OrderStatusName = o.OrderStatus.Name,
-                    VehicleId = o.VehicleId
+                    VehicleId = o.VehicleId,
+                    WorkByUsers = o.WorkByUsers?.Select(u => new Models.User
+                    {
+                        UserId = u.UserId,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                    })
                 });
         }
 
         [Route("api/Order/GetByVehicleId")]
-        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        //[Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         public IEnumerable<Models.Order> GetByVehicleId([FromUri]int vehicleId)
         {
@@ -62,12 +68,18 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     EndDateOfRepair = o.EndDateOfRepair,
                     OrderStatusId = o.OrderStatusId,
                     OrderStatusName = o.OrderStatus.Name,
-                    VehicleId = o.VehicleId
+                    VehicleId = o.VehicleId,
+                    WorkByUsers = o.WorkByUsers?.Select(u => new Models.User
+                    {
+                        UserId = u.UserId,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                    })
                 });
         }
 
         [Route("api/Order/GetOrderListByWorker")]
-        [Authorize(Roles = "SuperAdmin, Admin")]
+        //[Authorize(Roles = "SuperAdmin, Admin")]
         [HttpGet]
         public IEnumerable<Models.Order> GetOrderListByWorker([FromUri]int userId)
         {
@@ -84,7 +96,13 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     EndDateOfRepair = o.EndDateOfRepair,
                     OrderStatusId = o.OrderStatusId,
                     OrderStatusName = o.OrderStatus.Name,
-                    VehicleId = o.VehicleId
+                    VehicleId = o.VehicleId,
+                    WorkByUsers = o.WorkByUsers?.Select(u => new Models.User
+                    {
+                        UserId = u.UserId,
+                        FirstName = u.FirstName,
+                        LastName = u.LastName,
+                    })
                 });
         }
 

@@ -11,6 +11,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.Adapter;
+using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
@@ -18,7 +19,7 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "OrderByWorkerListActivity")]
+    [Activity(Label = "Lista zadań")]
     public class OrderByWorkerListActivity : AppCompatActivity
     {
         private const int orderDetailsRequestCode = 1;
@@ -52,7 +53,7 @@ namespace CarRepairShopSupportSystem.Activity
         {
             Intent nextActivity = new Intent(this, typeof(OrderDetailsActivity));
             nextActivity.PutExtra("OrderDetails", JsonConvert.SerializeObject(orderByWorkerList[e.Position]));
-            nextActivity.PutExtra("IsWorker", "Yes");
+            nextActivity.PutExtra(nameof(PermissionId), PermissionId.Admin.ToString());
             StartActivityForResult(nextActivity, orderDetailsRequestCode);
         }
 

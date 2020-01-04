@@ -61,5 +61,49 @@ namespace CarRepairShopSupportSystem.BLL.Service
                 return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem z edycja użytkownika" };
             }
         }
+
+        public IEnumerable<User> GetAllUserList()
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/User");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<User> matchingUserList = JsonConvert.DeserializeObject<IEnumerable<User>>(JsonContent);
+                    if (matchingUserList != null)
+                    {
+                        return matchingUserList;
+                    }
+                }
+                return Enumerable.Empty<User>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<User> GetAllWorkerList()
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/User/GetAllWorkerList");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<User> matchingUserList = JsonConvert.DeserializeObject<IEnumerable<User>>(JsonContent);
+                    if (matchingUserList != null)
+                    {
+                        return matchingUserList;
+                    }
+                }
+                return Enumerable.Empty<User>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

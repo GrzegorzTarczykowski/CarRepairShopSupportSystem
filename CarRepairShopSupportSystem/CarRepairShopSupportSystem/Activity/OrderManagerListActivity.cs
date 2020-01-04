@@ -11,15 +11,18 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.Adapter;
+using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
+using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
     [Activity(Label = "OrderManagerListActivity")]
     public class OrderManagerListActivity : AppCompatActivity
     {
+        private const int orderDetailsRequestCode = 1;
         private readonly IOrderService orderService;
         private List<Order> orderList;
 
@@ -39,7 +42,10 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void GvOrderManagerList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-
+            Intent nextActivity = new Intent(this, typeof(OrderDetailsActivity));
+            nextActivity.PutExtra("OrderDetails", JsonConvert.SerializeObject(orderList[e.Position]));
+            nextActivity.PutExtra(nameof(PermissionId), PermissionId.SuperAdmin.ToString());
+            StartActivityForResult(nextActivity, orderDetailsRequestCode);
         }
 
         private void RefreshGvOrderManagerList(GridView gvOrderManagerList)

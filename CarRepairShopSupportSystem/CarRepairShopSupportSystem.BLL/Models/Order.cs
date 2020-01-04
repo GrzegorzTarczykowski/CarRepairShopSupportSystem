@@ -19,6 +19,7 @@ namespace CarRepairShopSupportSystem.BLL.Models
         public int OrderStatusId { get; set; }
         public string OrderStatusName { get; set; }
         public int VehicleId { get; set; }
+        public IEnumerable<User> WorkByUsers { get; set; }
         public IEnumerable<Service> ContainsServices { get; set; }
         public IEnumerable<VehiclePart> UsedVehicleParts { get; set; }
     }
