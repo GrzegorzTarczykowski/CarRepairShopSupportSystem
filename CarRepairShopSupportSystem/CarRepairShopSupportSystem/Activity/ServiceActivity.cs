@@ -90,7 +90,7 @@ namespace CarRepairShopSupportSystem.Activity
             }
             else
             {
-                OperationResult operationResult = null;
+                OperationResult operationResult;
                 if (selectedService != null)
                 {
                     selectedService.Name = textServiceName;

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 {
-    //public class MsSqlDbInitializer : DropCreateDatabaseAlways<MsSqlServerContext>
-    public class MsSqlDbInitializer : CreateDatabaseIfNotExists<MsSqlServerContext>
+    public class MsSqlDbInitializer : DropCreateDatabaseAlways<MsSqlServerContext>
+    //public class MsSqlDbInitializer : CreateDatabaseIfNotExists<MsSqlServerContext>
     {
         protected override void Seed(MsSqlServerContext context)
         {
