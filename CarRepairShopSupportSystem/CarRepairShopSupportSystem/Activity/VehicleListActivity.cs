@@ -70,7 +70,14 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void RefreshGvVehicleList(GridView gvVehicleList)
         {
-            vehicles = vehicleService.GetVehicleListByUserId().ToList();
+            if (Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.SuperAdmin.ToString())
+            {
+                vehicles = vehicleService.GetVehicleList().ToList();
+            }
+            else
+            {
+                vehicles = vehicleService.GetVehicleListByUserId().ToList();
+            }
             gvVehicleList.Adapter = new VehicleAdapter(this, vehicles.ToArray());
         }
     }

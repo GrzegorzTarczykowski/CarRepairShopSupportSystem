@@ -12,5 +12,6 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.IService
     {
         IEnumerable<Vehicle> GetVehicleListByUserId(int userId);
         VehicleServiceResponse AddUserVehicle(Vehicle vehicle);
+        int GetUserIdOwnerByVehicleId(int vehicleId);
     }
 }

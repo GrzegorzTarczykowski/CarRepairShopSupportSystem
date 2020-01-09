@@ -117,7 +117,9 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnMyVehicle_Click(object sender, EventArgs e)
         {
+            
             Intent nextActivity = new Intent(this, typeof(VehicleListActivity));
+            nextActivity.PutExtra(nameof(PermissionId), ((PermissionId)applicationSessionService.GetUserFromApplicationSession().PermissionId).ToString());
             StartActivity(nextActivity);
         }
 

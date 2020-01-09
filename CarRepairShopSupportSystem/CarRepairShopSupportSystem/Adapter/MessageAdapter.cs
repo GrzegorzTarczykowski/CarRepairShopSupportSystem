@@ -41,37 +41,28 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout;
-
-            if (convertView == null)
+            LinearLayout linearLayout = new LinearLayout(context);
+            linearLayout.Orientation = Orientation.Vertical;
+            TextView tvMessageUserSender = new TextView(context)
             {
-                linearLayout = new LinearLayout(context);
-                linearLayout.Orientation = Orientation.Vertical;
-                TextView tvMessageUserSender = new TextView(context)
-                {
-                    TextSize = 15,
-                    Text = $" {messages[position].UserSenderFirstName} {messages[position].UserSenderLastName} {messages[position].SentDate}"
-                };
-                linearLayout.AddView(tvMessageUserSender);
-                TextView tvMessageContent = new TextView(context)
-                {
-                    TextSize = 20,
-                    Text = $"  {messages[position].Content}"
-                };
-                linearLayout.AddView(tvMessageContent);
+                TextSize = 15,
+                Text = $" {messages[position].UserSenderFirstName} {messages[position].UserSenderLastName} {messages[position].SentDate}"
+            };
+            linearLayout.AddView(tvMessageUserSender);
+            TextView tvMessageContent = new TextView(context)
+            {
+                TextSize = 20,
+                Text = $"  {messages[position].Content}"
+            };
+            linearLayout.AddView(tvMessageContent);
 
-                if (messages[position].UserSenderId == userId)
-                {
-                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Orange);
-                }
-                else
-                {
-                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Yellow);
-                }
+            if (messages[position].UserSenderId == userId)
+            {
+                linearLayout.SetBackgroundColor(Android.Graphics.Color.Orange);
             }
             else
             {
-                linearLayout = (LinearLayout)convertView;
+                linearLayout.SetBackgroundColor(Android.Graphics.Color.Yellow);
             }
 
             return linearLayout;

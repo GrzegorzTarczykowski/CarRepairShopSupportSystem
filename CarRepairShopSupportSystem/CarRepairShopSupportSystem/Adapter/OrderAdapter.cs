@@ -42,23 +42,14 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout;
-
-            if (convertView == null)
+            LinearLayout linearLayout = new LinearLayout(context);
+            linearLayout.Orientation = Orientation.Vertical;
+            TextView tvOrderInfo = new TextView(context)
             {
-                linearLayout = new LinearLayout(context);
-                linearLayout.Orientation = Orientation.Vertical;
-                TextView tvOrderInfo = new TextView(context)
-                {
-                    TextSize = 20,
-                    Text = $" {position + 1}. Data zlecenia: {orders[position].CreateDate} Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
-                };
-                linearLayout.AddView(tvOrderInfo);
-            }
-            else
-            {
-                linearLayout = (LinearLayout)convertView;
-            }
+                TextSize = 20,
+                Text = $" {position + 1}. Data zlecenia: {orders[position].CreateDate} Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
+            };
+            linearLayout.AddView(tvOrderInfo);
 
             return linearLayout;
         }

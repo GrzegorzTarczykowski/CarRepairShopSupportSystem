@@ -49,36 +49,27 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            TextView textView;
-
-            if (convertView == null)
+            TextView textView = new TextView(context);
+            if (position >= (int)dayOfWeekFirstDayOfMouth)
             {
-                textView = new TextView(context);
-                if (position >= (int)dayOfWeekFirstDayOfMouth)
+                textView.Text = (1 + position - (int)dayOfWeekFirstDayOfMouth).ToString();
+                textView.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
+                if (timetablePerDayEnumer.FirstOrDefault(tpd => tpd.Day == (1 + position - (int)dayOfWeekFirstDayOfMouth))?.IsAvailableEmployeesForCustomer ?? false)
                 {
-                    textView.Text = (1 + position - (int)dayOfWeekFirstDayOfMouth).ToString();
-                    textView.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
-                    if (timetablePerDayEnumer.FirstOrDefault(tpd => tpd.Day == (1 + position - (int)dayOfWeekFirstDayOfMouth))?.IsAvailableEmployeesForCustomer ?? false)
+                    if (position == selectedPosition)
                     {
-                        if (position == selectedPosition)
-                        {
-                            textView.SetBackgroundColor(Android.Graphics.Color.Blue);
-                        }
-                        else
-                        {
-                            textView.SetBackgroundColor(Android.Graphics.Color.Green);
-                        }
+                        textView.SetBackgroundColor(Android.Graphics.Color.Blue);
                     }
                     else
                     {
-                        textView.Clickable = false;
-                        textView.SetBackgroundColor(Android.Graphics.Color.Red);
+                        textView.SetBackgroundColor(Android.Graphics.Color.Green);
                     }
                 }
-            }
-            else
-            {
-                textView = (TextView)convertView;
+                else
+                {
+                    textView.Clickable = false;
+                    textView.SetBackgroundColor(Android.Graphics.Color.Red);
+                }
             }
 
             return textView;

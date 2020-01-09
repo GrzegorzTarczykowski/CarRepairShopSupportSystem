@@ -11,6 +11,8 @@ namespace CarRepairShopSupportSystem.BLL.IService
     {
         OperationResult AddUserVehicle(Vehicle vehicle);
         OperationResult EditUserVehicle(Vehicle vehicle);
+        int GetUserIdOwnerByVehicleId(int vehicleId);
+        IEnumerable<Vehicle> GetVehicleList();
         IEnumerable<Vehicle> GetVehicleListByUserId();
     }
 }

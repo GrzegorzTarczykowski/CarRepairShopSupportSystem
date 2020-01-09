@@ -44,7 +44,6 @@ namespace CarRepairShopSupportSystem.Activity
         {
             Intent nextActivity = new Intent(this, typeof(OrderDetailsActivity));
             nextActivity.PutExtra("OrderDetails", JsonConvert.SerializeObject(orderList[e.Position]));
-            nextActivity.PutExtra(nameof(PermissionId), PermissionId.SuperAdmin.ToString());
             StartActivityForResult(nextActivity, orderDetailsRequestCode);
         }
 

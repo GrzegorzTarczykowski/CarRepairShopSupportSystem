@@ -49,7 +49,7 @@ namespace CarRepairShopSupportSystem.Activity
                 Content = FindViewById<EditText>(Resource.Id.etMessageCreateor).Text,
                 SentDate = DateTime.Now,
                 OrderId = int.Parse(Intent.GetStringExtra("OrderId")),
-                UserReceiverId = 1, //zmienic to
+                UserReceiverId = int.Parse(Intent.GetStringExtra("UserReceiverId")),
                 UserSenderId = applicationSessionService.GetUserFromApplicationSession().UserId
             };
 
@@ -71,7 +71,14 @@ namespace CarRepairShopSupportSystem.Activity
         {
             int orderId = int.Parse(Intent.GetStringExtra("OrderId"));
             int userId = applicationSessionService.GetUserFromApplicationSession().UserId;
-            messages = messageService.GetMessageListByOrderIdAndUserId(orderId, userId).OrderByDescending(m => m.SentDate).ToList();
+            if (applicationSessionService.GetUserFromApplicationSession().PermissionId == (int)PermissionId.SuperAdmin)
+            {
+                messages = messageService.GetMessageListByOrderId(orderId).OrderByDescending(m => m.SentDate).ToList();
+            }
+            else
+            {
+                messages = messageService.GetMessageListByOrderIdAndUserId(orderId, userId).OrderByDescending(m => m.SentDate).ToList();
+            }
             gvMessageList.Adapter = new MessageAdapter(this, messages.ToArray(), userId);
         }
     }

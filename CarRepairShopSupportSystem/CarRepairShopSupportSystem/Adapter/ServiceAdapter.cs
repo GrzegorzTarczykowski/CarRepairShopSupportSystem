@@ -40,37 +40,28 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout;
-
-            if (convertView == null)
+            LinearLayout linearLayout = new LinearLayout(context);
+            linearLayout.Orientation = Orientation.Vertical;
+            TextView tvBrandNameAndModelName = new TextView(context)
             {
-                linearLayout = new LinearLayout(context);
-                linearLayout.Orientation = Orientation.Vertical;
-                TextView tvBrandNameAndModelName = new TextView(context)
-                {
-                    TextSize = 40,
-                    Text = $"{services[position].Name}"
-                };
-                linearLayout.AddView(tvBrandNameAndModelName);
-                TextView tvRegistrationNumbers = new TextView(context)
-                {
-                    TextSize = 20,
-                    Text = $"Cena: {services[position].Price} [PLN]"
-                };
-                linearLayout.AddView(tvRegistrationNumbers);
+                TextSize = 40,
+                Text = $"{services[position].Name}"
+            };
+            linearLayout.AddView(tvBrandNameAndModelName);
+            TextView tvRegistrationNumbers = new TextView(context)
+            {
+                TextSize = 20,
+                Text = $"Cena: {services[position].Price} [PLN]"
+            };
+            linearLayout.AddView(tvRegistrationNumbers);
 
-                if (selectedServices.Any(ss => ss.ServiceId == services[position].ServiceId))
-                {
-                    linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
-                }
-                else
-                {
-                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
-                }
+            if (selectedServices.Any(ss => ss.ServiceId == services[position].ServiceId))
+            {
+                linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
             }
             else
             {
-                linearLayout = (LinearLayout)convertView;
+                linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
             }
 
             return linearLayout;

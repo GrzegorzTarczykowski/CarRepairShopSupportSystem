@@ -42,34 +42,25 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            TextView textView;
-
-            if (convertView == null)
+            TextView textView = new TextView(context);
+            TimetablePerHour timetablePerHour = timetablePerHourList[position];
+            textView.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
+            textView.Text = $"      Godzina: {timetablePerHour.Hour}:00";
+            if (timetablePerHour.IsAvailableEmployeesForCustomer)
             {
-                textView = new TextView(context);
-                TimetablePerHour timetablePerHour = timetablePerHourList[position];
-                textView.SetTypeface(null, Android.Graphics.TypefaceStyle.Bold);
-                textView.Text = $"      Godzina: {timetablePerHour.Hour}:00";
-                if (timetablePerHour.IsAvailableEmployeesForCustomer)
+                if (position == selectedPosition)
                 {
-                    if (position == selectedPosition)
-                    {
-                        textView.SetBackgroundColor(Android.Graphics.Color.Blue);
-                    }
-                    else
-                    {
-                        textView.SetBackgroundColor(Android.Graphics.Color.Green);
-                    }
+                    textView.SetBackgroundColor(Android.Graphics.Color.Blue);
                 }
                 else
                 {
-                    textView.Clickable = false;
-                    textView.SetBackgroundColor(Android.Graphics.Color.Red);
+                    textView.SetBackgroundColor(Android.Graphics.Color.Green);
                 }
             }
             else
             {
-                textView = (TextView)convertView;
+                textView.Clickable = false;
+                textView.SetBackgroundColor(Android.Graphics.Color.Red);
             }
 
             return textView;

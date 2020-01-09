@@ -41,31 +41,22 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout;
-
-            if (convertView == null)
+            LinearLayout linearLayout = new LinearLayout(context);
+            linearLayout.Orientation = Orientation.Vertical;
+            TextView tvBrandNameAndModelName = new TextView(context)
             {
-                linearLayout = new LinearLayout(context);
-                linearLayout.Orientation = Orientation.Vertical;
-                TextView tvBrandNameAndModelName = new TextView(context)
-                {
-                    TextSize = 40,
-                    Text = $"{users[position].FirstName} {users[position].LastName}"
-                };
-                linearLayout.AddView(tvBrandNameAndModelName);
+                TextSize = 40,
+                Text = $"{users[position].FirstName} {users[position].LastName}"
+            };
+            linearLayout.AddView(tvBrandNameAndModelName);
 
-                if (selectedUsers.Any(su => su.UserId == users[position].UserId))
-                {
-                    linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
-                }
-                else
-                {
-                    linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
-                }
+            if (selectedUsers.Any(su => su.UserId == users[position].UserId))
+            {
+                linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
             }
             else
             {
-                linearLayout = (LinearLayout)convertView;
+                linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
             }
 
             return linearLayout;

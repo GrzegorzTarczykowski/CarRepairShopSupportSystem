@@ -21,6 +21,44 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.vehicleService = vehicleService;
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpGet]
+        // GET api/<controller>
+        public IEnumerable<Models.Vehicle> Get()
+        {
+            return GetBase(nameof(VehicleEngine)
+                         , nameof(VehicleFuel)
+                         , $"{nameof(VehicleModel)}.{nameof(VehicleBrand)}"
+                         , nameof(VehicleType))
+                ?.Select(v => new Models.Vehicle
+                {
+                    VehicleId = v.VehicleId,
+                    EngineMileage = v.EngineMileage,
+                    RegistrationNumbers = v.RegistrationNumbers,
+                    Description = v.Description,
+                    UserId = v.UserId,
+                    VehicleBrandId = v.VehicleModel.VehicleBrandId,
+                    VehicleBrandName = v.VehicleModel.VehicleBrand.Name,
+                    VehicleEngineId = v.VehicleEngineId,
+                    VehicleEngineCode = v.VehicleEngine.EngineCode,
+                    VehicleFuelId = v.VehicleFuelId,
+                    VehicleFuelName = v.VehicleFuel.Name,
+                    VehicleModelId = v.VehicleModelId,
+                    VehicleModelName = v.VehicleModel.Name,
+                    VehicleTypeId = v.VehicleTypeId,
+                    VehicleTypeName = v.VehicleType.Name
+                });
+        }
+        
+        [Route("api/Vehicle/GetUserIdOwnerByVehicleId")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        [HttpGet]
+        public int GetUserIdOwnerByVehicleId([FromUri]int vehicleId)
+        {
+            return vehicleService.GetUserIdOwnerByVehicleId(vehicleId);
+        }
+
+
         [Route("api/Vehicle/GetByUserId")]
         [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]

@@ -33,12 +33,17 @@ namespace CarRepairShopSupportSystem.Activity
         private Order order;
         private readonly IOrderService orderService;
         private readonly IOrderStatusService orderStatusService;
+        private readonly IVehicleService vehicleService;
+        private readonly IApplicationSessionService applicationSessionService;
         private bool isInitOrderStatus = true;
+        private int userReceiverId;
 
         public OrderDetailsActivity()
         {
             this.orderService = new OrderService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
             this.orderStatusService = new OrderStatusService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
+            this.vehicleService = new VehicleService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
+            this.applicationSessionService = new ApplicationSessionService();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -52,9 +57,18 @@ namespace CarRepairShopSupportSystem.Activity
             order = JsonConvert.DeserializeObject<Order>(Intent.GetStringExtra("OrderDetails"));
             selectedWorkerList = order.WorkByUsers.ToList();
 
-            if (Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.Admin.ToString()
-                || Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.SuperAdmin.ToString())
+            FindViewById<TextView>(Resource.Id.tvOrderStatusName).Text = order.OrderStatusName;
+            FindViewById<TextView>(Resource.Id.tvStartDateOfRepair).Text = order.StartDateOfRepair?.ToString() ?? string.Empty;
+            FindViewById<TextView>(Resource.Id.tvEndDateOfRepair).Text = order.EndDateOfRepair?.ToString() ?? string.Empty;
+            FindViewById<TextView>(Resource.Id.tvTotalCost).Text = order.TotalCost.ToString();
+            FindViewById<TextView>(Resource.Id.tvWorkByUsers).Text = $"{order.WorkByUsers.FirstOrDefault()?.FirstName} {order.WorkByUsers.FirstOrDefault()?.LastName}";
+            FindViewById<TextView>(Resource.Id.tvDescription).Text = order.Description;
+
+            int permissionId = applicationSessionService.GetUserFromApplicationSession().PermissionId;
+
+            if ((PermissionId)permissionId == PermissionId.Admin || (PermissionId)permissionId == PermissionId.SuperAdmin)
             {
+                userReceiverId = vehicleService.GetUserIdOwnerByVehicleId(order.VehicleId);
                 FindViewById<TextView>(Resource.Id.tvOrderStatusNameLabel).Visibility = ViewStates.Gone;
                 FindViewById<TextView>(Resource.Id.tvOrderStatusName).Visibility = ViewStates.Gone;
                 FindViewById<TextView>(Resource.Id.tvOrderStatusNameLabelForWorker).Visibility = ViewStates.Visible;
@@ -67,7 +81,7 @@ namespace CarRepairShopSupportSystem.Activity
                 spinnerOrderStatusNameForWorker.Adapter = orderStatusAdapter;
                 spinnerOrderStatusNameForWorker.ItemSelected += SpinnerOrderStatusNameForWorker_ItemSelected;
 
-                if (Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.SuperAdmin.ToString())
+                if ((PermissionId)permissionId == PermissionId.SuperAdmin)
                 {
                     FindViewById<TextView>(Resource.Id.tvWorkByUsersLabel).Visibility = ViewStates.Gone;
                     FindViewById<TextView>(Resource.Id.tvWorkByUsers).Visibility = ViewStates.Gone;
@@ -75,6 +89,10 @@ namespace CarRepairShopSupportSystem.Activity
                     btnAddWorker.Visibility = ViewStates.Visible;
                     btnAddWorker.Click += BtnAddWorker_Click;
                 }
+            }
+            else
+            {
+                userReceiverId = order.WorkByUsers.FirstOrDefault()?.UserId ?? 1;
             }
         }
 
@@ -119,6 +137,7 @@ namespace CarRepairShopSupportSystem.Activity
         {
             Intent nextActivity = new Intent(this, typeof(MessageActivity));
             nextActivity.PutExtra("OrderId", order.OrderId.ToString());
+            nextActivity.PutExtra("UserReceiverId", userReceiverId.ToString());
             StartActivityForResult(nextActivity, serviceListRequestCode);
         }
 

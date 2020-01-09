@@ -39,30 +39,21 @@ namespace CarRepairShopSupportSystem.Adapter
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout;
+            LinearLayout linearLayout = new LinearLayout(context);
+            linearLayout.Orientation = Orientation.Vertical;
+            TextView tvBrandNameAndModelName = new TextView(context)
+            {
+                TextSize = 40,
+                Text = $"  {vehicles[position].VehicleBrandName} {vehicles[position].VehicleModelName}"
+            };
+            linearLayout.AddView(tvBrandNameAndModelName);
+            TextView tvRegistrationNumbers = new TextView(context)
+            {
+                TextSize = 20,
+                Text = $"  Numer rejestracyjny: {vehicles[position].RegistrationNumbers}"
+            };
+            linearLayout.AddView(tvRegistrationNumbers);
 
-            if (convertView == null)
-            {
-                linearLayout = new LinearLayout(context);
-                linearLayout.Orientation = Orientation.Vertical;
-                TextView tvBrandNameAndModelName = new TextView(context)
-                {
-                    TextSize = 40,
-                    Text = $"  {vehicles[position].VehicleBrandName} {vehicles[position].VehicleModelName}"
-                };
-                linearLayout.AddView(tvBrandNameAndModelName);
-                TextView tvRegistrationNumbers = new TextView(context)
-                {
-                    TextSize = 20,
-                    Text = $"  Numer rejestracyjny: {vehicles[position].RegistrationNumbers}"
-                };
-                linearLayout.AddView(tvRegistrationNumbers);
-            }
-            else
-            {
-                linearLayout = (LinearLayout)convertView;
-            }
-            
             return linearLayout;
         }
     }

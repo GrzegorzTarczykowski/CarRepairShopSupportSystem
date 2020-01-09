@@ -66,6 +66,47 @@ namespace CarRepairShopSupportSystem.BLL.Service
             }
         }
 
+        public int GetUserIdOwnerByVehicleId(int vehicleId)
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Vehicle/GetUserIdOwnerByVehicleId?vehicleId={vehicleId}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    int userIdOwner = JsonConvert.DeserializeObject<int>(JsonContent);
+                    return userIdOwner;
+                }
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Vehicle> GetVehicleList()
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Vehicle");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<Vehicle> matchingVehicleList = JsonConvert.DeserializeObject<IEnumerable<Vehicle>>(JsonContent);
+                    if (matchingVehicleList != null)
+                    {
+                        return matchingVehicleList;
+                    }
+                }
+                return Enumerable.Empty<Vehicle>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public IEnumerable<Vehicle> GetVehicleListByUserId()
         {
             try

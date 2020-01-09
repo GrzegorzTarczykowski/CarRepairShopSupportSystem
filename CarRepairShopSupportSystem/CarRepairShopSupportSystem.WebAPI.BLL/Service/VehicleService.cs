@@ -47,5 +47,10 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
                 return VehicleServiceResponse.ErrorOperationAdd;
             }
         }
+
+        public int GetUserIdOwnerByVehicleId(int vehicleId)
+        {
+            return vehicleRepository.FindById(vehicleId).UserId;
+        }
     }
 }

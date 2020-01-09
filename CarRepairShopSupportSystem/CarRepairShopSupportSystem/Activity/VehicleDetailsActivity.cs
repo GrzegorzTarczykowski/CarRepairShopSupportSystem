@@ -53,7 +53,6 @@ namespace CarRepairShopSupportSystem.Activity
         {
             Intent nextActivity = new Intent(this, typeof(OrderDetailsActivity));
             nextActivity.PutExtra("OrderDetails", JsonConvert.SerializeObject(orders[e.Position]));
-            nextActivity.PutExtra("IsWorker", "No");
             StartActivityForResult(nextActivity, orderDetailsRequestCode);
         }
 
