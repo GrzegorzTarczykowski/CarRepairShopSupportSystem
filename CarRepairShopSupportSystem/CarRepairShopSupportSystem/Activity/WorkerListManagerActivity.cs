@@ -23,7 +23,7 @@ namespace CarRepairShopSupportSystem.Activity
     [Activity(Label = "Wybór pracownika")]
     public class WorkerListManagerActivity : AppCompatActivity
     {
-        private const int workerRequestCode = 1;
+        private const int workerManagerRequestCode = 1;
         private readonly IUserService userService;
         private IList<User> workerList;
         private IList<User> selectedWorkerList;
@@ -42,7 +42,9 @@ namespace CarRepairShopSupportSystem.Activity
             gvWorkerList.ItemClick += GvWorkerList_ItemClick;
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-
+                Button btnAddWorker = FindViewById<Button>(Resource.Id.btnAddWorker);
+                btnAddWorker.Click += BtnAddWorker_Click;
+                btnAddWorker.Visibility = ViewStates.Visible;
             }
             else
             {
@@ -50,6 +52,13 @@ namespace CarRepairShopSupportSystem.Activity
                 btnSubmitSelectedWorker.Click += BtnSubmitSelectedWorker_Click;
                 btnSubmitSelectedWorker.Visibility = ViewStates.Visible;
             }
+        }
+
+        private void BtnAddWorker_Click(object sender, EventArgs e)
+        {
+            Intent nextActivity = new Intent(this, typeof(RegisterActivity));
+            nextActivity.PutExtra(nameof(OperationType), OperationType.Add.GetDescription());
+            StartActivityForResult(nextActivity, workerManagerRequestCode);
         }
 
         private void BtnSubmitSelectedWorker_Click(object sender, EventArgs e)
@@ -64,7 +73,11 @@ namespace CarRepairShopSupportSystem.Activity
         {
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-
+                Intent nextActivity = new Intent(this, typeof(RegisterActivity));
+                nextActivity.PutExtra(nameof(OperationType), OperationType.Edit.GetDescription());
+                nextActivity.PutExtra("SelectedWorker", JsonConvert.SerializeObject(workerList[e.Position]));
+                StartActivity(nextActivity);
+                StartActivityForResult(nextActivity, workerManagerRequestCode);
             }
             else
             {

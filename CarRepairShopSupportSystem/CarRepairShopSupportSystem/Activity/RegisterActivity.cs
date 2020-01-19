@@ -15,6 +15,7 @@ using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
+using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
@@ -41,7 +42,8 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<Button>(Resource.Id.btnRegister).Click += BtnRegister_Click;
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-                User user = applicationSessionService.GetUserFromApplicationSession();
+                User user = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra("SelectedWorkerList")) 
+                    ?? applicationSessionService.GetUserFromApplicationSession();
                 FindViewById<EditText>(Resource.Id.editTextUsername).Enabled = false;
                 FindViewById<EditText>(Resource.Id.editTextFirstName).Enabled = false;
                 FindViewById<EditText>(Resource.Id.editTextLastName).Enabled = false;

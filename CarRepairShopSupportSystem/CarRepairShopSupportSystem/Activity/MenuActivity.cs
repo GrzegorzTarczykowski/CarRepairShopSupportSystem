@@ -26,6 +26,7 @@ namespace CarRepairShopSupportSystem.Activity
         private const int vehiclePartListRequestCode = 3;
         private const int orderManagerListRequestCode = 4;
         private const int orderByWorkerListRequestCode = 5;
+        private const int workerListManagerRequestCode = 6;
         private readonly IApplicationSessionService applicationSessionService;
 
         public MenuActivity()
@@ -74,6 +75,9 @@ namespace CarRepairShopSupportSystem.Activity
 
         private void BtnWorkersManagement_Click(object sender, EventArgs e)
         {
+            Intent nextActivity = new Intent(this, typeof(WorkerListManagerActivity));
+            nextActivity.PutExtra(nameof(OperationType), OperationType.Edit.GetDescription());
+            StartActivityForResult(nextActivity, workerListManagerRequestCode);
         }
 
         private void BtnVehiclePartManagement_Click(object sender, EventArgs e)

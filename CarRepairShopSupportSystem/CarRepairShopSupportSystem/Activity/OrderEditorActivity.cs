@@ -118,6 +118,10 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(data.GetStringExtra("SelectedServiceList"));
                     sumServicePrice = selectedServiceList.Sum(ss => ss.Price);
+                    if (selectedStartDateTime != null)
+                    {
+                        FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text = selectedStartDateTime.AddHours(selectedServiceList.Count).ToString();
+                    }
                 }
             }
             else if (requestCode == timetableRequestCode)
@@ -126,6 +130,10 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     selectedStartDateTime = JsonConvert.DeserializeObject<DateTime>(data.GetStringExtra("SelectedDateTime"));
                     FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text = selectedStartDateTime.ToString();
+                    if (selectedServiceList != null)
+                    {
+                        FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text = selectedStartDateTime.AddHours(selectedServiceList.Count).ToString();
+                    }
                 }
             }
             else if (requestCode == vehiclePartListRequestCode)
