@@ -64,7 +64,6 @@ namespace CarRepairShopSupportSystem.Adapter
             {
                 linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
             }
-            linearLayout = (LinearLayout)convertView;
 
             return linearLayout;
         }

@@ -101,5 +101,15 @@ namespace CarRepairShopSupportSystem.Activity
             selectedWorkerList = JsonConvert.DeserializeObject<IList<User>>(Intent.GetStringExtra("SelectedWorkerList") ?? string.Empty) ?? new List<User>();
             gvWorkerList.Adapter = new UserAdapter(this, workerList.ToArray(), selectedWorkerList.ToArray());
         }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            if (requestCode == workerManagerRequestCode)
+            {
+                GridView gvWorkerList = FindViewById<GridView>(Resource.Id.gvWorkerList);
+                RefreshGvWorkerList(gvWorkerList);
+            }
+        }
     }
 }

@@ -95,7 +95,8 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     FirstName = value.FirstName,
                     LastName = value.LastName,
                     Email = value.Email,
-                    PhoneNumber = value.PhoneNumber
+                    PhoneNumber = value.PhoneNumber,
+                    PermissionId = value.PermissionId
                 };
                 RegisterServiceResponse registerServiceResponse = registerService.Register(user);
                 switch (registerServiceResponse)

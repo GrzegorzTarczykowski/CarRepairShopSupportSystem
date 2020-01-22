@@ -43,7 +43,6 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
                     user.Salt = salt;
                     user.Password = Convert.ToBase64String(hashedPassword);
                     user.CreateDate = DateTime.Now;
-                    user.PermissionId = (int)PermissionId.User;
                     userRepository.Add(user);
                     userRepository.SaveChanges();
                     return RegisterServiceResponse.SuccessRegister;

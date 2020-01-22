@@ -26,6 +26,7 @@ namespace CarRepairShopSupportSystem.Activity
         private readonly IEmailService emailService;
         private readonly IRegularExpressionService regularExpressionService;
         private readonly IApplicationSessionService applicationSessionService;
+        private int permissionId;
 
         public RegisterActivity()
         {
@@ -42,7 +43,7 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<Button>(Resource.Id.btnRegister).Click += BtnRegister_Click;
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-                User user = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra("SelectedWorkerList")) 
+                User user = JsonConvert.DeserializeObject<User>(Intent.GetStringExtra("SelectedWorker") ?? string.Empty) 
                     ?? applicationSessionService.GetUserFromApplicationSession();
                 FindViewById<EditText>(Resource.Id.editTextUsername).Enabled = false;
                 FindViewById<EditText>(Resource.Id.editTextFirstName).Enabled = false;
@@ -56,8 +57,20 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<EditText>(Resource.Id.editTextPhoneNumber).Text = user.PhoneNumber.ToString();
                 FindViewById<EditText>(Resource.Id.editTextPassword).Text = user.Password;
                 FindViewById<EditText>(Resource.Id.editTextConfirmPassword).Text = user.Password;
+                permissionId = user.PermissionId;
 
                 FindViewById<Button>(Resource.Id.btnRegister).Text = "Zapisz zmiany";
+            }
+            else
+            {
+                if (applicationSessionService.GetUserFromApplicationSession()?.PermissionId == (int)PermissionId.SuperAdmin)
+                {
+                    permissionId = (int)PermissionId.Admin;
+                }
+                else
+                {
+                    permissionId = (int)PermissionId.User;
+                }
             }
         }
 
@@ -148,7 +161,8 @@ namespace CarRepairShopSupportSystem.Activity
                     FirstName = textFirstName,
                     LastName = textLastName,
                     Email = textEmail,
-                    PhoneNumber = phoneNumber
+                    PhoneNumber = phoneNumber,
+                    PermissionId = permissionId
                 };
 
                 OperationResult operationResult = null;
@@ -158,10 +172,17 @@ namespace CarRepairShopSupportSystem.Activity
                 }
                 else
                 {
-                    ApplicationSession.userName = "TestGuest";
-                    ApplicationSession.userPassword = "1";
-                    operationResult = userService.AddUser(user);
-                    applicationSessionService.ClearApplicationSession();
+                    if (applicationSessionService.GetUserFromApplicationSession() == null)
+                    {
+                        ApplicationSession.userName = "TestGuest";
+                        ApplicationSession.userPassword = "1";
+                        operationResult = userService.AddUser(user);
+                        applicationSessionService.ClearApplicationSession();
+                    }
+                    else
+                    {
+                        operationResult = userService.AddUser(user);
+                    }
                 }
                     
                 if (operationResult.ResultCode == ResultCode.Successful)
