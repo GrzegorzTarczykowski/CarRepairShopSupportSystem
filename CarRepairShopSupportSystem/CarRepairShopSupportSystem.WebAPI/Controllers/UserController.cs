@@ -75,7 +75,8 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Username = user.Username
+                    Username = user.Username,
+                    PhoneNumber = user.PhoneNumber
                 };
             }
             return null;
@@ -115,12 +116,19 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             });
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpPut]
         // PUT api/<controller>/5
         public HttpResponseMessage Put(int id, [FromBody]User value)
         {
-            return PutBase(id == value.UserId, value);
+            if (userService.ChangeUserDetails(id, value))
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nieoczekiwany bład");
+            }
         }
 
         [Authorize(Roles = "SuperAdmin")]

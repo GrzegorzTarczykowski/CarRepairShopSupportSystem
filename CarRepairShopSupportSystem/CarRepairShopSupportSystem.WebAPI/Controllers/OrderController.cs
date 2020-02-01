@@ -200,7 +200,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             }
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpDelete]
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)

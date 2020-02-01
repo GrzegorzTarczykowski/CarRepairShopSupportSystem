@@ -66,7 +66,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
         {
             try
             {
-                HttpResponseMessage tokenResponse = httpClientService.Put("api/VehiclePart", vehiclePart);
+                HttpResponseMessage tokenResponse = httpClientService.Put($"api/VehiclePart{vehiclePart.VehiclePartId}", vehiclePart);
 
                 if (tokenResponse.IsSuccessStatusCode)
                 {

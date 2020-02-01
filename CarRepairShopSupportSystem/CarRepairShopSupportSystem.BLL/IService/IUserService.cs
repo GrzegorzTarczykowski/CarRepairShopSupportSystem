@@ -13,5 +13,6 @@ namespace CarRepairShopSupportSystem.BLL.IService
         OperationResult EditUser(User user);
         IEnumerable<User> GetAllUserList();
         IEnumerable<User> GetAllWorkerList();
+        bool GetUser(string username, string password);
     }
 }

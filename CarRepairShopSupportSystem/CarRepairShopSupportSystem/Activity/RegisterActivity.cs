@@ -27,10 +27,11 @@ namespace CarRepairShopSupportSystem.Activity
         private readonly IRegularExpressionService regularExpressionService;
         private readonly IApplicationSessionService applicationSessionService;
         private int permissionId;
+        private int userId;
 
         public RegisterActivity()
         {
-            userService = new UserService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
+            userService = new UserService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
             emailService = new EmailService();
             regularExpressionService = new RegularExpressionService();
             applicationSessionService = new ApplicationSessionService();
@@ -58,6 +59,7 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<EditText>(Resource.Id.editTextPassword).Text = user.Password;
                 FindViewById<EditText>(Resource.Id.editTextConfirmPassword).Text = user.Password;
                 permissionId = user.PermissionId;
+                userId = user.UserId;
 
                 FindViewById<Button>(Resource.Id.btnRegister).Text = "Zapisz zmiany";
             }
@@ -168,7 +170,12 @@ namespace CarRepairShopSupportSystem.Activity
                 OperationResult operationResult = null;
                 if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
                 {
-                    operationResult = userService.EditUser(user);
+                    user.UserId = userId;
+                    operationResult = userService.EditUser(user); 
+                    if (operationResult.ResultCode == ResultCode.Successful)
+                    {
+                        userService.GetUser(user.Username, user.Password);
+                    }
                 }
                 else
                 {

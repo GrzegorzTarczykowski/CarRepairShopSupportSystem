@@ -30,7 +30,7 @@ namespace CarRepairShopSupportSystem.Activity
 
         public WorkerListManagerActivity()
         {
-            userService = new UserService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
+            userService = new UserService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

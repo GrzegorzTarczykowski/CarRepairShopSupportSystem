@@ -9,6 +9,7 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.IService
 {
     public interface IUserService
     {
+        bool ChangeUserDetails(int userId, User user);
         IEnumerable<User> GetAllWorkerList();
     }
 }

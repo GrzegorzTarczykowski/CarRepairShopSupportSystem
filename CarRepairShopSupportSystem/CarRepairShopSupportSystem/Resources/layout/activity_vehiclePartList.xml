@@ -27,7 +27,7 @@
             android:id="@+id/gvVehiclePartList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:columnWidth="400dp"
+            android:columnWidth="350dp"
             android:numColumns="1"
             android:verticalSpacing="24dp"
             android:horizontalSpacing="10dp"

@@ -14,10 +14,12 @@ namespace CarRepairShopSupportSystem.BLL.Service
     public class UserService : IUserService
     {
         private readonly IHttpClientService httpClientService;
+        private readonly IApplicationSessionService applicationSessionService;
 
-        public UserService(IHttpClientService httpClientService)
+        public UserService(IHttpClientService httpClientService, IApplicationSessionService applicationSessionService)
         {
             this.httpClientService = httpClientService;
+            this.applicationSessionService = applicationSessionService;
         }
 
         public OperationResult AddUser(User user)
@@ -45,7 +47,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
         {
             try
             {
-                HttpResponseMessage tokenResponse = httpClientService.Put("api/User", user);
+                HttpResponseMessage tokenResponse = httpClientService.Put($"api/User/{user.UserId}", user);
 
                 if (tokenResponse.IsSuccessStatusCode)
                 {
@@ -103,6 +105,29 @@ namespace CarRepairShopSupportSystem.BLL.Service
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public bool GetUser(string username, string password)
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/User?username={username}&password={password}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    User matchingUser = JsonConvert.DeserializeObject<User>(JsonContent);
+                    if (matchingUser != null)
+                    {
+                        applicationSessionService.AddUserIntoApplicationSession(matchingUser);
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }
