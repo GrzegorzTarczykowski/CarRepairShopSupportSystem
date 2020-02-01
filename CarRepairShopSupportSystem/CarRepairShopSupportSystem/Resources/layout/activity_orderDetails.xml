@@ -5,132 +5,155 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundMainGradientSelector">
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <GridLayout
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2">
-            <TextView
-                android:id="@+id/tvOrderStatusNameLabel"
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Status zlecenia:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvOrderStatusName"
-                android:layout_column="1"
-                android:textSize="20dp"
-                android:text="brak"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvOrderStatusNameLabelForWorker"
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Status zlecenia:"
-                android:layout_width="wrap_content"
+            android:scrollbars="vertical">
+            <GridLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2">
+                <TextView
+                    android:id="@+id/tvOrderStatusNameLabel"
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Status zlecenia:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvOrderStatusName"
+                    android:layout_column="1"
+                    android:textSize="20dp"
+                    android:text="brak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvOrderStatusNameLabelForWorker"
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Status zlecenia:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+                <Spinner
+                    android:id="@+id/spinnerOrderStatusNameForWorker"
+                    android:layout_column="1"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Data rozpoczęcia:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvStartDateOfRepair"
+                    android:layout_column="1"
+                    android:textSize="20dp"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Data zakończenia:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvEndDateOfRepair"
+                    android:layout_column="1"
+                    android:textSize="20dp"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Koszt zlecenia [PLN]: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvTotalCost"
+                    android:layout_column="1"
+                    android:textSize="20dp"
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvWorkByUsersLabel"
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Wykonwca zlecenia: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvWorkByUsers"
+                    android:layout_column="1"
+                    android:textSize="20dp"
+                    android:text="brak wykonawcy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_column="0"
+                    android:textSize="20dp"
+                    android:text="Szczegółowy opis:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_column="1"
+                    android:textSize="15dp"
+                    android:maxWidth="150dp"
+                    android:text="brak opisu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </GridLayout>
+            <Button
+                android:text="Dodaj opis"
+                android:id="@+id/btnAddDescription"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
-            <Spinner
-                android:id="@+id/spinnerOrderStatusNameForWorker"
-                android:layout_column="1"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/etAddDescription"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
-            <TextView
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Data rozpoczęcia:"
-                android:layout_width="wrap_content"
+            <Button
+                android:text="Zatwierdz opis"
+                android:id="@+id/btnApproveDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <Button
+                android:text="Dodaj usługę"
+                android:id="@+id/btnService"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvStartDateOfRepair"
-                android:layout_column="1"
-                android:textSize="20dp"
-                android:text="0"
-                android:layout_width="wrap_content"
+            <Button
+                android:text="Wiadomości"
+                android:id="@+id/btnMessages"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Data zakończenia:"
-                android:layout_width="wrap_content"
+            <Button
+                android:text="Dodaj pracowników"
+                android:id="@+id/btnAddWorker"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <Button
+                android:text="Usuń zlecenie"
+                android:id="@+id/btnDeleteOrder"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvEndDateOfRepair"
-                android:layout_column="1"
-                android:textSize="20dp"
-                android:text="0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Koszt zlecenia [PLN]: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvTotalCost"
-                android:layout_column="1"
-                android:textSize="20dp"
-                android:text="0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvWorkByUsersLabel"
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Wykonwca zlecenia: "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvWorkByUsers"
-                android:layout_column="1"
-                android:textSize="20dp"
-                android:text="brak wykonawcy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_column="0"
-                android:textSize="20dp"
-                android:text="Szczegółowy opis:"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_column="0"
-                android:textSize="15dp"
-                android:text="brak opisu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </GridLayout>
-        <Button
-            android:text="Dodaj usługę"
-            android:id="@+id/btnService"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:text="Wiadomości"
-            android:id="@+id/btnMessages"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:text="Dodaj pracowników"
-            android:id="@+id/btnAddWorker"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-        <Button
-            android:text="Usuń zlecenie"
-            android:id="@+id/btnDeleteOrder"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

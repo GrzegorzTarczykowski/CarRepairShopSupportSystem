@@ -25,7 +25,8 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             return GetBase()?.Select(s => new Models.Service { ServiceId = s.ServiceId
                                                                 , Name = s.Name
                                                                 , Description = s.Description
-                                                                , Price = s.Price });
+                                                                , Price = s.Price
+                                                                , ExecutionTimeInMinutes = s.ExecutionTimeInMinutes });
         }
 
         [Authorize(Roles = "SuperAdmin")]

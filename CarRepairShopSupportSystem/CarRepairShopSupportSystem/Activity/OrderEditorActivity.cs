@@ -68,6 +68,7 @@ namespace CarRepairShopSupportSystem.Activity
                     TotalCost = selectedServiceList.Sum(ss => ss.Price),
                     CreateDate = DateTime.Now,
                     PlannedStartDateOfRepair = selectedStartDateTime,
+                    PlannedEndDateOfRepair = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)),
                     OrderStatusId = (int)OrderStatusId.Planned,
                     VehicleId = vehicleId,
                     ContainsServices = selectedServiceList//.AsEnumerable()
@@ -132,7 +133,8 @@ namespace CarRepairShopSupportSystem.Activity
                     FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text = selectedStartDateTime.ToString();
                     if (selectedServiceList != null)
                     {
-                        FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text = selectedStartDateTime.AddHours(selectedServiceList.Count).ToString();
+                        FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text 
+                            = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)).ToString();
                     }
                 }
             }

@@ -46,10 +46,10 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             IList<Service> defaultServices = new List<Service>();
 
-            defaultServices.Add(new Service() { Name = "Diagnoza pojazdu", Description = string.Empty, Price = 50.00M });
-            defaultServices.Add(new Service() { Name = "Wymiana opoy", Description = string.Empty, Price = 20.00M });
-            defaultServices.Add(new Service() { Name = "Wymiana oleju", Description = string.Empty, Price = 50.00M });
-            defaultServices.Add(new Service() { Name = "Wymiana klocków hamulcowych", Description = string.Empty, Price = 100.00M });
+            defaultServices.Add(new Service() { Name = "Diagnoza pojazdu", Description = string.Empty, Price = 50.00M, ExecutionTimeInMinutes = 30 });
+            defaultServices.Add(new Service() { Name = "Wymiana opoy", Description = string.Empty, Price = 20.00M, ExecutionTimeInMinutes = 40 });
+            defaultServices.Add(new Service() { Name = "Wymiana oleju", Description = string.Empty, Price = 50.00M, ExecutionTimeInMinutes = 50 });
+            defaultServices.Add(new Service() { Name = "Wymiana klocków hamulcowych", Description = string.Empty, Price = 100.00M, ExecutionTimeInMinutes = 60 });
 
             context.Services.AddRange(defaultServices);
 

@@ -54,6 +54,8 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<Button>(Resource.Id.btnService).Click += BtnService_Click;
             FindViewById<Button>(Resource.Id.btnMessages).Click += BtnMessages_Click;
             FindViewById<Button>(Resource.Id.btnDeleteOrder).Click += BtnDeleteOrder_Click;
+            FindViewById<TextView>(Resource.Id.btnAddDescription).Click += BtnAddDescription_Click;
+            FindViewById<TextView>(Resource.Id.btnApproveDescription).Click += BtnApproveDescription_Click;
             order = JsonConvert.DeserializeObject<Order>(Intent.GetStringExtra("OrderDetails"));
             selectedWorkerList = order.WorkByUsers.ToList();
 
@@ -72,6 +74,7 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<TextView>(Resource.Id.tvOrderStatusNameLabel).Visibility = ViewStates.Gone;
                 FindViewById<TextView>(Resource.Id.tvOrderStatusName).Visibility = ViewStates.Gone;
                 FindViewById<TextView>(Resource.Id.tvOrderStatusNameLabelForWorker).Visibility = ViewStates.Visible;
+                FindViewById<TextView>(Resource.Id.btnAddDescription).Visibility = ViewStates.Visible;
 
                 Spinner spinnerOrderStatusNameForWorker = FindViewById<Spinner>(Resource.Id.spinnerOrderStatusNameForWorker);
                 spinnerOrderStatusNameForWorker.Visibility = ViewStates.Visible;
@@ -94,6 +97,35 @@ namespace CarRepairShopSupportSystem.Activity
             {
                 userReceiverId = order.WorkByUsers.FirstOrDefault()?.UserId ?? 1;
             }
+        }
+
+        private void BtnApproveDescription_Click(object sender, EventArgs e)
+        {
+            FindViewById<TextView>(Resource.Id.etAddDescription).Visibility = ViewStates.Gone;
+            FindViewById<TextView>(Resource.Id.btnApproveDescription).Visibility = ViewStates.Gone;
+            FindViewById<TextView>(Resource.Id.tvDescription).Text = order.Description = FindViewById<TextView>(Resource.Id.etAddDescription).Text;
+            OperationResult operationResult = orderService.EditVehicleOrder(order);
+
+            if (operationResult.ResultCode == ResultCode.Successful)
+            {
+                Toast.MakeText(Application.Context, "Zedytowano opis zadania", ToastLength.Long).Show();
+            }
+            else
+            {
+                Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
+            }
+
+            FindViewById<TextView>(Resource.Id.btnAddDescription).Visibility = ViewStates.Visible;
+            FindViewById<TextView>(Resource.Id.tvDescription).Visibility = ViewStates.Visible;
+        }
+
+        private void BtnAddDescription_Click(object sender, EventArgs e)
+        {
+            FindViewById<TextView>(Resource.Id.etAddDescription).Text = order.Description;
+            FindViewById<TextView>(Resource.Id.btnAddDescription).Visibility = ViewStates.Gone;
+            FindViewById<TextView>(Resource.Id.etAddDescription).Visibility = ViewStates.Visible;
+            FindViewById<TextView>(Resource.Id.btnApproveDescription).Visibility = ViewStates.Visible;
+            FindViewById<TextView>(Resource.Id.tvDescription).Visibility = ViewStates.Gone;
         }
 
         private void BtnAddWorker_Click(object sender, EventArgs e)
