@@ -121,7 +121,8 @@ namespace CarRepairShopSupportSystem.Activity
                     sumServicePrice = selectedServiceList.Sum(ss => ss.Price);
                     if (selectedStartDateTime != null)
                     {
-                        FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text = selectedStartDateTime.AddHours(selectedServiceList.Count).ToString();
+                        FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text 
+                            = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)).ToString();
                     }
                 }
             }
