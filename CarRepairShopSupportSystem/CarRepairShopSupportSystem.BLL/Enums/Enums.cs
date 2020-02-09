@@ -56,7 +56,9 @@ namespace CarRepairShopSupportSystem.BLL.Enums
         [Description("W trakcie")]
         InProgress = 2,
         [Description("Zakończona")]
-        Completed = 3
+        Completed = 3,
+        [Description("Niezrealizowane")]
+        Unrealized = 4
     }
 
     public enum PermissionId

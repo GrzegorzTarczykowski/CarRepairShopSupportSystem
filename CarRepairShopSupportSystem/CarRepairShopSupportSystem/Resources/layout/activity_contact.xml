@@ -11,17 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:text=
-            "            Kontakt z warsztatem:
-            Telefon: 123456789
-            Email: warsztat@warsztat.pl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text=
-            "            Twórcami oprogramowania są:
-            Artur Krakowiak
-            Grzegorz Tarczykowski"
+            android:id="@+id/tvContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

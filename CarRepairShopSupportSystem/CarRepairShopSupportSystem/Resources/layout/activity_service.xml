@@ -41,6 +41,16 @@
             android:textColorHint="#9b0493"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Czas w minutach"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/etExecutionTimeInMinutes"
+            android:hint="Podaj czas w minutach"
+            android:textColorHint="#9b0493"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <Button
             android:text="Dodaj / Modyfikuj"
             android:id="@+id/btnSubmitService"

@@ -32,6 +32,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
             defaultOrderStatuses.Add(new OrderStatus() { Name = $"Zaplanowane" });
             defaultOrderStatuses.Add(new OrderStatus() { Name = $"W trakcie" });
             defaultOrderStatuses.Add(new OrderStatus() { Name = $"Zakończone" });
+            defaultOrderStatuses.Add(new OrderStatus() { Name = $"Niezrealizowana" });
 
             context.OrderStatuses.AddRange(defaultOrderStatuses);
 

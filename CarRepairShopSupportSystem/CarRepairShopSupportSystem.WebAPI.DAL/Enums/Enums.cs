@@ -18,6 +18,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Enums
     {
         Planned = 1,
         InProgress = 2,
-        Completed = 3
+        Completed = 3,
+        Unrealized = 4
     }
 }

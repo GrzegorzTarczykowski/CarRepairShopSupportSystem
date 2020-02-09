@@ -24,7 +24,7 @@
             android:id="@+id/gvMessageList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:columnWidth="400dp"
+            android:columnWidth="350dp"
             android:minHeight="600dp"
             android:numColumns="1"
             android:verticalSpacing="24dp"

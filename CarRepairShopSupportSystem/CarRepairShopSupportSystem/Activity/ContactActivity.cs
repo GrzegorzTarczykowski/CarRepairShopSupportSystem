@@ -20,6 +20,12 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_contact);
+            FindViewById<TextView>(Resource.Id.tvContact).Text = 
+            @"Kontakt z warsztatem: Telefon: 123456789
+Email: warsztat @warsztat.pl
+Twórcami oprogramowania są:
+Artur Krakowiak
+Grzegorz Tarczykowski";
         }
     }
 }

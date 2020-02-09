@@ -119,7 +119,7 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(data.GetStringExtra("SelectedServiceList"));
                     sumServicePrice = selectedServiceList.Sum(ss => ss.Price);
-                    if (selectedStartDateTime != null)
+                    if (!string.IsNullOrWhiteSpace(FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text))
                     {
                         FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text 
                             = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)).ToString();
@@ -132,7 +132,7 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     selectedStartDateTime = JsonConvert.DeserializeObject<DateTime>(data.GetStringExtra("SelectedDateTime"));
                     FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text = selectedStartDateTime.ToString();
-                    if (selectedServiceList != null)
+                    if (!string.IsNullOrWhiteSpace(FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text))
                     {
                         FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text 
                             = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)).ToString();

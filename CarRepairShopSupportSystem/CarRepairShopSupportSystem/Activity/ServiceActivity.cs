@@ -42,7 +42,8 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<EditText>(Resource.Id.editServiceName).Text = selectedService.Name;
                 FindViewById<EditText>(Resource.Id.editServiceDescription).Text = selectedService.Description;
                 FindViewById<EditText>(Resource.Id.editServicePrice).Text = selectedService.Price.ToString();
-                FindViewById<Button>(Resource.Id.btnDeleteService).Click += BtnDeleteService_Click;
+                FindViewById<EditText>(Resource.Id.etExecutionTimeInMinutes).Text = selectedService.ExecutionTimeInMinutes.ToString();
+                FindViewById<Button>(Resource.Id.btnDeleteService).Click += BtnDeleteService_Click; 
             }
             else
             {
@@ -71,6 +72,7 @@ namespace CarRepairShopSupportSystem.Activity
             string textServiceName = FindViewById<EditText>(Resource.Id.editServiceName).Text;
             string textServiceDescription = FindViewById<EditText>(Resource.Id.editServiceDescription).Text;
             string textServicePrice = FindViewById<EditText>(Resource.Id.editServicePrice).Text;
+            string testExecutionTimeInMinutes = FindViewById<EditText>(Resource.Id.etExecutionTimeInMinutes).Text;
 
             if (string.IsNullOrWhiteSpace(textServiceName))
             {
@@ -88,6 +90,10 @@ namespace CarRepairShopSupportSystem.Activity
             {
                 Toast.MakeText(Application.Context, "Nie poprawna cena", ToastLength.Long).Show();
             }
+            else if (!int.TryParse(testExecutionTimeInMinutes, out int executionTimeInMinutes))
+            {
+                Toast.MakeText(Application.Context, "Nie poprawny czas wykonywania", ToastLength.Long).Show();
+            }
             else
             {
                 OperationResult operationResult;
@@ -96,6 +102,7 @@ namespace CarRepairShopSupportSystem.Activity
                     selectedService.Name = textServiceName;
                     selectedService.Description = textServiceDescription;
                     selectedService.Price = servicePrice;
+                    selectedService.ExecutionTimeInMinutes = executionTimeInMinutes;
                     operationResult = serviceService.EditService(selectedService);
                 }
                 else
@@ -104,7 +111,8 @@ namespace CarRepairShopSupportSystem.Activity
                     {
                         Name = textServiceName,
                         Description = textServiceDescription,
-                        Price = servicePrice
+                        Price = servicePrice,
+                        ExecutionTimeInMinutes = executionTimeInMinutes
                     };
                     operationResult = serviceService.AddService(selectedService);
                 }
