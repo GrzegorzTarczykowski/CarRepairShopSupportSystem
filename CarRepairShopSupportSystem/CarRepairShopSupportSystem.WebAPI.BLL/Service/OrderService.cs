@@ -30,8 +30,39 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
 
         public bool AddOrder(Order order)
         {
+            ICollection<User> workByUsers = order.WorkByUsers;
+            order.WorkByUsers = null;
+            ICollection<DAL.Models.Service> containsServices = order.ContainsServices;
+            order.ContainsServices = null;
+            ICollection<VehiclePart> usedVehicleParts = order.UsedVehicleParts;
+            order.UsedVehicleParts = null;
             orderRepository.Add(order);
             orderRepository.SaveChanges();
+
+            if (workByUsers != null)
+            {
+                orderRepository.EditManyToMany<User>(o => o.OrderId == order.OrderId
+                                        , nameof(order.WorkByUsers)
+                                        , nameof(User.UserId)
+                                        , workByUsers);
+                orderRepository.SaveChanges();
+            }
+            if (containsServices != null)
+            {
+                orderRepository.EditManyToMany<DAL.Models.Service>(o => o.OrderId == order.OrderId
+                                        , nameof(order.ContainsServices)
+                                        , nameof(DAL.Models.Service.ServiceId)
+                                        , containsServices);
+                orderRepository.SaveChanges();
+            }
+            if (usedVehicleParts != null)
+            {
+                orderRepository.EditManyToMany<VehiclePart>(o => o.OrderId == order.OrderId
+                                        , nameof(order.UsedVehicleParts)
+                                        , nameof(VehiclePart.VehiclePartId)
+                                        , usedVehicleParts);
+                orderRepository.SaveChanges();
+            }
             return true;
         }
 
@@ -39,6 +70,10 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
         {
             ICollection<User> workByUsers = order.WorkByUsers;
             order.WorkByUsers = null;
+            ICollection<DAL.Models.Service> containsServices = order.ContainsServices;
+            order.ContainsServices = null;
+            ICollection<VehiclePart> usedVehicleParts = order.UsedVehicleParts;
+            order.UsedVehicleParts = null;
             orderRepository.Edit(order);
             orderRepository.SaveChanges();
 
@@ -48,6 +83,22 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Service
                                         , nameof(order.WorkByUsers)
                                         , nameof(User.UserId)
                                         , workByUsers);
+                orderRepository.SaveChanges();
+            }
+            if (containsServices != null)
+            {
+                orderRepository.EditManyToMany<DAL.Models.Service>(o => o.OrderId == order.OrderId
+                                        , nameof(order.ContainsServices)
+                                        , nameof(DAL.Models.Service.ServiceId)
+                                        , containsServices);
+                orderRepository.SaveChanges();
+            }
+            if (usedVehicleParts != null)
+            {
+                orderRepository.EditManyToMany<VehiclePart>(o => o.OrderId == order.OrderId
+                                        , nameof(order.UsedVehicleParts)
+                                        , nameof(VehiclePart.VehiclePartId)
+                                        , usedVehicleParts);
                 orderRepository.SaveChanges();
             }
             return true;

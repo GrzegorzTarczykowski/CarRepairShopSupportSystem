@@ -63,7 +63,7 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Repository
                                     .GetType()
                                     .GetProperty(idPropertyName)
                                     .GetValue(obj, null))
-                                .Select(value => (TMany)msSqlServerContext.Set(typeof(TMany)).Find(value)))
+                                .Select(id => (TMany)msSqlServerContext.Set(typeof(TMany)).Find(id)))
             {
                 values.Add(entry);
             }
@@ -107,6 +107,16 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Repository
             return includeProperties.Aggregate(set.AsQueryable(), (query, path) => query.Include(path));
         }
 
+        public void Remove(int id)
+        {
+            T entityToDelete = set.Find(id);
+            if (msSqlServerContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                set.Attach(entityToDelete);
+            }
+            set.Remove(entityToDelete);
+        }
+
         public void Remove(params object[] keyValues)
         {
             T entityToDelete = set.Find(keyValues);
@@ -117,14 +127,37 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Repository
             set.Remove(entityToDelete);
         }
 
-        public void Remove(int id)
+        public void RemoveManyToMany<TMany>(Expression<Func<T, bool>> filter, string collectionPropertyName, string idPropertyName, IEnumerable<object> removeSet)
         {
-            T entityToDelete = set.Find(id);
-            if (msSqlServerContext.Entry(entityToDelete).State == EntityState.Detached)
+            var previous = msSqlServerContext
+                .Set<T>()
+                .Include(collectionPropertyName)
+                .FirstOrDefault(filter);
+
+            IList<TMany> currentCollectionValue;
+            if (msSqlServerContext.Entry(previous).Collection(collectionPropertyName).CurrentValue is HashSet<TMany>)
             {
-                set.Attach(entityToDelete);
+                currentCollectionValue = ((HashSet<TMany>)(msSqlServerContext.Entry(previous).Collection(collectionPropertyName).CurrentValue)).ToList();
             }
-            set.Remove(entityToDelete);
+            else
+            {
+                currentCollectionValue = (IList<TMany>)msSqlServerContext.Entry(previous).Collection(collectionPropertyName).CurrentValue;
+
+            }
+
+
+            foreach (var entry in removeSet
+                                .Select(obj => (int)obj
+                                    .GetType()
+                                    .GetProperty(idPropertyName)
+                                    .GetValue(obj, null))
+                                .Select(id => (TMany)msSqlServerContext.Set(typeof(TMany)).Find(id)))
+            {
+                currentCollectionValue.Remove(entry);
+            }
+
+            msSqlServerContext.Entry(previous).Collection(collectionPropertyName).CurrentValue = currentCollectionValue;
+            set.Attach(previous);
         }
 
         public bool SaveChanges()

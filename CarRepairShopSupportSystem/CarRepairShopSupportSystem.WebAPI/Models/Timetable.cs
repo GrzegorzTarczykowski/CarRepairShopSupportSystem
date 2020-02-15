@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
+namespace CarRepairShopSupportSystem.WebAPI.Models
 {
     public class Timetable
     {
@@ -14,6 +13,6 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
         public int NumberOfEmployeesReservedForCustomer { get; set; }
         public int NumberOfEmployeesForManager { get; set; }
         public int NumberOfEmployeesReservedForManager { get; set; }
-        public virtual ICollection<User> WorkingUsers { get; set; }
+        public IEnumerable<int> WorkingUsersId { get; set; }
     }
 }

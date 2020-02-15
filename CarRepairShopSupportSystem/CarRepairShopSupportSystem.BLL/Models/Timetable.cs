@@ -14,5 +14,6 @@ namespace CarRepairShopSupportSystem.BLL.Models
         public int NumberOfEmployeesReservedForCustomer { get; set; }
         public int NumberOfEmployeesForManager { get; set; }
         public int NumberOfEmployeesReservedForManager { get; set; }
+        public IEnumerable<int> WorkingUsersId { get; set; }
     }
 }

@@ -12,5 +12,8 @@ namespace CarRepairShopSupportSystem.BLL.IService
         IEnumerable<Timetable> GetTimetableListPerHour(int year, int month, int day, int hour);
         IEnumerable<Timetable> GetTimetableListPerDay(int year, int month, int day);
         IEnumerable<Timetable> GetTimetableListPerMonth(int year, int month);
+        IEnumerable<Timetable> GetTimetableListPerYear(int year);
+        IEnumerable<Timetable> GetTimetableListPerYearByUserId(int year, int userId);
+        OperationResult SaveTimetableForUser(Timetable timetable);
     }
 }

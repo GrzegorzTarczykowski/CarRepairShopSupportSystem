@@ -27,6 +27,7 @@ namespace CarRepairShopSupportSystem.Activity
         private readonly IUserService userService;
         private IList<User> workerList;
         private IList<User> selectedWorkerList;
+        private bool isTimetableEdit;
 
         public WorkerListManagerActivity()
         {
@@ -45,12 +46,29 @@ namespace CarRepairShopSupportSystem.Activity
                 Button btnAddWorker = FindViewById<Button>(Resource.Id.btnAddWorker);
                 btnAddWorker.Click += BtnAddWorker_Click;
                 btnAddWorker.Visibility = ViewStates.Visible;
+                Spinner spinnerOperationType = FindViewById<Spinner>(Resource.Id.spinnerOperationType);
+                spinnerOperationType.ItemSelected += SpinnerOperationType_ItemSelected;
+                spinnerOperationType.Adapter 
+                    = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, new string[] { "Edycja danych", "Edycja godzin" });
+                spinnerOperationType.Visibility = ViewStates.Visible;
             }
             else
             {
                 Button btnSubmitSelectedWorker = FindViewById<Button>(Resource.Id.btnSubmitSelectedWorker);
                 btnSubmitSelectedWorker.Click += BtnSubmitSelectedWorker_Click;
                 btnSubmitSelectedWorker.Visibility = ViewStates.Visible;
+            }
+        }
+
+        private void SpinnerOperationType_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (e.Position == 1)
+            {
+                isTimetableEdit = true;
+            }
+            else
+            {
+                isTimetableEdit = false;
             }
         }
 
@@ -73,11 +91,19 @@ namespace CarRepairShopSupportSystem.Activity
         {
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
-                Intent nextActivity = new Intent(this, typeof(RegisterActivity));
-                nextActivity.PutExtra(nameof(OperationType), OperationType.Edit.GetDescription());
-                nextActivity.PutExtra("SelectedWorker", JsonConvert.SerializeObject(workerList[e.Position]));
-                StartActivity(nextActivity);
-                StartActivityForResult(nextActivity, workerManagerRequestCode);
+                if (isTimetableEdit)
+                {
+                    Intent nextActivity = new Intent(this, typeof(WorkerManagerActivity));
+                    nextActivity.PutExtra("SelectedWorker", JsonConvert.SerializeObject(workerList[e.Position]));
+                    StartActivity(nextActivity);
+                }
+                else
+                {
+                    Intent nextActivity = new Intent(this, typeof(RegisterActivity));
+                    nextActivity.PutExtra(nameof(OperationType), OperationType.Edit.GetDescription());
+                    nextActivity.PutExtra("SelectedWorker", JsonConvert.SerializeObject(workerList[e.Position]));
+                    StartActivityForResult(nextActivity, workerManagerRequestCode);
+                }
             }
             else
             {

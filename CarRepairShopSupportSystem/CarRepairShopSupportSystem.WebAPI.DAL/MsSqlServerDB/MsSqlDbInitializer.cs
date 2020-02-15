@@ -54,33 +54,6 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
 
             context.Services.AddRange(defaultServices);
 
-            IList<Timetable> defaultTimetables = new List<Timetable>();
-
-            System.Globalization.Calendar calendar = new System.Globalization.GregorianCalendar();
-            int daysInMonth = calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
-            DateTime dateTimeFirstDayOfMouth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DayOfWeek dayOfWeekFirstDayOfMouth = calendar.GetDayOfWeek(dateTimeFirstDayOfMouth);
-
-            for (int i = 1; i <= daysInMonth; i++)
-            {
-                if ((i + (int)dayOfWeekFirstDayOfMouth) % 7 > 1) //  1, 7, 8, 14, 15, 21, 22, 28, 29, 35, 36
-                {
-                    for (int k = 8; k < 16; k++)
-                    {
-                        defaultTimetables.Add(new Timetable()
-                        {
-                            DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i, k, 0, 0),
-                            NumberOfEmployeesForCustomer = 2,
-                            NumberOfEmployeesReservedForCustomer = 0,
-                            NumberOfEmployeesForManager = 2,
-                            NumberOfEmployeesReservedForManager = 0
-                        });
-                    }
-                }
-            }
-
-            context.Timetables.AddRange(defaultTimetables);
-
             IList<User> defaultUsers = new List<User>();
 
             defaultUsers.Add(new User() { Username = "TestSuperAdmin"
@@ -144,6 +117,34 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                                         , Permission = defaultPermissions[3] });
 
             context.Users.AddRange(defaultUsers);
+
+            IList<Timetable> defaultTimetables = new List<Timetable>();
+
+            System.Globalization.Calendar calendar = new System.Globalization.GregorianCalendar();
+            int daysInMonth = calendar.GetDaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+            DateTime dateTimeFirstDayOfMouth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DayOfWeek dayOfWeekFirstDayOfMouth = calendar.GetDayOfWeek(dateTimeFirstDayOfMouth);
+
+            for (int i = 1; i <= daysInMonth; i++)
+            {
+                if ((i + (int)dayOfWeekFirstDayOfMouth) % 7 > 1) //  1, 7, 8, 14, 15, 21, 22, 28, 29, 35, 36
+                {
+                    for (int k = 8; k < 16; k++)
+                    {
+                        defaultTimetables.Add(new Timetable()
+                        {
+                            DateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i, k, 0, 0),
+                            NumberOfEmployeesForCustomer = 2,
+                            NumberOfEmployeesReservedForCustomer = 0,
+                            NumberOfEmployeesForManager = 2,
+                            NumberOfEmployeesReservedForManager = 0,
+                            WorkingUsers = new List<User> { defaultUsers[1] }
+                        });
+                    }
+                }
+            }
+
+            context.Timetables.AddRange(defaultTimetables);
 
             IList<VehicleBrand> defaultVehicleBrands = new List<VehicleBrand>();
 

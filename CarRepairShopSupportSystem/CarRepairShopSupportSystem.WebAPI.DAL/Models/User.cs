@@ -26,5 +26,6 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Models
         public virtual ICollection<Message> SentMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<Order> WorksOnOrders { get; set; }
+        public virtual ICollection<Timetable> UserWorkTimetables { get; set; }
     }
 }

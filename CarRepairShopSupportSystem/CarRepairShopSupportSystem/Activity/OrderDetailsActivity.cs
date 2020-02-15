@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
 {
-    [Activity(Label = "Szczegóły pojazdu")]
+    [Activity(Label = "Szczegóły zlecenia")]
     public class OrderDetailsActivity : AppCompatActivity
     {
         private const int serviceListRequestCode = 1;
@@ -58,13 +58,8 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<TextView>(Resource.Id.btnApproveDescription).Click += BtnApproveDescription_Click;
             order = JsonConvert.DeserializeObject<Order>(Intent.GetStringExtra("OrderDetails"));
             selectedWorkerList = order.WorkByUsers.ToList();
-
-            FindViewById<TextView>(Resource.Id.tvOrderStatusName).Text = order.OrderStatusName;
-            FindViewById<TextView>(Resource.Id.tvStartDateOfRepair).Text = order.StartDateOfRepair?.ToString() ?? string.Empty;
-            FindViewById<TextView>(Resource.Id.tvEndDateOfRepair).Text = order.EndDateOfRepair?.ToString() ?? string.Empty;
-            FindViewById<TextView>(Resource.Id.tvTotalCost).Text = order.TotalCost.ToString();
-            FindViewById<TextView>(Resource.Id.tvWorkByUsers).Text = $"{order.WorkByUsers.FirstOrDefault()?.FirstName} {order.WorkByUsers.FirstOrDefault()?.LastName}";
-            FindViewById<TextView>(Resource.Id.tvDescription).Text = order.Description;
+            selectedServiceList = order.ContainsServices?.ToList();
+            selectedVehiclePartList = order.UsedVehicleParts.ToList();
 
             int permissionId = applicationSessionService.GetUserFromApplicationSession().PermissionId;
 
@@ -97,6 +92,18 @@ namespace CarRepairShopSupportSystem.Activity
             {
                 userReceiverId = order.WorkByUsers.FirstOrDefault()?.UserId ?? 1;
             }
+
+            CompleteData();
+        }
+
+        private void CompleteData()
+        {
+            FindViewById<TextView>(Resource.Id.tvOrderStatusName).Text = order.OrderStatusName;
+            FindViewById<TextView>(Resource.Id.tvStartDateOfRepair).Text = order.PlannedStartDateOfRepair?.ToString() ?? string.Empty;
+            FindViewById<TextView>(Resource.Id.tvEndDateOfRepair).Text = order.PlannedEndDateOfRepair?.ToString() ?? string.Empty;
+            FindViewById<TextView>(Resource.Id.tvTotalCost).Text = order.TotalCost.ToString();
+            FindViewById<TextView>(Resource.Id.tvWorkByUsers).Text = $"{order.WorkByUsers.FirstOrDefault()?.FirstName} {order.WorkByUsers.FirstOrDefault()?.LastName}";
+            FindViewById<TextView>(Resource.Id.tvDescription).Text = order.Description;
         }
 
         private void BtnApproveDescription_Click(object sender, EventArgs e)
@@ -189,6 +196,17 @@ namespace CarRepairShopSupportSystem.Activity
                 if (resultCode == Result.Ok)
                 {
                     selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(data.GetStringExtra("SelectedServiceList"));
+                    order.ContainsServices = selectedServiceList;
+                    OperationResult operationResult = orderService.EditVehicleOrder(order);
+
+                    if (operationResult.ResultCode == ResultCode.Successful)
+                    {
+                        Toast.MakeText(Application.Context, "Zapisano usługi", ToastLength.Long).Show();
+                    }
+                    else
+                    {
+                        Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
+                    }
                 }
             }
             else if (requestCode == vehiclePartListRequestCode)
@@ -196,6 +214,17 @@ namespace CarRepairShopSupportSystem.Activity
                 if (resultCode == Result.Ok)
                 {
                     selectedVehiclePartList = JsonConvert.DeserializeObject<IList<VehiclePart>>(data.GetStringExtra("SelectedVehiclePartList"));
+                    order.UsedVehicleParts = selectedVehiclePartList;
+                    OperationResult operationResult = orderService.EditVehicleOrder(order);
+
+                    if (operationResult.ResultCode == ResultCode.Successful)
+                    {
+                        Toast.MakeText(Application.Context, "Zapisano częsci", ToastLength.Long).Show();
+                    }
+                    else
+                    {
+                        Toast.MakeText(Application.Context, operationResult.Message, ToastLength.Long).Show();
+                    }
                 }
             }
             if (requestCode == workerListManagerRequestCode)
@@ -217,6 +246,7 @@ namespace CarRepairShopSupportSystem.Activity
                 }
             }
             FindViewById<TextView>(Resource.Id.tvTotalCost).Text = $"{sumServicePrice + sumVehiclePartPrice}";
+            CompleteData();
         }
     }
 }

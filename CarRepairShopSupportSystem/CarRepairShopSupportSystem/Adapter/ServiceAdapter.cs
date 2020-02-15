@@ -54,6 +54,12 @@ namespace CarRepairShopSupportSystem.Adapter
                 Text = $"Cena: {services[position].Price} [PLN]"
             };
             linearLayout.AddView(tvRegistrationNumbers);
+            TextView tvExecutionTimeInMinutes = new TextView(context)
+            {
+                TextSize = 20,
+                Text = $"Czas trwania: {services[position].ExecutionTimeInMinutes} minut"
+            };
+            linearLayout.AddView(tvExecutionTimeInMinutes);
 
             if (selectedServices.Any(ss => ss.ServiceId == services[position].ServiceId))
             {

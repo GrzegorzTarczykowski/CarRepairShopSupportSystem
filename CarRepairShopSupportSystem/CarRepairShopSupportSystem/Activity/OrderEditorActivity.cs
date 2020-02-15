@@ -132,7 +132,7 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     selectedStartDateTime = JsonConvert.DeserializeObject<DateTime>(data.GetStringExtra("SelectedDateTime"));
                     FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text = selectedStartDateTime.ToString();
-                    if (!string.IsNullOrWhiteSpace(FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text))
+                    if (!string.IsNullOrWhiteSpace(FindViewById<TextView>(Resource.Id.tvPlannedStartDateOfRepair).Text) && selectedServiceList != null)
                     {
                         FindViewById<TextView>(Resource.Id.tvPlannedEndDateOfRepair).Text 
                             = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)).ToString();

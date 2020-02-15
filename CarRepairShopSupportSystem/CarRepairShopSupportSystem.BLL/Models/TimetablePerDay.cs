@@ -14,7 +14,7 @@ namespace CarRepairShopSupportSystem.BLL.Models
         public int SumNumberOfEmployeesForManager { get; set; }
         public int SumNumberOfEmployeesReservedForManager { get; set; }
 
-        public bool IsAvailableEmployeesForCustomer  => SumNumberOfEmployeesForCustomer - SumNumberOfEmployeesReservedForCustomer > 0;
+        public bool IsAvailableEmployeesForCustomer => SumNumberOfEmployeesForCustomer - SumNumberOfEmployeesReservedForCustomer > 0;
         public bool IsAvailableOfEmployeesForManager => SumNumberOfEmployeesForManager - SumNumberOfEmployeesReservedForManager > 0;
     }
 }

@@ -19,10 +19,11 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.Abstraction
         bool Any(Expression<Func<T, bool>> predicate);
         bool Add(T entity);
         bool AddRange(IEnumerable<T> entities);
-        void Remove(params object[] keyValues);
-        void Remove(int id);
         bool Edit(T entity);
         void EditManyToMany<TMany>(Expression<Func<T, bool>> filter, string collectionPropertyName, string idPropertyName, IEnumerable<object> updatedSet);
+        void Remove(int id);
+        void Remove(params object[] keyValues);
+        void RemoveManyToMany<TMany>(Expression<Func<T, bool>> filter, string collectionPropertyName, string idPropertyName, IEnumerable<object> removeSet);
         bool SaveChanges(T entity);
         Task<bool> SaveChangesAsync();
     }

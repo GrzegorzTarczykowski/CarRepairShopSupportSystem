@@ -88,6 +88,16 @@ namespace CarRepairShopSupportSystem.WebAPI.DAL.MsSqlServerDB
                         });
 
             modelBuilder.Entity<User>()
+                        .HasMany<Timetable>(u => u.UserWorkTimetables)
+                        .WithMany(t => t.WorkingUsers)
+                        .Map(cs =>
+                        {
+                            cs.MapLeftKey($"{nameof(User)}Id");
+                            cs.MapRightKey($"{nameof(Timetable)}Id");
+                            cs.ToTable($"{nameof(User)}{nameof(Timetable)}");
+                        });
+
+            modelBuilder.Entity<User>()
                         .HasRequired(u => u.Permission)
                         .WithMany(p => p.AssignedToUsers)
                         .HasForeignKey(u => u.PermissionId)

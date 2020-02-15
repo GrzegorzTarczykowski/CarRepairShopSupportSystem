@@ -43,6 +43,15 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction
         }
 
         [HttpGet]
+        internal protected IEnumerable<T> GetByBase(Expression<Func<T, bool>> predicate, params string[] includeProperties)
+        {
+            return BaseAction(delegate
+            {
+                return repository.FindBy(predicate, includeProperties);
+            });
+        }
+
+        [HttpGet]
         internal protected T GetBase(int id)
         {
             return BaseAction(delegate

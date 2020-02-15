@@ -22,7 +22,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.orderService = orderService;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>
         public IEnumerable<Models.Order> Get()
@@ -47,12 +47,26 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         PermissionId = u.PermissionId
+                    }),
+                    ContainsServices = o.ContainsServices?.Select(s => new Models.Service
+                    {
+                        ServiceId = s.ServiceId,
+                        Name = s.Name,
+                        Description = s.Description,
+                        ExecutionTimeInMinutes = s.ExecutionTimeInMinutes,
+                        Price = s.Price
+                    }),
+                    UsedVehicleParts = o.UsedVehicleParts?.Select(vp => new Models.VehiclePart
+                    {
+                        VehiclePartId = vp.VehiclePartId,
+                        Name = vp.Name,
+                        Price = vp.Price
                     })
                 });
         }
 
         [Route("api/Order/GetByVehicleId")]
-        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        //[Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         public IEnumerable<Models.Order> GetByVehicleId([FromUri]int vehicleId)
         {
@@ -76,12 +90,26 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         PermissionId = u.PermissionId
+                    }),
+                    ContainsServices = o.ContainsServices?.Select(s => new Models.Service
+                    {
+                        ServiceId = s.ServiceId,
+                        Name = s.Name,
+                        Description = s.Description,
+                        ExecutionTimeInMinutes = s.ExecutionTimeInMinutes,
+                        Price = s.Price
+                    }),
+                    UsedVehicleParts = o.UsedVehicleParts?.Select(vp => new Models.VehiclePart
+                    {
+                        VehiclePartId = vp.VehiclePartId,
+                        Name = vp.Name,
+                        Price = vp.Price
                     })
                 });
         }
 
         [Route("api/Order/GetOrderListByWorker")]
-        [Authorize(Roles = "SuperAdmin, Admin")]
+        //[Authorize(Roles = "SuperAdmin, Admin")]
         [HttpGet]
         public IEnumerable<Models.Order> GetOrderListByWorker([FromUri]int userId)
         {
@@ -105,11 +133,25 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         PermissionId = u.PermissionId
+                    }),
+                    ContainsServices = o.ContainsServices?.Select(s => new Models.Service
+                    {
+                        ServiceId = s.ServiceId,
+                        Name = s.Name,
+                        Description = s.Description,
+                        ExecutionTimeInMinutes = s.ExecutionTimeInMinutes,
+                        Price = s.Price
+                    }),
+                    UsedVehicleParts = o.UsedVehicleParts?.Select(vp => new Models.VehiclePart
+                    {
+                        VehiclePartId = vp.VehiclePartId,
+                        Name = vp.Name,
+                        Price = vp.Price
                     })
                 });
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin, User")]
+        //[Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         // GET api/<controller>/5
         public Models.Order Get(int id)
@@ -134,6 +176,20 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     PermissionId = u.PermissionId
+                }),
+                ContainsServices = order.ContainsServices?.Select(s => new Models.Service
+                {
+                    ServiceId = s.ServiceId,
+                    Name = s.Name,
+                    Description = s.Description,
+                    ExecutionTimeInMinutes = s.ExecutionTimeInMinutes,
+                    Price = s.Price
+                }),
+                UsedVehicleParts = order.UsedVehicleParts?.Select(vp => new Models.VehiclePart
+                {
+                    VehiclePartId = vp.VehiclePartId,
+                    Name = vp.Name,
+                    Price = vp.Price
                 })
             };
         }
@@ -154,7 +210,19 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 PlannedEndDateOfRepair = value.PlannedEndDateOfRepair,
                 EndDateOfRepair = value.EndDateOfRepair,
                 OrderStatusId = value.OrderStatusId,
-                VehicleId = value.VehicleId
+                VehicleId = value.VehicleId,
+                WorkByUsers = value.WorkByUsers?.Select(u => new User
+                {
+                    UserId = u.UserId
+                }).ToList(),
+                ContainsServices = value.ContainsServices?.Select(s => new Service
+                {
+                    ServiceId = s.ServiceId
+                }).ToList(),
+                UsedVehicleParts = value.UsedVehicleParts?.Select(vp => new VehiclePart
+                {
+                    VehiclePartId = vp.VehiclePartId
+                }).ToList()
             };
 
             if (orderService.AddOrder(order))
@@ -187,6 +255,14 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 WorkByUsers = value.WorkByUsers?.Select(u => new User
                 {
                     UserId = u.UserId
+                }).ToList(),
+                ContainsServices = value.ContainsServices?.Select(s => new Service
+                {
+                    ServiceId = s.ServiceId
+                }).ToList(),
+                UsedVehicleParts = value.UsedVehicleParts?.Select(vp => new VehiclePart
+                {
+                    VehiclePartId = vp.VehiclePartId
                 }).ToList()
             };
 

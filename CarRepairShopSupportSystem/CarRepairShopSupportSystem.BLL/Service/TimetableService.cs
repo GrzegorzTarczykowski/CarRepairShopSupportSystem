@@ -1,4 +1,5 @@
-﻿using CarRepairShopSupportSystem.BLL.IService;
+﻿using CarRepairShopSupportSystem.BLL.Enums;
+using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using Newtonsoft.Json;
 using System;
@@ -82,6 +83,71 @@ namespace CarRepairShopSupportSystem.BLL.Service
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public IEnumerable<Timetable> GetTimetableListPerYear(int year)
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Timetable/GetPerYear?year={year}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<Timetable> matchingTimetableList = JsonConvert.DeserializeObject<IEnumerable<Timetable>>(JsonContent);
+                    if (matchingTimetableList != null)
+                    {
+                        return matchingTimetableList;
+                    }
+                }
+                return Enumerable.Empty<Timetable>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<Timetable> GetTimetableListPerYearByUserId(int year, int userId)
+        {
+            try
+            {
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/Timetable/GetPerYearByUserId?year={year}&userId={userId}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    IEnumerable<Timetable> matchingTimetableList = JsonConvert.DeserializeObject<IEnumerable<Timetable>>(JsonContent);
+                    if (matchingTimetableList != null)
+                    {
+                        return matchingTimetableList;
+                    }
+                }
+                return Enumerable.Empty<Timetable>();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public OperationResult SaveTimetableForUser(Timetable timetable)
+        {
+            try
+            {
+                HttpResponseMessage tokenResponse = httpClientService.Post($"api/Timetable", timetable);
+
+                if (tokenResponse.IsSuccessStatusCode)
+                {
+                    return new OperationResult { ResultCode = ResultCode.Successful };
+                }
+
+                OperationResult operationResult = JsonConvert.DeserializeObject<OperationResult>(tokenResponse.Content.ReadAsStringAsync().Result);
+                operationResult.ResultCode = ResultCode.Error;
+                return operationResult;
+            }
+            catch (Exception)
+            {
+                return new OperationResult { ResultCode = ResultCode.Error, Message = "Wystąpił problem edycja zlecenia" };
             }
         }
     }

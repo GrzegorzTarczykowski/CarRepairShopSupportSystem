@@ -87,12 +87,17 @@ namespace CarRepairShopSupportSystem.Activity
                 FindViewById<EditText>(Resource.Id.editEngineMileage).Text = vehicle.EngineMileage.ToString();
                 FindViewById<EditText>(Resource.Id.editRegistrationNumbers).Text = vehicle.RegistrationNumbers;
 
+                FindViewById<Spinner>(Resource.Id.spinnerVehicleModel).Enabled = false;
+                FindViewById<Spinner>(Resource.Id.spinnerVehicleBrand).Enabled = false;
                 FindViewById<Spinner>(Resource.Id.spinnerVehicleBrand)
                     .SetSelection(vehicleBrandList.IndexOf(vehicleBrandList.FirstOrDefault(vb => vb.VehicleBrandId == vehicle.VehicleBrandId)));
+                FindViewById<Spinner>(Resource.Id.spinnerVehicleEngine).Enabled = false;
                 FindViewById<Spinner>(Resource.Id.spinnerVehicleEngine)
                     .SetSelection(vehicleEngineList.IndexOf(vehicleEngineList.FirstOrDefault(vb => vb.VehicleEngineId == vehicle.VehicleEngineId)));
+                FindViewById<Spinner>(Resource.Id.spinnerVehicleFuel).Enabled = false;
                 FindViewById<Spinner>(Resource.Id.spinnerVehicleFuel)
                     .SetSelection(vehicleFuelList.IndexOf(vehicleFuelList.FirstOrDefault(vb => vb.VehicleFuelId == vehicle.VehicleFuelId)));
+                FindViewById<Spinner>(Resource.Id.spinnerVehicleType).Enabled = false;
                 FindViewById<Spinner>(Resource.Id.spinnerVehicleType)
                     .SetSelection(vehicleTypeList.IndexOf(vehicleTypeList.FirstOrDefault(vb => vb.VehicleTypeId == vehicle.VehicleTypeId)));
             }
