@@ -21,11 +21,13 @@ namespace CarRepairShopSupportSystem.Adapter
     {
         private readonly Context context;
         private readonly Order[] orders;
+        private readonly bool isVisibleVehicleRegistrationNumbers;
 
-        public OrderAdapter(Context context, Order[] orders)
+        public OrderAdapter(Context context, Order[] orders, bool isVisibleVehicleRegistrationNumbers)
         {
             this.context = context;
             this.orders = orders;
+            this.isVisibleVehicleRegistrationNumbers = isVisibleVehicleRegistrationNumbers;
         }
 
         public override int Count => orders.Length;
@@ -50,6 +52,15 @@ namespace CarRepairShopSupportSystem.Adapter
                 Text = $" {position + 1}. Data zlecenia: {orders[position].CreateDate} Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
             };
             linearLayout.AddView(tvOrderInfo);
+            if (isVisibleVehicleRegistrationNumbers)
+            {
+                TextView tvVehicleInfo = new TextView(context)
+                {
+                    TextSize = 15,
+                    Text = $"Numer rejestracyjny: {orders[position].VehicleRegistrationNumbers}"
+                };
+                linearLayout.AddView(tvVehicleInfo);
+            }
 
             return linearLayout;
         }

@@ -1,5 +1,4 @@
-﻿using CarRepairShopSupportSystem.WebAPI.BLL.Enums;
-using CarRepairShopSupportSystem.WebAPI.BLL.IService;
+﻿using CarRepairShopSupportSystem.WebAPI.BLL.IService;
 using CarRepairShopSupportSystem.WebAPI.Controllers.Abstraction;
 using CarRepairShopSupportSystem.WebAPI.DAL.Abstraction;
 using CarRepairShopSupportSystem.WebAPI.DAL.Models;
@@ -22,12 +21,12 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.orderService = orderService;
         }
 
-        //[Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>
         public IEnumerable<Models.Order> Get()
         {
-            return GetBase(nameof(OrderStatus))
+            return GetBase(nameof(OrderStatus), nameof(Vehicle))
                 ?.Select(o => new Models.Order
                 {
                     OrderId = o.OrderId,
@@ -39,8 +38,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     PlannedEndDateOfRepair = o.PlannedEndDateOfRepair,
                     EndDateOfRepair = o.EndDateOfRepair,
                     OrderStatusId = o.OrderStatusId,
-                    OrderStatusName = o.OrderStatus.Name,
+                    OrderStatusName = o.OrderStatus?.Name,
                     VehicleId = o.VehicleId,
+                    VehicleRegistrationNumbers = o.Vehicle?.RegistrationNumbers,
                     WorkByUsers = o.WorkByUsers?.Select(u => new Models.User
                     {
                         UserId = u.UserId,
@@ -66,7 +66,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         }
 
         [Route("api/Order/GetByVehicleId")]
-        //[Authorize(Roles = "SuperAdmin, Admin, User")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         public IEnumerable<Models.Order> GetByVehicleId([FromUri]int vehicleId)
         {
@@ -82,8 +82,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     PlannedEndDateOfRepair = o.PlannedEndDateOfRepair,
                     EndDateOfRepair = o.EndDateOfRepair,
                     OrderStatusId = o.OrderStatusId,
-                    OrderStatusName = o.OrderStatus.Name,
+                    OrderStatusName = o.OrderStatus?.Name,
                     VehicleId = o.VehicleId,
+                    VehicleRegistrationNumbers = o.Vehicle?.RegistrationNumbers,
                     WorkByUsers = o.WorkByUsers?.Select(u => new Models.User
                     {
                         UserId = u.UserId,
@@ -109,7 +110,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
         }
 
         [Route("api/Order/GetOrderListByWorker")]
-        //[Authorize(Roles = "SuperAdmin, Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpGet]
         public IEnumerable<Models.Order> GetOrderListByWorker([FromUri]int userId)
         {
@@ -125,8 +126,9 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                     PlannedEndDateOfRepair = o.PlannedEndDateOfRepair,
                     EndDateOfRepair = o.EndDateOfRepair,
                     OrderStatusId = o.OrderStatusId,
-                    OrderStatusName = o.OrderStatus.Name,
+                    OrderStatusName = o.OrderStatus?.Name,
                     VehicleId = o.VehicleId,
+                    VehicleRegistrationNumbers = o.Vehicle?.RegistrationNumbers,
                     WorkByUsers = o.WorkByUsers?.Select(u => new Models.User
                     {
                         UserId = u.UserId,
@@ -151,7 +153,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 });
         }
 
-        //[Authorize(Roles = "SuperAdmin, Admin, User")]
+        [Authorize(Roles = "SuperAdmin, Admin, User")]
         [HttpGet]
         // GET api/<controller>/5
         public Models.Order Get(int id)
@@ -170,6 +172,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
                 OrderStatusId = order.OrderStatusId,
                 OrderStatusName = order.OrderStatus?.Name,
                 VehicleId = order.VehicleId,
+                VehicleRegistrationNumbers = order.Vehicle?.RegistrationNumbers,
                 WorkByUsers = order.WorkByUsers?.Select(u => new Models.User
                 {
                     UserId = u.UserId,

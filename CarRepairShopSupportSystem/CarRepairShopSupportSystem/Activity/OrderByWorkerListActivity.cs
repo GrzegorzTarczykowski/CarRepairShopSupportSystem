@@ -45,8 +45,8 @@ namespace CarRepairShopSupportSystem.Activity
         private void RefreshGvOrderByWorkerList(GridView gvOrderByWorkerList)
         {
             orderByWorkerList = orderService.GetOrderListByWorker(applicationSessionService.GetUserFromApplicationSession().UserId)
-                                                .ToList();
-            gvOrderByWorkerList.Adapter = new OrderAdapter(this, orderByWorkerList.ToArray());
+                                            .ToList();
+            gvOrderByWorkerList.Adapter = new OrderAdapter(this, orderByWorkerList.ToArray(), true);
         }
 
         private void GvOrderByWorkerList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

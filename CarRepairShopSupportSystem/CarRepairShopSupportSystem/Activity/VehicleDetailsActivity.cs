@@ -99,7 +99,7 @@ namespace CarRepairShopSupportSystem.Activity
         private void RefreshGvOrderList(GridView gvOrderList)
         {
             orders = orderService.GetOrderListByVehicleId(vehicle.VehicleId).OrderByDescending(o => o.CreateDate).ToList();
-            gvOrderList.Adapter = new OrderAdapter(this, orders.ToArray());
+            gvOrderList.Adapter = new OrderAdapter(this, orders.ToArray(), false);
         }
     }
 }

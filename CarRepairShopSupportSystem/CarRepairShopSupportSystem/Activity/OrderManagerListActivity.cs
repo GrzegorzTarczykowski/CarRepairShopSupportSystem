@@ -50,7 +50,7 @@ namespace CarRepairShopSupportSystem.Activity
         private void RefreshGvOrderManagerList(GridView gvOrderManagerList)
         {
             orderList = orderService.GetAllOrderList().ToList();
-            gvOrderManagerList.Adapter = new OrderAdapter(this, orderList.ToArray());
+            gvOrderManagerList.Adapter = new OrderAdapter(this, orderList.ToArray(), true);
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
