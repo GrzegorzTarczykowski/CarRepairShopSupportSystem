@@ -67,8 +67,8 @@ namespace CarRepairShopSupportSystem.Activity
                 {
                     TotalCost = selectedServiceList.Sum(ss => ss.Price),
                     CreateDate = DateTime.Now,
-                    PlannedStartDateOfRepair = selectedStartDateTime,
-                    PlannedEndDateOfRepair = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)),
+                    StartDateOfRepair = selectedStartDateTime,
+                    EndDateOfRepair = selectedStartDateTime.AddMinutes(selectedServiceList.Sum(ss => ss.ExecutionTimeInMinutes)),
                     OrderStatusId = (int)OrderStatusId.Planned,
                     VehicleId = vehicleId,
                     ContainsServices = selectedServiceList//.AsEnumerable()

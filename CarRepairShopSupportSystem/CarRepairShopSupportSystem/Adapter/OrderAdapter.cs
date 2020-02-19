@@ -49,7 +49,7 @@ namespace CarRepairShopSupportSystem.Adapter
             TextView tvOrderInfo = new TextView(context)
             {
                 TextSize = 20,
-                Text = $" {position + 1}. Data zlecenia: {orders[position].CreateDate} Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
+                Text = $"{position + 1}. Data rozpoczęcia zlecenia: {orders[position].StartDateOfRepair}. Data zakończenia zlecenia: {orders[position].EndDateOfRepair}. Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
             };
             linearLayout.AddView(tvOrderInfo);
             if (isVisibleVehicleRegistrationNumbers)
@@ -61,7 +61,6 @@ namespace CarRepairShopSupportSystem.Adapter
                 };
                 linearLayout.AddView(tvVehicleInfo);
             }
-
             return linearLayout;
         }
     }

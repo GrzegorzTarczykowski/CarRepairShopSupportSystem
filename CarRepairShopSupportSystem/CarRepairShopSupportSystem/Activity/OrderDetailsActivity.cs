@@ -99,8 +99,8 @@ namespace CarRepairShopSupportSystem.Activity
         private void CompleteData()
         {
             FindViewById<TextView>(Resource.Id.tvOrderStatusName).Text = order.OrderStatusName;
-            FindViewById<TextView>(Resource.Id.tvStartDateOfRepair).Text = order.PlannedStartDateOfRepair?.ToString() ?? string.Empty;
-            FindViewById<TextView>(Resource.Id.tvEndDateOfRepair).Text = order.PlannedEndDateOfRepair?.ToString() ?? string.Empty;
+            FindViewById<TextView>(Resource.Id.tvStartDateOfRepair).Text = order.StartDateOfRepair?.ToString() ?? string.Empty;
+            FindViewById<TextView>(Resource.Id.tvEndDateOfRepair).Text = order.EndDateOfRepair?.ToString() ?? string.Empty;
             FindViewById<TextView>(Resource.Id.tvTotalCost).Text = order.TotalCost.ToString();
             FindViewById<TextView>(Resource.Id.tvWorkByUsers).Text = $"{order.WorkByUsers.FirstOrDefault()?.FirstName} {order.WorkByUsers.FirstOrDefault()?.LastName}";
             FindViewById<TextView>(Resource.Id.tvDescription).Text = order.Description;
