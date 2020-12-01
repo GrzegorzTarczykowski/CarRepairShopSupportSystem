@@ -225,6 +225,7 @@
     <Compile Include="Autofac\UnitOfWorkModule.cs" />
     <Compile Include="Controllers\Abstraction\ABaseApiController.cs" />
     <Compile Include="Controllers\Abstraction\ACRUDApiController[T].cs" />
+    <Compile Include="Controllers\ApkVersionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />

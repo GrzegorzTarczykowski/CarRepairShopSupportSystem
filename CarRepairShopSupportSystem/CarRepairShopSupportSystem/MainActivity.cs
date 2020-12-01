@@ -12,6 +12,9 @@ using CarRepairShopSupportSystem.BLL.Service;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
+using Java.IO;
+using System.Net;
+using CarRepairShopSupportSystem.Helper;
 
 namespace CarRepairShopSupportSystem
 {
@@ -21,10 +24,12 @@ namespace CarRepairShopSupportSystem
         private const int menuRequestCode = 1;
         private const int registerRequestCode = 2;
         private readonly ILoginService loginService;
+        private readonly IApkVersionService apkVersionService;
 
         public MainActivity()
         {
             loginService = new LoginService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
+            apkVersionService = new ApkVersionService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -37,6 +42,26 @@ namespace CarRepairShopSupportSystem
 
             FindViewById<Button>(Resource.Id.btnLogin).Click += BtnLogin_Click;
             FindViewById<Android.Support.V7.Widget.AppCompatTextView>(Resource.Id.txtRegister).Click += TxtViewRegister_Click;
+
+            try
+            {
+                if (CheckRemoteApkVersionCodeIsGreaterThanCurrent())
+                {
+                    DownloadHelper downloadHelper = new DownloadHelper(this);
+                    downloadHelper.DownloadApk();
+                }
+            }
+            catch (IOException e)
+            {
+                Toast.MakeText(Application.Context, "Update error!", ToastLength.Long).Show();
+            }
+        }
+
+        private bool CheckRemoteApkVersionCodeIsGreaterThanCurrent()
+        {
+            long currentVersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionCode;
+            long remoteVersionCode = apkVersionService.GetApkVersion();
+            return currentVersionCode < remoteVersionCode;
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)

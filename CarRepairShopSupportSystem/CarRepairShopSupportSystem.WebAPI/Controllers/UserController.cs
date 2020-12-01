@@ -25,7 +25,7 @@ namespace CarRepairShopSupportSystem.WebAPI.Controllers
             this.userService = userService;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         [HttpGet]
         // GET api/<controller>
         public IEnumerable<Models.User> Get()
