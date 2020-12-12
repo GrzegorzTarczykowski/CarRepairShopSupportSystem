@@ -15,6 +15,7 @@ using CarRepairShopSupportSystem.BLL.Extensions;
 using Java.IO;
 using System.Net;
 using CarRepairShopSupportSystem.Helper;
+using CarRepairShopSupportSystem.BLL.Models;
 
 namespace CarRepairShopSupportSystem
 {
@@ -25,11 +26,13 @@ namespace CarRepairShopSupportSystem
         private const int registerRequestCode = 2;
         private readonly ILoginService loginService;
         private readonly IApkVersionService apkVersionService;
+        private readonly IApplicationSessionService applicationSessionService;
 
         public MainActivity()
         {
             loginService = new LoginService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
             apkVersionService = new ApkVersionService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
+            applicationSessionService = new ApplicationSessionService();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -60,7 +63,18 @@ namespace CarRepairShopSupportSystem
         private bool CheckRemoteApkVersionCodeIsGreaterThanCurrent()
         {
             long currentVersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionCode;
-            long remoteVersionCode = apkVersionService.GetApkVersion();
+            long remoteVersionCode;
+            if (applicationSessionService.GetUserFromApplicationSession() == null)
+            {
+                ApplicationSession.userName = "TestGuest";
+                ApplicationSession.userPassword = "1";
+                remoteVersionCode = apkVersionService.GetApkVersion();
+                applicationSessionService.ClearApplicationSession();
+            }
+            else
+            {
+                remoteVersionCode = apkVersionService.GetApkVersion();
+            }
             return currentVersionCode < remoteVersionCode;
         }
 
