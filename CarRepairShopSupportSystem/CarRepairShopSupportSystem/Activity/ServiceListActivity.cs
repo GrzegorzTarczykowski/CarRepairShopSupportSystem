@@ -15,6 +15,7 @@ using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Service;
+using CarRepairShopSupportSystem.Extensions;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
@@ -24,8 +25,8 @@ namespace CarRepairShopSupportSystem.Activity
     {
         private const int serviceRequestCode = 1;
         private readonly IServiceService serviceService;
-        private IList<BLL.Models.Service> serviceList;
-        private IList<BLL.Models.Service> selectedServiceList;
+        private List<BLL.Models.Service> serviceList;
+        private List<BLL.Models.Service> selectedServiceList;
 
         public ServiceListActivity()
         {
@@ -36,9 +37,10 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_serviceList);
-            GridView gvServiceList = FindViewById<GridView>(Resource.Id.gvServiceList);
-            RefreshGvServiceList(gvServiceList);
-            gvServiceList.ItemClick += GvServiceList_ItemClick;
+            ListView lvServiceList = FindViewById<ListView>(Resource.Id.lvServiceList);
+            lvServiceList.ChoiceMode = ChoiceMode.Multiple;
+            lvServiceList.ItemClick += GvServiceList_ItemClick;
+            RefreshLvServiceList(lvServiceList);
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
                 Button btnAddService = FindViewById<Button>(Resource.Id.btnAddService);
@@ -53,11 +55,15 @@ namespace CarRepairShopSupportSystem.Activity
             }
         }
 
-        private void RefreshGvServiceList(GridView gvServiceList)
+        private void RefreshLvServiceList(ListView lvServiceList)
         {
             serviceList = serviceService.GetAllServiceList().ToList();
-            selectedServiceList = JsonConvert.DeserializeObject<IList<BLL.Models.Service>>(Intent.GetStringExtra("SelectedServiceList") ?? string.Empty) ?? new List<BLL.Models.Service>();
-            gvServiceList.Adapter = new ServiceAdapter(this, serviceList.ToArray(), selectedServiceList.ToArray());
+            selectedServiceList = JsonConvert.DeserializeObject<List<BLL.Models.Service>>(Intent.GetStringExtra("SelectedServiceList") ?? string.Empty) ?? new List<BLL.Models.Service>();
+            lvServiceList.Adapter = new ServiceAdapter(this, serviceList);
+            selectedServiceList.ForEach(selectedService =>
+            {
+                lvServiceList.SetItemChecked(serviceList.FindIndex(s => s.ServiceId == selectedService.ServiceId), true);
+            });
         }
 
         private void GvServiceList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -68,24 +74,12 @@ namespace CarRepairShopSupportSystem.Activity
                 nextActivity.PutExtra("SelectedService", JsonConvert.SerializeObject(serviceList[e.Position]));
                 StartActivityForResult(nextActivity, serviceRequestCode);
             }
-            else
-            {
-                BLL.Models.Service service = selectedServiceList.FirstOrDefault(ss => ss.ServiceId == serviceList[e.Position].ServiceId);
-                if (service != null)
-                {
-                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.Transparent);
-                    selectedServiceList.Remove(service);
-                }
-                else
-                {
-                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.GreenYellow);
-                    selectedServiceList.Add(serviceList[e.Position]);
-                }
-            } 
         }
 
         private void BtnSubmitSelectedServices_Click(object sender, EventArgs e)
         {
+            selectedServiceList 
+                = FindViewById<ListView>(Resource.Id.lvServiceList).GetSelectedItems<BLL.Models.Service>();
             Intent intent = new Intent(this, typeof(OrderEditorActivity));
             intent.PutExtra("SelectedServiceList", JsonConvert.SerializeObject(selectedServiceList));
             SetResult(Result.Ok, intent);
@@ -103,8 +97,8 @@ namespace CarRepairShopSupportSystem.Activity
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == serviceRequestCode)
             {
-                GridView gvServiceList = FindViewById<GridView>(Resource.Id.gvServiceList);
-                RefreshGvServiceList(gvServiceList);
+                ListView lvServiceList = FindViewById<ListView>(Resource.Id.lvServiceList);
+                RefreshLvServiceList(lvServiceList);
             }
         }
     }

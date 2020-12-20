@@ -25,22 +25,22 @@ namespace CarRepairShopSupportSystem.BLL.Service
         {
             try
             {
-                //ApplicationSession.userName = username;
-                //ApplicationSession.userPassword = password;
-                //HttpResponseMessage APIResponse = httpClientService.Get($"api/User?username={username}&password={password}");
-                //if (APIResponse.IsSuccessStatusCode)
-                //{
-                //    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
-                //    User matchingUser = JsonConvert.DeserializeObject<User>(JsonContent);
-                //    if (matchingUser != null)
-                //    {
-                //        applicationSessionService.AddUserIntoApplicationSession(matchingUser);
-                //        return true;
-                //    }
-                //}
+                ApplicationSession.userName = username;
+                ApplicationSession.userPassword = password;
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/User?username={username}&password={password}");
+                if (APIResponse.IsSuccessStatusCode)
+                {
+                    string JsonContent = APIResponse.Content.ReadAsStringAsync().Result;
+                    User matchingUser = JsonConvert.DeserializeObject<User>(JsonContent);
+                    if (matchingUser != null)
+                    {
+                        applicationSessionService.AddUserIntoApplicationSession(matchingUser);
+                        return true;
+                    }
+                }
 
-                //ApplicationSession.userName = string.Empty;
-                //ApplicationSession.userPassword = string.Empty;
+                ApplicationSession.userName = string.Empty;
+                ApplicationSession.userPassword = string.Empty;
                 return true;
             }
             catch (Exception)

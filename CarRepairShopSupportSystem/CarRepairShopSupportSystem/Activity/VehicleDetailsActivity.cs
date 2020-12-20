@@ -41,9 +41,9 @@ namespace CarRepairShopSupportSystem.Activity
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_vehicleDetails);
             RefreshVehicleDetailsList(Intent);
-            GridView gvOrderList = FindViewById<GridView>(Resource.Id.gvOrderList);
-            RefreshGvOrderList(gvOrderList);
-            gvOrderList.ItemClick += GvOrderList_ItemClick;
+            ListView lvOrderList = FindViewById<ListView>(Resource.Id.lvOrderList);
+            RefreshGvOrderList(lvOrderList);
+            lvOrderList.ItemClick += GvOrderList_ItemClick;
 
             FindViewById<Button>(Resource.Id.btnAddOrder).Click += BtnAddOrder_Click;
             FindViewById<Button>(Resource.Id.btnEditVehicle).Click += BtnEditVehicle_Click;
@@ -81,7 +81,7 @@ namespace CarRepairShopSupportSystem.Activity
                     RefreshVehicleDetailsList(data);
                 }
             }
-            RefreshGvOrderList(FindViewById<GridView>(Resource.Id.gvOrderList));
+            RefreshGvOrderList(FindViewById<ListView>(Resource.Id.lvOrderList));
         }
 
         private void RefreshVehicleDetailsList(Intent intent)
@@ -96,10 +96,10 @@ namespace CarRepairShopSupportSystem.Activity
             FindViewById<TextView>(Resource.Id.tvVehicleType).Text = vehicle.VehicleTypeName;
         }
 
-        private void RefreshGvOrderList(GridView gvOrderList)
+        private void RefreshGvOrderList(ListView lvOrderList)
         {
             orders = orderService.GetOrderListByVehicleId(vehicle.VehicleId).OrderByDescending(o => o.CreateDate).ToList();
-            gvOrderList.Adapter = new OrderAdapter(this, orders.ToArray(), false);
+            lvOrderList.Adapter = new OrderAdapter(this, orders.ToList(), false);
         }
     }
 }

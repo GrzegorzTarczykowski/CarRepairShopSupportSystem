@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
@@ -16,6 +15,7 @@ using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
 using CarRepairShopSupportSystem.BLL.Service;
+using CarRepairShopSupportSystem.Extensions;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
@@ -25,8 +25,8 @@ namespace CarRepairShopSupportSystem.Activity
     {
         private const int vehiclePartRequestCode = 1;
         private readonly IVehiclePartService vehiclePartService;
-        private IList<VehiclePart> vehiclePartList;
-        private IList<VehiclePart> selectedVehiclePartList;
+        private List<VehiclePart> vehiclePartList;
+        private List<VehiclePart> selectedVehiclePartList;
 
         public VehiclePartListActivity()
         {
@@ -37,9 +37,10 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_vehiclePartList);
-            GridView gvVehiclePartList = FindViewById<GridView>(Resource.Id.gvVehiclePartList);
-            RefreshGvVehiclePartList(gvVehiclePartList);
-            gvVehiclePartList.ItemClick += GvVehiclePartList_ItemClick;
+            ListView lvVehiclePartList = FindViewById<ListView>(Resource.Id.lvVehiclePartList);
+            RefreshGvVehiclePartList(lvVehiclePartList);
+            lvVehiclePartList.ChoiceMode = ChoiceMode.Multiple;
+            lvVehiclePartList.ItemClick += LvVehiclePartList_ItemClick;
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
                 Button btnAddVehiclePart = FindViewById<Button>(Resource.Id.btnAddVehiclePart);
@@ -54,14 +55,18 @@ namespace CarRepairShopSupportSystem.Activity
             }
         }
 
-        private void RefreshGvVehiclePartList(GridView gvVehiclePartList)
+        private void RefreshGvVehiclePartList(ListView lvVehiclePartList)
         {
             vehiclePartList = vehiclePartService.GetAllVehiclePartList().ToList();
-            selectedVehiclePartList = JsonConvert.DeserializeObject<IList<VehiclePart>>(Intent.GetStringExtra("SelectedVehiclePartList") ?? string.Empty) ?? new List<VehiclePart>();
-            gvVehiclePartList.Adapter = new VehiclePartAdapter(this, vehiclePartList.ToArray(), selectedVehiclePartList.ToArray());
+            selectedVehiclePartList = JsonConvert.DeserializeObject<List<VehiclePart>>(Intent.GetStringExtra("SelectedVehiclePartList") ?? string.Empty) ?? new List<VehiclePart>();
+            lvVehiclePartList.Adapter = new VehiclePartAdapter(this, vehiclePartList);
+            selectedVehiclePartList.ForEach(selectedVehiclePart =>
+            {
+                lvVehiclePartList.SetItemChecked(vehiclePartList.FindIndex(vp => vp.VehiclePartId == selectedVehiclePart.VehiclePartId), true);
+            });
         }
 
-        private void GvVehiclePartList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void LvVehiclePartList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             if (Intent.GetStringExtra(nameof(OperationType)) == OperationType.Edit.GetDescription())
             {
@@ -69,24 +74,12 @@ namespace CarRepairShopSupportSystem.Activity
                 nextActivity.PutExtra("SelectedVehiclePart", JsonConvert.SerializeObject(vehiclePartList[e.Position]));
                 StartActivityForResult(nextActivity, vehiclePartRequestCode);
             }
-            else
-            {
-                VehiclePart vehiclePart = selectedVehiclePartList.FirstOrDefault(svp => svp.VehiclePartId == vehiclePartList[e.Position].VehiclePartId);
-                if (vehiclePart != null)
-                {
-                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.Transparent);
-                    selectedVehiclePartList.Remove(vehiclePart);
-                }
-                else
-                {
-                    ((LinearLayout)e.View).SetBackgroundColor(Android.Graphics.Color.GreenYellow);
-                    selectedVehiclePartList.Add(vehiclePartList[e.Position]);
-                }
-            }
         }
 
         private void BtnSubmitSelectedVehicleParts_Click(object sender, EventArgs e)
         {
+            selectedVehiclePartList
+                = FindViewById<ListView>(Resource.Id.lvVehiclePartList).GetSelectedItems<VehiclePart>();
             Intent intent = new Intent(this, typeof(OrderEditorActivity));
             intent.PutExtra("SelectedVehiclePartList", JsonConvert.SerializeObject(selectedVehiclePartList));
             SetResult(Result.Ok, intent);
@@ -104,8 +97,8 @@ namespace CarRepairShopSupportSystem.Activity
             base.OnActivityResult(requestCode, resultCode, data);
             if (requestCode == vehiclePartRequestCode)
             {
-                GridView gvVehiclePartList = FindViewById<GridView>(Resource.Id.gvVehiclePartList);
-                RefreshGvVehiclePartList(gvVehiclePartList);
+                ListView lvVehiclePartList = FindViewById<ListView>(Resource.Id.lvVehiclePartList);
+                RefreshGvVehiclePartList(lvVehiclePartList);
             }
         }
     }

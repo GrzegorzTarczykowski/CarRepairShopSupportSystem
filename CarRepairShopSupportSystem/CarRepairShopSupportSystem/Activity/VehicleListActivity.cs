@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.Adapter;
 using CarRepairShopSupportSystem.BLL.Enums;
@@ -27,7 +24,7 @@ namespace CarRepairShopSupportSystem.Activity
         private const int vehicleDetailsRequestCode = 2;
         private readonly IVehicleService vehicleService;
 
-        private IList<Vehicle> vehicles;
+        private List<Vehicle> vehicleList;
 
         public VehicleListActivity()
         {
@@ -38,16 +35,16 @@ namespace CarRepairShopSupportSystem.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_vehicleList);
-            GridView gvVehicleList = FindViewById<GridView>(Resource.Id.gvVehicleList);
-            RefreshGvVehicleList(gvVehicleList);
-            gvVehicleList.ItemClick += GvVehicleList_ItemClick;
+            ListView lvVehicleList = FindViewById<ListView>(Resource.Id.lvVehicleList);
+            RefreshLvVehicleList(lvVehicleList);
+            lvVehicleList.ItemClick += GvVehicleList_ItemClick;
             FindViewById<Button>(Resource.Id.btnAddVehicle).Click += BtnAddVehicle_Click;
         }
 
         private void GvVehicleList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Intent nextActivity = new Intent(this, typeof(VehicleDetailsActivity));
-            nextActivity.PutExtra("VehicleDetails", JsonConvert.SerializeObject(vehicles[e.Position]));
+            nextActivity.PutExtra("VehicleDetails", JsonConvert.SerializeObject(vehicleList[e.Position]));
             StartActivityForResult(nextActivity, vehicleDetailsRequestCode);
         }
 
@@ -64,21 +61,21 @@ namespace CarRepairShopSupportSystem.Activity
             if (requestCode == vehicleRequestCode
                 || requestCode == vehicleDetailsRequestCode)
             {
-                RefreshGvVehicleList(FindViewById<GridView>(Resource.Id.gvVehicleList));
+                RefreshLvVehicleList(FindViewById<ListView>(Resource.Id.lvVehicleList));
             }
         }
 
-        private void RefreshGvVehicleList(GridView gvVehicleList)
+        private void RefreshLvVehicleList(ListView lvVehicleList)
         {
             if (Intent.GetStringExtra(nameof(PermissionId)) == PermissionId.SuperAdmin.ToString())
             {
-                vehicles = vehicleService.GetVehicleList().ToList();
+                vehicleList = vehicleService.GetVehicleList().ToList();
             }
             else
             {
-                vehicles = vehicleService.GetVehicleListByUserId().ToList();
+                vehicleList = vehicleService.GetVehicleListByUserId().ToList();
             }
-            gvVehicleList.Adapter = new VehicleAdapter(this, vehicles.ToArray());
+            lvVehicleList.Adapter = new VehicleAdapter(this, vehicleList);
         }
     }
 }

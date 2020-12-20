@@ -1,76 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using System.Collections.Generic;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Models;
-using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    internal class ServiceAdapter : BaseAdapter
+    internal class ServiceAdapter : BaseAdapter<Service>
     {
-        private readonly Context context;
-        private readonly Service[] services;
-        private readonly Service[] selectedServices;
+        private readonly AppCompatActivity context;
+        private readonly List<Service> serviceList;
 
-        public ServiceAdapter(Context context, Service[] services, Service[] selectedServices)
+        public ServiceAdapter(AppCompatActivity context, List<Service> serviceList) : base()
         {
             this.context = context;
-            this.services = services;
-            this.selectedServices = selectedServices;
+            this.serviceList = serviceList;
         }
 
-        public override int Count => services.Length;
+        public override Service this[int position] => serviceList[position];
 
-        public override Java.Lang.Object GetItem(int position)
-        {
-            return JsonConvert.SerializeObject(services[position]);
-        }
+        public override int Count => serviceList.Count;
 
-        public override long GetItemId(int position)
-        {
-            return services[position].ServiceId;
-        }
+        public override long GetItemId(int position) => serviceList[position].ServiceId;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout = new LinearLayout(context);
-            linearLayout.Orientation = Orientation.Vertical;
-            TextView tvBrandNameAndModelName = new TextView(context)
+            var service = serviceList[position];
+            if (convertView == null)
             {
-                TextSize = 40,
-                Text = $"{services[position].Name}"
-            };
-            linearLayout.AddView(tvBrandNameAndModelName);
-            TextView tvRegistrationNumbers = new TextView(context)
-            {
-                TextSize = 20,
-                Text = $"Cena: {services[position].Price} [PLN]"
-            };
-            linearLayout.AddView(tvRegistrationNumbers);
-            TextView tvExecutionTimeInMinutes = new TextView(context)
-            {
-                TextSize = 20,
-                Text = $"Czas trwania: {services[position].ExecutionTimeInMinutes} minut"
-            };
-            linearLayout.AddView(tvExecutionTimeInMinutes);
-
-            if (selectedServices.Any(ss => ss.ServiceId == services[position].ServiceId))
-            {
-                linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
+                convertView = context.LayoutInflater.Inflate(Resource.Layout.activity_serviceListItem, null);
             }
-            else
-            {
-                linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
-            }
-
-            return linearLayout;
+            convertView.FindViewById<TextView>(Resource.Id.tvServiceNameItem).Text = $"{service.Name}";
+            convertView.FindViewById<TextView>(Resource.Id.tvServicePriceItem).Text = $"Cena: {service.Price} [PLN]";
+            convertView.FindViewById<TextView>(Resource.Id.tvServiceExecutionTimeItem).Text = $"Czas trwania: {service.ExecutionTimeInMinutes} minut";
+            return convertView;
         }
     }
 }

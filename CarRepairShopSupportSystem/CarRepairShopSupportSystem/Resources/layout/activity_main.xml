@@ -40,7 +40,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
             <Button
-                android:text="Zaloguj"
+                android:text=" \uf238 \uf238 \uf238 Zaloguj"
                 android:id="@+id/btnLogin"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:text="Zarejestruj"
+                android:text=" f368 \uf238 Unicode To get FontAwesome icon Zarejestruj"
                 android:clickable="true"
                 android:textSize="15dp"
                 android:id="@+id/txtRegister"

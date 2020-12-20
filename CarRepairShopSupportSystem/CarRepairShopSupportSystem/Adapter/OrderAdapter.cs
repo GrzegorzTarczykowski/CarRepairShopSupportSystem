@@ -1,67 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using System.Collections.Generic;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.Models;
-using Java.Lang;
-using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    class OrderAdapter : BaseAdapter
+    class OrderAdapter : BaseAdapter<Order>
     {
-        private readonly Context context;
-        private readonly Order[] orders;
+        private readonly AppCompatActivity context;
+        private readonly List<Order> orderList;
         private readonly bool isVisibleVehicleRegistrationNumbers;
 
-        public OrderAdapter(Context context, Order[] orders, bool isVisibleVehicleRegistrationNumbers)
+        public OrderAdapter(AppCompatActivity context, List<Order> orderList, bool isVisibleVehicleRegistrationNumbers)
         {
             this.context = context;
-            this.orders = orders;
+            this.orderList = orderList;
             this.isVisibleVehicleRegistrationNumbers = isVisibleVehicleRegistrationNumbers;
         }
 
-        public override int Count => orders.Length;
+        public override Order this[int position] => orderList[position];
 
-        public override Java.Lang.Object GetItem(int position)
-        {
-            return JsonConvert.SerializeObject(orders[position]);
-        }
+        public override int Count => orderList.Count;
 
-        public override long GetItemId(int position)
-        {
-            return orders[position].VehicleId;
-        }
+        public override long GetItemId(int position) => orderList[position].OrderId;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout = new LinearLayout(context);
-            linearLayout.Orientation = Orientation.Vertical;
-            TextView tvOrderInfo = new TextView(context)
+            var order = orderList[position];
+            if (convertView == null)
             {
-                TextSize = 20,
-                Text = $"{position + 1}. Data rozpoczęcia zlecenia: {orders[position].StartDateOfRepair}. Data zakończenia zlecenia: {orders[position].EndDateOfRepair}. Status zlecenia: {((OrderStatusId)orders[position].OrderStatusId).GetDescription()}"
-            };
-            linearLayout.AddView(tvOrderInfo);
+                convertView = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItemActivated2, null);
+            }
+            convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text 
+                = $"{position + 1}. Data rozpoczęcia zlecenia: {order.StartDateOfRepair}. Data zakończenia zlecenia: {order.EndDateOfRepair}. Status zlecenia: {((OrderStatusId)order.OrderStatusId).GetDescription()}";
             if (isVisibleVehicleRegistrationNumbers)
             {
-                TextView tvVehicleInfo = new TextView(context)
-                {
-                    TextSize = 15,
-                    Text = $"Numer rejestracyjny: {orders[position].VehicleRegistrationNumbers}"
-                };
-                linearLayout.AddView(tvVehicleInfo);
+                convertView.FindViewById<TextView>(Android.Resource.Id.Text2).Text
+                    = $"Numer rejestracyjny: {order.VehicleRegistrationNumbers}";
             }
-            return linearLayout;
+            return convertView;
         }
     }
 }

@@ -1,60 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using System.Collections.Generic;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Models;
-using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    internal class VehicleAdapter : BaseAdapter
+    internal class VehicleAdapter : BaseAdapter<Vehicle>
     {
-        private readonly Context context;
-        private readonly Vehicle[] vehicles;
+        private readonly AppCompatActivity context;
+        private readonly List<Vehicle> vehicleList;
 
-        public VehicleAdapter(Context context, Vehicle[] vehicles)
+        public VehicleAdapter(AppCompatActivity context, List<Vehicle> vehicleList)
         {
             this.context = context;
-            this.vehicles = vehicles;
+            this.vehicleList = vehicleList;
         }
 
-        public override int Count => vehicles.Length;
+        public override Vehicle this[int position] => vehicleList[position];
 
-        public override Java.Lang.Object GetItem(int position)
-        {
-            return JsonConvert.SerializeObject(vehicles[position]);
-        }
+        public override int Count => vehicleList.Count;
 
-        public override long GetItemId(int position)
-        {
-            return vehicles[position].VehicleId;
-        }
+        public override long GetItemId(int position) => vehicleList[position].VehicleId;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout = new LinearLayout(context);
-            linearLayout.Orientation = Orientation.Vertical;
-            TextView tvBrandNameAndModelName = new TextView(context)
+            var vehicle = vehicleList[position];
+            if (convertView == null)
             {
-                TextSize = 40,
-                Text = $"  {vehicles[position].VehicleBrandName} {vehicles[position].VehicleModelName}"
-            };
-            linearLayout.AddView(tvBrandNameAndModelName);
-            TextView tvRegistrationNumbers = new TextView(context)
-            {
-                TextSize = 20,
-                Text = $"  Numer rejestracyjny: {vehicles[position].RegistrationNumbers}"
-            };
-            linearLayout.AddView(tvRegistrationNumbers);
-
-            return linearLayout;
+                convertView = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItemActivated2, null);
+            }
+            convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text
+                = $"{vehicle.VehicleBrandName} {vehicle.VehicleModelName}";
+            convertView.FindViewById<TextView>(Android.Resource.Id.Text2).Text
+                    = $"Numer rejestracyjny: {vehicle.RegistrationNumbers}";
+            return convertView;
         }
     }
 }

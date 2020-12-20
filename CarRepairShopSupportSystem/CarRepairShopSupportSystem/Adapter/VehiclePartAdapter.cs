@@ -1,71 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using System.Collections.Generic;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using CarRepairShopSupportSystem.BLL.Models;
-using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Adapter
 {
-    class VehiclePartAdapter : BaseAdapter
+    class VehiclePartAdapter : BaseAdapter<VehiclePart>
     {
-        private readonly Context context;
-        private readonly VehiclePart[] vehicleParts;
-        private readonly VehiclePart[] selectedVehicleParts;
+        private readonly AppCompatActivity context;
+        private readonly List<VehiclePart> vehiclePartList;
 
-        public VehiclePartAdapter(Context context, VehiclePart[] vehicleParts, VehiclePart[] selectedVehicleParts)
+        public VehiclePartAdapter(AppCompatActivity context, List<VehiclePart> vehiclePartList)
         {
             this.context = context;
-            this.vehicleParts = vehicleParts;
-            this.selectedVehicleParts = selectedVehicleParts;
+            this.vehiclePartList = vehiclePartList;
         }
 
-        public override int Count => vehicleParts.Length;
+        public override VehiclePart this[int position] => vehiclePartList[position];
 
-        public override Java.Lang.Object GetItem(int position)
-        {
-            return JsonConvert.SerializeObject(vehicleParts[position]);
-        }
+        public override int Count => vehiclePartList.Count;
 
-        public override long GetItemId(int position)
-        {
-            return vehicleParts[position].VehiclePartId;
-        }
+        public override long GetItemId(int position) => vehiclePartList[position].VehiclePartId;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LinearLayout linearLayout = new LinearLayout(context);
-            linearLayout.Orientation = Orientation.Vertical;
-            TextView tvBrandNameAndModelName = new TextView(context)
+            var vehiclePart = vehiclePartList[position];
+            if (convertView == null)
             {
-                TextSize = 40,
-                Text = $"  {vehicleParts[position].Name}"
-            };
-            linearLayout.AddView(tvBrandNameAndModelName);
-            TextView tvRegistrationNumbers = new TextView(context)
-            {
-                TextSize = 20,
-                Text = $"Cena: {vehicleParts[position].Price} [PLN]"
-            };
-            linearLayout.AddView(tvRegistrationNumbers);
-
-            if (selectedVehicleParts.Any(svp => svp.VehiclePartId == vehicleParts[position].VehiclePartId))
-            {
-                linearLayout.SetBackgroundColor(Android.Graphics.Color.GreenYellow);
+                convertView = context.LayoutInflater.Inflate(Android.Resource.Layout.SimpleListItemActivated2, null);
             }
-            else
-            {
-                linearLayout.SetBackgroundColor(Android.Graphics.Color.Transparent);
-            }
-
-            return linearLayout;
+            convertView.FindViewById<TextView>(Android.Resource.Id.Text1).Text = $"{vehiclePart.Name}";
+            convertView.FindViewById<TextView>(Android.Resource.Id.Text2).Text = $"Cena: {vehiclePart.Price} [PLN]";
+            return convertView;
         }
     }
 }

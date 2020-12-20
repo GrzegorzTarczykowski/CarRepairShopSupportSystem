@@ -116,14 +116,9 @@
             android:id="@+id/btnAddOrder"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
-        <GridView
-            android:id="@+id/gvOrderList"
+        <ListView
+            android:id="@+id/lvOrderList"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:columnWidth="350dp"
-            android:numColumns="1"
-            android:verticalSpacing="24dp"
-            android:horizontalSpacing="10dp"
-            android:stretchMode="spacingWidthUniform"/>
+            android:layout_height="fill_parent"/>
     </LinearLayout>
 </LinearLayout>

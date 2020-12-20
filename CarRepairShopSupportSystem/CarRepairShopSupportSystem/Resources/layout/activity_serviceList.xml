@@ -2,36 +2,23 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/backgroundMainGradientSelector">
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:text="Dodaj usługę"
-            android:id="@+id/btnAddService"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-        <Button
-            android:text="Zatwierdź wybrane usługi"
-            android:id="@+id/btnSubmitSelectedServices"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-        <GridView
-            android:id="@+id/gvServiceList"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:columnWidth="350dp"
-            android:numColumns="1"
-            android:verticalSpacing="24dp"
-            android:horizontalSpacing="10dp"
-            android:stretchMode="spacingWidthUniform"
-            android:scrollbars="vertical"/>
-    </LinearLayout>
+    <Button
+        android:text="Dodaj usługę"
+        android:id="@+id/btnAddService"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <Button
+        android:text="Zatwierdź wybrane usługi"
+        android:id="@+id/btnSubmitSelectedServices"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <ListView
+        android:id="@+id/lvServiceList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 </LinearLayout>

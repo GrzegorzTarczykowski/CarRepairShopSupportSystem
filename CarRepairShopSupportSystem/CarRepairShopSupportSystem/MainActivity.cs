@@ -16,6 +16,8 @@ using Java.IO;
 using System.Net;
 using CarRepairShopSupportSystem.Helper;
 using CarRepairShopSupportSystem.BLL.Models;
+using System.Threading;
+using Android.Graphics;
 
 namespace CarRepairShopSupportSystem
 {
@@ -43,7 +45,16 @@ namespace CarRepairShopSupportSystem
             AppDomain.CurrentDomain.UnhandledException += ExceptionHandler.LogAppDomainUnhandledException;
             TaskScheduler.UnobservedTaskException += ExceptionHandler.LogTaskSchedulerUnhandledException;
 
-            FindViewById<Button>(Resource.Id.btnLogin).Click += BtnLogin_Click;
+            Button button = FindViewById<Button>(Resource.Id.btnLogin);
+            button.Click += BtnLogin_Click;
+
+
+
+            //Android.Graphics.Typeface font = Android.Graphics.Typeface.CreateFromAsset(Assets, "fa-regular-400.ttf");
+            button.Typeface = Typeface.CreateFromAsset(Application.Assets, "fa-regular-400.ttf");
+            //button.SetTypeface(font, Android.Graphics.TypefaceStyle.Normal);
+
+
             FindViewById<Android.Support.V7.Widget.AppCompatTextView>(Resource.Id.txtRegister).Click += TxtViewRegister_Click;
 
             try
@@ -80,17 +91,23 @@ namespace CarRepairShopSupportSystem
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            bool succesfull = loginService.Login(FindViewById<EditText>(Resource.Id.editTextLogin).Text, FindViewById<EditText>(Resource.Id.editTextPassword).Text);
-            if (succesfull)
+            ThreadPool.QueueUserWorkItem(delegate
             {
-                Intent nextActivity = new Intent(this, typeof(MenuActivity));
-                nextActivity.PutExtra("HellowMessage", "Hellow world");
-                StartActivityForResult(nextActivity, menuRequestCode);
-            }
-            else
-            {
-                Toast.MakeText(Application.Context, "Niepoprawne login lub hasło", ToastLength.Long).Show();
-            }
+                if (loginService.Login(FindViewById<EditText>(Resource.Id.editTextLogin).Text
+                    , FindViewById<EditText>(Resource.Id.editTextPassword).Text))
+                {
+                    Intent nextActivity = new Intent(this, typeof(MenuActivity));
+                    nextActivity.PutExtra("HellowMessage", "Hellow world");
+                    StartActivityForResult(nextActivity, menuRequestCode);
+                }
+                else
+                {
+                    RunOnUiThread(delegate
+                    {
+                        Toast.MakeText(Application.Context, "Niepoprawne login lub hasło", ToastLength.Long).Show();
+                    });
+                }
+            });
         }
 
         private void TxtViewRegister_Click(object sender, EventArgs e)
