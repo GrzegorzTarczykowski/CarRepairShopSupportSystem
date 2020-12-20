@@ -2404,8 +2404,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090037
 			public const int SYM = 2131296311;
 			
-			// aapt resource value: 0x7f0900ff
-			public const int action0 = 2131296511;
+			// aapt resource value: 0x7f090101
+			public const int action0 = 2131296513;
 			
 			// aapt resource value: 0x7f09007c
 			public const int action_bar = 2131296380;
@@ -2428,17 +2428,17 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09005a
 			public const int action_bar_title = 2131296346;
 			
-			// aapt resource value: 0x7f0900fc
-			public const int action_container = 2131296508;
+			// aapt resource value: 0x7f0900fe
+			public const int action_container = 2131296510;
 			
 			// aapt resource value: 0x7f09007d
 			public const int action_context_bar = 2131296381;
 			
-			// aapt resource value: 0x7f090103
-			public const int action_divider = 2131296515;
+			// aapt resource value: 0x7f090105
+			public const int action_divider = 2131296517;
 			
-			// aapt resource value: 0x7f0900fd
-			public const int action_image = 2131296509;
+			// aapt resource value: 0x7f0900ff
+			public const int action_image = 2131296511;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -2455,11 +2455,11 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09005c
 			public const int action_mode_close_button = 2131296348;
 			
-			// aapt resource value: 0x7f0900fe
-			public const int action_text = 2131296510;
+			// aapt resource value: 0x7f090100
+			public const int action_text = 2131296512;
 			
-			// aapt resource value: 0x7f09010c
-			public const int actions = 2131296524;
+			// aapt resource value: 0x7f09010e
+			public const int actions = 2131296526;
 			
 			// aapt resource value: 0x7f09005d
 			public const int activity_chooser_view_content = 2131296349;
@@ -2491,116 +2491,116 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09003d
 			public const int bottom = 2131296317;
 			
-			// aapt resource value: 0x7f0900a7
-			public const int btnAddDescription = 2131296423;
-			
-			// aapt resource value: 0x7f0900b3
-			public const int btnAddOrder = 2131296435;
-			
-			// aapt resource value: 0x7f0900c3
-			public const int btnAddService = 2131296451;
-			
-			// aapt resource value: 0x7f0900df
-			public const int btnAddVehicle = 2131296479;
-			
-			// aapt resource value: 0x7f0900e5
-			public const int btnAddVehiclePart = 2131296485;
-			
-			// aapt resource value: 0x7f0900ac
-			public const int btnAddWorker = 2131296428;
-			
 			// aapt resource value: 0x7f0900a9
-			public const int btnApproveDescription = 2131296425;
+			public const int btnAddDescription = 2131296425;
 			
-			// aapt resource value: 0x7f090092
-			public const int btnContact = 2131296402;
+			// aapt resource value: 0x7f0900b5
+			public const int btnAddOrder = 2131296437;
 			
-			// aapt resource value: 0x7f090093
-			public const int btnDayTimetable = 2131296403;
+			// aapt resource value: 0x7f0900c5
+			public const int btnAddService = 2131296453;
 			
-			// aapt resource value: 0x7f0900ad
-			public const int btnDeleteOrder = 2131296429;
+			// aapt resource value: 0x7f0900e1
+			public const int btnAddVehicle = 2131296481;
 			
-			// aapt resource value: 0x7f0900c2
-			public const int btnDeleteService = 2131296450;
+			// aapt resource value: 0x7f0900e7
+			public const int btnAddVehiclePart = 2131296487;
 			
-			// aapt resource value: 0x7f0900e4
-			public const int btnDeleteVehiclePart = 2131296484;
+			// aapt resource value: 0x7f0900ae
+			public const int btnAddWorker = 2131296430;
 			
-			// aapt resource value: 0x7f0900d6
-			public const int btnEditVehicle = 2131296470;
+			// aapt resource value: 0x7f0900ab
+			public const int btnApproveDescription = 2131296427;
+			
+			// aapt resource value: 0x7f090094
+			public const int btnContact = 2131296404;
+			
+			// aapt resource value: 0x7f090095
+			public const int btnDayTimetable = 2131296405;
+			
+			// aapt resource value: 0x7f0900af
+			public const int btnDeleteOrder = 2131296431;
+			
+			// aapt resource value: 0x7f0900c4
+			public const int btnDeleteService = 2131296452;
+			
+			// aapt resource value: 0x7f0900e6
+			public const int btnDeleteVehiclePart = 2131296486;
+			
+			// aapt resource value: 0x7f0900d8
+			public const int btnEditVehicle = 2131296472;
 			
 			// aapt resource value: 0x7f09008e
 			public const int btnLogin = 2131296398;
 			
-			// aapt resource value: 0x7f090098
-			public const int btnLogout = 2131296408;
-			
-			// aapt resource value: 0x7f0900ab
-			public const int btnMessages = 2131296427;
-			
-			// aapt resource value: 0x7f090091
-			public const int btnMyAccount = 2131296401;
-			
-			// aapt resource value: 0x7f090090
-			public const int btnMyVehicle = 2131296400;
-			
-			// aapt resource value: 0x7f0900bc
-			public const int btnRegister = 2131296444;
-			
-			// aapt resource value: 0x7f0900ed
-			public const int btnSaveWorkerTimetable = 2131296493;
-			
 			// aapt resource value: 0x7f09009a
-			public const int btnSentMessage = 2131296410;
+			public const int btnLogout = 2131296410;
 			
-			// aapt resource value: 0x7f0900aa
-			public const int btnService = 2131296426;
+			// aapt resource value: 0x7f0900ad
+			public const int btnMessages = 2131296429;
 			
-			// aapt resource value: 0x7f090095
-			public const int btnServiceManagement = 2131296405;
+			// aapt resource value: 0x7f090093
+			public const int btnMyAccount = 2131296403;
 			
-			// aapt resource value: 0x7f0900d5
-			public const int btnSubmitOperation = 2131296469;
+			// aapt resource value: 0x7f090092
+			public const int btnMyVehicle = 2131296402;
 			
-			// aapt resource value: 0x7f0900c4
-			public const int btnSubmitSelectedServices = 2131296452;
+			// aapt resource value: 0x7f0900be
+			public const int btnRegister = 2131296446;
 			
-			// aapt resource value: 0x7f0900cd
-			public const int btnSubmitSelectedTimetable = 2131296461;
+			// aapt resource value: 0x7f0900ef
+			public const int btnSaveWorkerTimetable = 2131296495;
 			
-			// aapt resource value: 0x7f0900e6
-			public const int btnSubmitSelectedVehicleParts = 2131296486;
+			// aapt resource value: 0x7f09009c
+			public const int btnSentMessage = 2131296412;
 			
-			// aapt resource value: 0x7f0900e9
-			public const int btnSubmitSelectedWorker = 2131296489;
-			
-			// aapt resource value: 0x7f0900c1
-			public const int btnSubmitService = 2131296449;
-			
-			// aapt resource value: 0x7f0900e3
-			public const int btnSubmitVehiclePart = 2131296483;
-			
-			// aapt resource value: 0x7f0900af
-			public const int btnTimetable = 2131296431;
-			
-			// aapt resource value: 0x7f090094
-			public const int btnTimetableManagement = 2131296404;
-			
-			// aapt resource value: 0x7f0900ae
-			public const int btnVehiclePart = 2131296430;
-			
-			// aapt resource value: 0x7f090096
-			public const int btnVehiclePartManagement = 2131296406;
+			// aapt resource value: 0x7f0900ac
+			public const int btnService = 2131296428;
 			
 			// aapt resource value: 0x7f090097
-			public const int btnWorkersManagement = 2131296407;
+			public const int btnServiceManagement = 2131296407;
+			
+			// aapt resource value: 0x7f0900d7
+			public const int btnSubmitOperation = 2131296471;
+			
+			// aapt resource value: 0x7f0900c6
+			public const int btnSubmitSelectedServices = 2131296454;
+			
+			// aapt resource value: 0x7f0900cf
+			public const int btnSubmitSelectedTimetable = 2131296463;
+			
+			// aapt resource value: 0x7f0900e8
+			public const int btnSubmitSelectedVehicleParts = 2131296488;
+			
+			// aapt resource value: 0x7f0900eb
+			public const int btnSubmitSelectedWorker = 2131296491;
+			
+			// aapt resource value: 0x7f0900c3
+			public const int btnSubmitService = 2131296451;
+			
+			// aapt resource value: 0x7f0900e5
+			public const int btnSubmitVehiclePart = 2131296485;
+			
+			// aapt resource value: 0x7f0900b1
+			public const int btnTimetable = 2131296433;
+			
+			// aapt resource value: 0x7f090096
+			public const int btnTimetableManagement = 2131296406;
+			
+			// aapt resource value: 0x7f0900b0
+			public const int btnVehiclePart = 2131296432;
+			
+			// aapt resource value: 0x7f090098
+			public const int btnVehiclePartManagement = 2131296408;
+			
+			// aapt resource value: 0x7f090099
+			public const int btnWorkersManagement = 2131296409;
 			
 			// aapt resource value: 0x7f090063
 			public const int buttonPanel = 2131296355;
 			
-			// aapt resource value: 0x7f090100
-			public const int cancel_action = 2131296512;
+			// aapt resource value: 0x7f090102
+			public const int cancel_action = 2131296514;
 			
 			// aapt resource value: 0x7f090045
 			public const int center = 2131296325;
@@ -2614,8 +2614,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090073
 			public const int checkbox = 2131296371;
 			
-			// aapt resource value: 0x7f090108
-			public const int chronometer = 2131296520;
+			// aapt resource value: 0x7f09010a
+			public const int chronometer = 2131296522;
 			
 			// aapt resource value: 0x7f09004e
 			public const int clip_horizontal = 2131296334;
@@ -2626,14 +2626,14 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090039
 			public const int collapseActionView = 2131296313;
 			
-			// aapt resource value: 0x7f0900f0
-			public const int container = 2131296496;
+			// aapt resource value: 0x7f0900f2
+			public const int container = 2131296498;
 			
 			// aapt resource value: 0x7f090066
 			public const int contentPanel = 2131296358;
 			
-			// aapt resource value: 0x7f0900f1
-			public const int coordinator = 2131296497;
+			// aapt resource value: 0x7f0900f3
+			public const int coordinator = 2131296499;
 			
 			// aapt resource value: 0x7f09006d
 			public const int custom = 2131296365;
@@ -2647,50 +2647,50 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090060
 			public const int default_activity_button = 2131296352;
 			
-			// aapt resource value: 0x7f0900f3
-			public const int design_bottom_sheet = 2131296499;
+			// aapt resource value: 0x7f0900f5
+			public const int design_bottom_sheet = 2131296501;
+			
+			// aapt resource value: 0x7f0900fc
+			public const int design_menu_item_action_area = 2131296508;
+			
+			// aapt resource value: 0x7f0900fb
+			public const int design_menu_item_action_area_stub = 2131296507;
 			
 			// aapt resource value: 0x7f0900fa
-			public const int design_menu_item_action_area = 2131296506;
+			public const int design_menu_item_text = 2131296506;
 			
 			// aapt resource value: 0x7f0900f9
-			public const int design_menu_item_action_area_stub = 2131296505;
-			
-			// aapt resource value: 0x7f0900f8
-			public const int design_menu_item_text = 2131296504;
-			
-			// aapt resource value: 0x7f0900f7
-			public const int design_navigation_view = 2131296503;
+			public const int design_navigation_view = 2131296505;
 			
 			// aapt resource value: 0x7f090020
 			public const int disableHome = 2131296288;
 			
-			// aapt resource value: 0x7f0900ce
-			public const int editEngineMileage = 2131296462;
+			// aapt resource value: 0x7f0900d0
+			public const int editEngineMileage = 2131296464;
 			
-			// aapt resource value: 0x7f0900cf
-			public const int editRegistrationNumbers = 2131296463;
+			// aapt resource value: 0x7f0900d1
+			public const int editRegistrationNumbers = 2131296465;
 			
-			// aapt resource value: 0x7f0900be
-			public const int editServiceDescription = 2131296446;
-			
-			// aapt resource value: 0x7f0900bd
-			public const int editServiceName = 2131296445;
+			// aapt resource value: 0x7f0900c0
+			public const int editServiceDescription = 2131296448;
 			
 			// aapt resource value: 0x7f0900bf
-			public const int editServicePrice = 2131296447;
+			public const int editServiceName = 2131296447;
+			
+			// aapt resource value: 0x7f0900c1
+			public const int editServicePrice = 2131296449;
+			
+			// aapt resource value: 0x7f0900bd
+			public const int editTextConfirmPassword = 2131296445;
 			
 			// aapt resource value: 0x7f0900bb
-			public const int editTextConfirmPassword = 2131296443;
+			public const int editTextEmail = 2131296443;
 			
 			// aapt resource value: 0x7f0900b9
-			public const int editTextEmail = 2131296441;
+			public const int editTextFirstName = 2131296441;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int editTextFirstName = 2131296439;
-			
-			// aapt resource value: 0x7f0900b8
-			public const int editTextLastName = 2131296440;
+			// aapt resource value: 0x7f0900ba
+			public const int editTextLastName = 2131296442;
 			
 			// aapt resource value: 0x7f09008c
 			public const int editTextLogin = 2131296396;
@@ -2698,17 +2698,17 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09008d
 			public const int editTextPassword = 2131296397;
 			
-			// aapt resource value: 0x7f0900ba
-			public const int editTextPhoneNumber = 2131296442;
+			// aapt resource value: 0x7f0900bc
+			public const int editTextPhoneNumber = 2131296444;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int editTextUsername = 2131296438;
+			// aapt resource value: 0x7f0900b8
+			public const int editTextUsername = 2131296440;
 			
-			// aapt resource value: 0x7f0900e1
-			public const int editVehiclePartName = 2131296481;
+			// aapt resource value: 0x7f0900e3
+			public const int editVehiclePartName = 2131296483;
 			
-			// aapt resource value: 0x7f0900e2
-			public const int editVehiclePartPrice = 2131296482;
+			// aapt resource value: 0x7f0900e4
+			public const int editVehiclePartPrice = 2131296484;
 			
 			// aapt resource value: 0x7f09007e
 			public const int edit_query = 2131296382;
@@ -2716,8 +2716,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090030
 			public const int end = 2131296304;
 			
-			// aapt resource value: 0x7f09010e
-			public const int end_padder = 2131296526;
+			// aapt resource value: 0x7f090110
+			public const int end_padder = 2131296528;
 			
 			// aapt resource value: 0x7f09003f
 			public const int enterAlways = 2131296319;
@@ -2725,14 +2725,14 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090040
 			public const int enterAlwaysCollapsed = 2131296320;
 			
-			// aapt resource value: 0x7f0900a8
-			public const int etAddDescription = 2131296424;
+			// aapt resource value: 0x7f0900aa
+			public const int etAddDescription = 2131296426;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int etExecutionTimeInMinutes = 2131296448;
+			// aapt resource value: 0x7f0900c2
+			public const int etExecutionTimeInMinutes = 2131296450;
 			
-			// aapt resource value: 0x7f090099
-			public const int etMessageCreateor = 2131296409;
+			// aapt resource value: 0x7f09009b
+			public const int etMessageCreateor = 2131296411;
 			
 			// aapt resource value: 0x7f090041
 			public const int exitUntilCollapsed = 2131296321;
@@ -2761,17 +2761,17 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09000a
 			public const int ghost_view = 2131296266;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int gvCalendar = 2131296458;
+			// aapt resource value: 0x7f0900cc
+			public const int gvCalendar = 2131296460;
 			
-			// aapt resource value: 0x7f09009b
-			public const int gvMessageList = 2131296411;
+			// aapt resource value: 0x7f09009d
+			public const int gvMessageList = 2131296413;
 			
-			// aapt resource value: 0x7f0900cb
-			public const int gvTimetable = 2131296459;
+			// aapt resource value: 0x7f0900cd
+			public const int gvTimetable = 2131296461;
 			
-			// aapt resource value: 0x7f0900ea
-			public const int gvWorkerList = 2131296490;
+			// aapt resource value: 0x7f0900ec
+			public const int gvWorkerList = 2131296492;
 			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
@@ -2782,8 +2782,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090062
 			public const int icon = 2131296354;
 			
-			// aapt resource value: 0x7f09010d
-			public const int icon_group = 2131296525;
+			// aapt resource value: 0x7f09010f
+			public const int icon_group = 2131296527;
 			
 			// aapt resource value: 0x7f09003a
 			public const int ifRoom = 2131296314;
@@ -2791,8 +2791,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09005f
 			public const int image = 2131296351;
 			
-			// aapt resource value: 0x7f090109
-			public const int info = 2131296521;
+			// aapt resource value: 0x7f09010b
+			public const int info = 2131296523;
 			
 			// aapt resource value: 0x7f090059
 			public const int italic = 2131296345;
@@ -2800,8 +2800,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090000
 			public const int item_touch_helper_previous_elevation = 2131296256;
 			
-			// aapt resource value: 0x7f0900ef
-			public const int largeLabel = 2131296495;
+			// aapt resource value: 0x7f0900f1
+			public const int largeLabel = 2131296497;
 			
 			// aapt resource value: 0x7f090049
 			public const int left = 2131296329;
@@ -2818,32 +2818,32 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090061
 			public const int list_item = 2131296353;
 			
-			// aapt resource value: 0x7f09009c
-			public const int lvOrderByWorkerList = 2131296412;
-			
-			// aapt resource value: 0x7f0900de
-			public const int lvOrderList = 2131296478;
-			
-			// aapt resource value: 0x7f0900b4
-			public const int lvOrderManagerList = 2131296436;
-			
-			// aapt resource value: 0x7f0900c5
-			public const int lvServiceList = 2131296453;
+			// aapt resource value: 0x7f09009e
+			public const int lvOrderByWorkerList = 2131296414;
 			
 			// aapt resource value: 0x7f0900e0
-			public const int lvVehicleList = 2131296480;
+			public const int lvOrderList = 2131296480;
 			
-			// aapt resource value: 0x7f0900e7
-			public const int lvVehiclePartList = 2131296487;
+			// aapt resource value: 0x7f0900b6
+			public const int lvOrderManagerList = 2131296438;
+			
+			// aapt resource value: 0x7f0900c7
+			public const int lvServiceList = 2131296455;
+			
+			// aapt resource value: 0x7f0900e2
+			public const int lvVehicleList = 2131296482;
+			
+			// aapt resource value: 0x7f0900e9
+			public const int lvVehiclePartList = 2131296489;
+			
+			// aapt resource value: 0x7f090113
+			public const int masked = 2131296531;
+			
+			// aapt resource value: 0x7f090104
+			public const int media_actions = 2131296516;
 			
 			// aapt resource value: 0x7f090111
-			public const int masked = 2131296529;
-			
-			// aapt resource value: 0x7f090102
-			public const int media_actions = 2131296514;
-			
-			// aapt resource value: 0x7f09010f
-			public const int message = 2131296527;
+			public const int message = 2131296529;
 			
 			// aapt resource value: 0x7f090031
 			public const int middle = 2131296305;
@@ -2854,8 +2854,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090028
 			public const int multiply = 2131296296;
 			
-			// aapt resource value: 0x7f0900f6
-			public const int navigation_header_container = 2131296502;
+			// aapt resource value: 0x7f0900f8
+			public const int navigation_header_container = 2131296504;
 			
 			// aapt resource value: 0x7f09003b
 			public const int never = 2131296315;
@@ -2866,14 +2866,14 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09001e
 			public const int normal = 2131296286;
 			
-			// aapt resource value: 0x7f09010b
-			public const int notification_background = 2131296523;
+			// aapt resource value: 0x7f09010d
+			public const int notification_background = 2131296525;
 			
-			// aapt resource value: 0x7f090105
-			public const int notification_main_column = 2131296517;
+			// aapt resource value: 0x7f090107
+			public const int notification_main_column = 2131296519;
 			
-			// aapt resource value: 0x7f090104
-			public const int notification_main_column_container = 2131296516;
+			// aapt resource value: 0x7f090106
+			public const int notification_main_column_container = 2131296518;
 			
 			// aapt resource value: 0x7f09004c
 			public const int parallax = 2131296332;
@@ -2899,11 +2899,11 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09004a
 			public const int right = 2131296330;
 			
-			// aapt resource value: 0x7f09010a
-			public const int right_icon = 2131296522;
+			// aapt resource value: 0x7f09010c
+			public const int right_icon = 2131296524;
 			
-			// aapt resource value: 0x7f090106
-			public const int right_side = 2131296518;
+			// aapt resource value: 0x7f090108
+			public const int right_side = 2131296520;
 			
 			// aapt resource value: 0x7f09000c
 			public const int save_image_matrix = 2131296268;
@@ -2977,14 +2977,14 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090025
 			public const int showTitle = 2131296293;
 			
-			// aapt resource value: 0x7f0900ee
-			public const int smallLabel = 2131296494;
+			// aapt resource value: 0x7f0900f0
+			public const int smallLabel = 2131296496;
 			
-			// aapt resource value: 0x7f0900f5
-			public const int snackbar_action = 2131296501;
+			// aapt resource value: 0x7f0900f7
+			public const int snackbar_action = 2131296503;
 			
-			// aapt resource value: 0x7f0900f4
-			public const int snackbar_text = 2131296500;
+			// aapt resource value: 0x7f0900f6
+			public const int snackbar_text = 2131296502;
 			
 			// aapt resource value: 0x7f090043
 			public const int snap = 2131296323;
@@ -2992,35 +2992,35 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090064
 			public const int spacer = 2131296356;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int spinnerMonth = 2131296457;
+			// aapt resource value: 0x7f0900cb
+			public const int spinnerMonth = 2131296459;
 			
-			// aapt resource value: 0x7f0900e8
-			public const int spinnerOperationType = 2131296488;
+			// aapt resource value: 0x7f0900ea
+			public const int spinnerOperationType = 2131296490;
 			
-			// aapt resource value: 0x7f0900a0
-			public const int spinnerOrderStatusNameForWorker = 2131296416;
-			
-			// aapt resource value: 0x7f0900d0
-			public const int spinnerVehicleBrand = 2131296464;
+			// aapt resource value: 0x7f0900a2
+			public const int spinnerOrderStatusNameForWorker = 2131296418;
 			
 			// aapt resource value: 0x7f0900d2
-			public const int spinnerVehicleEngine = 2131296466;
-			
-			// aapt resource value: 0x7f0900d3
-			public const int spinnerVehicleFuel = 2131296467;
-			
-			// aapt resource value: 0x7f0900d1
-			public const int spinnerVehicleModel = 2131296465;
+			public const int spinnerVehicleBrand = 2131296466;
 			
 			// aapt resource value: 0x7f0900d4
-			public const int spinnerVehicleType = 2131296468;
+			public const int spinnerVehicleEngine = 2131296468;
 			
-			// aapt resource value: 0x7f0900eb
-			public const int spinnerWeekNumber = 2131296491;
+			// aapt resource value: 0x7f0900d5
+			public const int spinnerVehicleFuel = 2131296469;
 			
-			// aapt resource value: 0x7f0900ec
-			public const int spinnerWorkStartHour = 2131296492;
+			// aapt resource value: 0x7f0900d3
+			public const int spinnerVehicleModel = 2131296467;
+			
+			// aapt resource value: 0x7f0900d6
+			public const int spinnerVehicleType = 2131296470;
+			
+			// aapt resource value: 0x7f0900ed
+			public const int spinnerWeekNumber = 2131296493;
+			
+			// aapt resource value: 0x7f0900ee
+			public const int spinnerWorkStartHour = 2131296494;
 			
 			// aapt resource value: 0x7f090008
 			public const int split_action_bar = 2131296264;
@@ -3037,8 +3037,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09004b
 			public const int start = 2131296331;
 			
-			// aapt resource value: 0x7f090101
-			public const int status_bar_latest_event_content = 2131296513;
+			// aapt resource value: 0x7f090103
+			public const int status_bar_latest_event_content = 2131296515;
 			
 			// aapt resource value: 0x7f090076
 			public const int submenuarrow = 2131296374;
@@ -3064,8 +3064,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090069
 			public const int textSpacerNoTitle = 2131296361;
 			
-			// aapt resource value: 0x7f0900fb
-			public const int text_input_password_toggle = 2131296507;
+			// aapt resource value: 0x7f0900fd
+			public const int text_input_password_toggle = 2131296509;
 			
 			// aapt resource value: 0x7f090014
 			public const int textinput_counter = 2131296276;
@@ -3073,8 +3073,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090015
 			public const int textinput_error = 2131296277;
 			
-			// aapt resource value: 0x7f090107
-			public const int time = 2131296519;
+			// aapt resource value: 0x7f090109
+			public const int time = 2131296521;
 			
 			// aapt resource value: 0x7f09001c
 			public const int title = 2131296284;
@@ -3091,8 +3091,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09006e
 			public const int topPanel = 2131296366;
 			
-			// aapt resource value: 0x7f0900f2
-			public const int touch_outside = 2131296498;
+			// aapt resource value: 0x7f0900f4
+			public const int touch_outside = 2131296500;
 			
 			// aapt resource value: 0x7f09000f
 			public const int transition_current_scene = 2131296271;
@@ -3112,77 +3112,83 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f09008b
 			public const int tvContact = 2131296395;
 			
-			// aapt resource value: 0x7f0900a6
-			public const int tvDescription = 2131296422;
-			
-			// aapt resource value: 0x7f0900a2
-			public const int tvEndDateOfRepair = 2131296418;
-			
-			// aapt resource value: 0x7f0900d7
-			public const int tvEngineMileage = 2131296471;
-			
-			// aapt resource value: 0x7f09009e
-			public const int tvOrderStatusName = 2131296414;
-			
-			// aapt resource value: 0x7f09009d
-			public const int tvOrderStatusNameLabel = 2131296413;
-			
-			// aapt resource value: 0x7f09009f
-			public const int tvOrderStatusNameLabelForWorker = 2131296415;
-			
-			// aapt resource value: 0x7f0900b2
-			public const int tvPlannedEndDateOfRepair = 2131296434;
-			
-			// aapt resource value: 0x7f0900b1
-			public const int tvPlannedStartDateOfRepair = 2131296433;
-			
-			// aapt resource value: 0x7f0900d8
-			public const int tvRegistrationNumbers = 2131296472;
-			
-			// aapt resource value: 0x7f0900cc
-			public const int tvSelectedTimetable = 2131296460;
-			
-			// aapt resource value: 0x7f0900c8
-			public const int tvServiceExecutionTimeItem = 2131296456;
-			
-			// aapt resource value: 0x7f0900c6
-			public const int tvServiceNameItem = 2131296454;
-			
-			// aapt resource value: 0x7f0900c7
-			public const int tvServicePriceItem = 2131296455;
-			
-			// aapt resource value: 0x7f0900a1
-			public const int tvStartDateOfRepair = 2131296417;
-			
-			// aapt resource value: 0x7f0900a3
-			public const int tvTotalCost = 2131296419;
-			
-			// aapt resource value: 0x7f0900b0
-			public const int tvTotalCostOrder = 2131296432;
-			
-			// aapt resource value: 0x7f0900b5
-			public const int tvUserDetailsTitle = 2131296437;
-			
-			// aapt resource value: 0x7f0900d9
-			public const int tvVehicleBrand = 2131296473;
-			
-			// aapt resource value: 0x7f0900db
-			public const int tvVehicleEngine = 2131296475;
-			
-			// aapt resource value: 0x7f0900dc
-			public const int tvVehicleFuel = 2131296476;
-			
-			// aapt resource value: 0x7f0900da
-			public const int tvVehicleModel = 2131296474;
-			
-			// aapt resource value: 0x7f0900dd
-			public const int tvVehicleType = 2131296477;
-			
-			// aapt resource value: 0x7f0900a5
-			public const int tvWorkByUsers = 2131296421;
+			// aapt resource value: 0x7f0900a8
+			public const int tvDescription = 2131296424;
 			
 			// aapt resource value: 0x7f0900a4
-			public const int tvWorkByUsersLabel = 2131296420;
+			public const int tvEndDateOfRepair = 2131296420;
+			
+			// aapt resource value: 0x7f0900d9
+			public const int tvEngineMileage = 2131296473;
+			
+			// aapt resource value: 0x7f090090
+			public const int tvMyLastLocation = 2131296400;
+			
+			// aapt resource value: 0x7f090091
+			public const int tvMyLocation = 2131296401;
+			
+			// aapt resource value: 0x7f0900a0
+			public const int tvOrderStatusName = 2131296416;
+			
+			// aapt resource value: 0x7f09009f
+			public const int tvOrderStatusNameLabel = 2131296415;
+			
+			// aapt resource value: 0x7f0900a1
+			public const int tvOrderStatusNameLabelForWorker = 2131296417;
+			
+			// aapt resource value: 0x7f0900b4
+			public const int tvPlannedEndDateOfRepair = 2131296436;
+			
+			// aapt resource value: 0x7f0900b3
+			public const int tvPlannedStartDateOfRepair = 2131296435;
+			
+			// aapt resource value: 0x7f0900da
+			public const int tvRegistrationNumbers = 2131296474;
+			
+			// aapt resource value: 0x7f0900ce
+			public const int tvSelectedTimetable = 2131296462;
+			
+			// aapt resource value: 0x7f0900ca
+			public const int tvServiceExecutionTimeItem = 2131296458;
+			
+			// aapt resource value: 0x7f0900c8
+			public const int tvServiceNameItem = 2131296456;
+			
+			// aapt resource value: 0x7f0900c9
+			public const int tvServicePriceItem = 2131296457;
+			
+			// aapt resource value: 0x7f0900a3
+			public const int tvStartDateOfRepair = 2131296419;
+			
+			// aapt resource value: 0x7f0900a5
+			public const int tvTotalCost = 2131296421;
+			
+			// aapt resource value: 0x7f0900b2
+			public const int tvTotalCostOrder = 2131296434;
+			
+			// aapt resource value: 0x7f0900b7
+			public const int tvUserDetailsTitle = 2131296439;
+			
+			// aapt resource value: 0x7f0900db
+			public const int tvVehicleBrand = 2131296475;
+			
+			// aapt resource value: 0x7f0900dd
+			public const int tvVehicleEngine = 2131296477;
+			
+			// aapt resource value: 0x7f0900de
+			public const int tvVehicleFuel = 2131296478;
+			
+			// aapt resource value: 0x7f0900dc
+			public const int tvVehicleModel = 2131296476;
+			
+			// aapt resource value: 0x7f0900df
+			public const int tvVehicleType = 2131296479;
+			
+			// aapt resource value: 0x7f0900a7
+			public const int tvWorkByUsers = 2131296423;
+			
+			// aapt resource value: 0x7f0900a6
+			public const int tvWorkByUsersLabel = 2131296422;
 			
 			// aapt resource value: 0x7f09008f
 			public const int txtRegister = 2131296399;
@@ -3199,8 +3205,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f090110
-			public const int visible = 2131296528;
+			// aapt resource value: 0x7f090112
+			public const int visible = 2131296530;
 			
 			// aapt resource value: 0x7f09003c
 			public const int withText = 2131296316;

@@ -46,7 +46,7 @@
     <IntermediateOutputPath>C:\Apps\X</IntermediateOutputPath>
     <AndroidUseAapt2>false</AndroidUseAapt2>
     <AndroidDexTool>d8</AndroidDexTool>
-    <AndroidSupportedAbis>x86</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>

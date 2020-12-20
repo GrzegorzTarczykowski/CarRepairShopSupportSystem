@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,50 +12,58 @@
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <TextView
-                android:text="Logowanie"
-                android:textStyle="bold"
-                android:textSize="35dp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Login:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextLogin"
-                android:focusable="true"
-                android:hint="Podaj login"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Hasło:"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/editTextPassword"
-                android:inputType="textPassword"
-                android:hint="Podaj hasło"
-                android:textColorHint="#9b0493"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:text=" \uf238 \uf238 \uf238 Zaloguj"
-                android:id="@+id/btnLogin"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Nie masz konta?"
-                android:textSize="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:text=" f368 \uf238 Unicode To get FontAwesome icon Zarejestruj"
-                android:clickable="true"
-                android:textSize="15dp"
-                android:id="@+id/txtRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Logowanie"
+            android:textStyle="bold"
+            android:textSize="35dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Login:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextLogin"
+            android:focusable="true"
+            android:hint="Podaj login"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Hasło:"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:inputType="textPassword"
+            android:hint="Podaj hasło"
+            android:textColorHint="#9b0493"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text=" \uf238 \uf238 \uf238 Zaloguj"
+            android:id="@+id/btnLogin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Nie masz konta?"
+            android:textSize="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Zarejestruj"
+            android:clickable="true"
+            android:textSize="15dp"
+            android:id="@+id/txtRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvMyLastLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvMyLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

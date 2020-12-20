@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" 
-          android:versionCode="3" 
-          android:versionName="1.0" 
-          package="CarRepairShopSupportSystem.CarRepairShopSupportSystem" 
-          android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="3" android:versionName="1.0" package="CarRepairShopSupportSystem.CarRepairShopSupportSystem" android:installLocation="preferExternal">
 	<uses-sdk android:minSdkVersion="12" android:targetSdkVersion="24" />
 	<!--<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -11,6 +7,7 @@
 	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 	<uses-permission android:name="android.permission.INSTALL_PACKAGES" />
 	<uses-permission android:name="android.permission.DELETE_PACKAGES" />-->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.DELETE_PACKAGES" />
 	<uses-permission android:name="android.permission.INSTALL_PACKAGES" />
