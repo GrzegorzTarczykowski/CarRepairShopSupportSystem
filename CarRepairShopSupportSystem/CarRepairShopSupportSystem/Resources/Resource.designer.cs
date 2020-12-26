@@ -1219,44 +1219,44 @@ namespace CarRepairShopSupportSystem
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0b0050
-			public const int abc_background_cache_hint_selector_material_dark = 2131427408;
-			
 			// aapt resource value: 0x7f0b0051
-			public const int abc_background_cache_hint_selector_material_light = 2131427409;
+			public const int abc_background_cache_hint_selector_material_dark = 2131427409;
 			
 			// aapt resource value: 0x7f0b0052
-			public const int abc_btn_colored_borderless_text_material = 2131427410;
+			public const int abc_background_cache_hint_selector_material_light = 2131427410;
 			
 			// aapt resource value: 0x7f0b0053
-			public const int abc_btn_colored_text_material = 2131427411;
+			public const int abc_btn_colored_borderless_text_material = 2131427411;
 			
 			// aapt resource value: 0x7f0b0054
-			public const int abc_color_highlight_material = 2131427412;
+			public const int abc_btn_colored_text_material = 2131427412;
 			
 			// aapt resource value: 0x7f0b0055
-			public const int abc_hint_foreground_material_dark = 2131427413;
+			public const int abc_color_highlight_material = 2131427413;
 			
 			// aapt resource value: 0x7f0b0056
-			public const int abc_hint_foreground_material_light = 2131427414;
+			public const int abc_hint_foreground_material_dark = 2131427414;
+			
+			// aapt resource value: 0x7f0b0057
+			public const int abc_hint_foreground_material_light = 2131427415;
 			
 			// aapt resource value: 0x7f0b0004
 			public const int abc_input_method_navigation_guard = 2131427332;
 			
-			// aapt resource value: 0x7f0b0057
-			public const int abc_primary_text_disable_only_material_dark = 2131427415;
-			
 			// aapt resource value: 0x7f0b0058
-			public const int abc_primary_text_disable_only_material_light = 2131427416;
+			public const int abc_primary_text_disable_only_material_dark = 2131427416;
 			
 			// aapt resource value: 0x7f0b0059
-			public const int abc_primary_text_material_dark = 2131427417;
+			public const int abc_primary_text_disable_only_material_light = 2131427417;
 			
 			// aapt resource value: 0x7f0b005a
-			public const int abc_primary_text_material_light = 2131427418;
+			public const int abc_primary_text_material_dark = 2131427418;
 			
 			// aapt resource value: 0x7f0b005b
-			public const int abc_search_url_text = 2131427419;
+			public const int abc_primary_text_material_light = 2131427419;
+			
+			// aapt resource value: 0x7f0b005c
+			public const int abc_search_url_text = 2131427420;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int abc_search_url_text_normal = 2131427333;
@@ -1267,29 +1267,29 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f0b0007
 			public const int abc_search_url_text_selected = 2131427335;
 			
-			// aapt resource value: 0x7f0b005c
-			public const int abc_secondary_text_material_dark = 2131427420;
-			
 			// aapt resource value: 0x7f0b005d
-			public const int abc_secondary_text_material_light = 2131427421;
+			public const int abc_secondary_text_material_dark = 2131427421;
 			
 			// aapt resource value: 0x7f0b005e
-			public const int abc_tint_btn_checkable = 2131427422;
+			public const int abc_secondary_text_material_light = 2131427422;
 			
 			// aapt resource value: 0x7f0b005f
-			public const int abc_tint_default = 2131427423;
+			public const int abc_tint_btn_checkable = 2131427423;
 			
 			// aapt resource value: 0x7f0b0060
-			public const int abc_tint_edittext = 2131427424;
+			public const int abc_tint_default = 2131427424;
 			
 			// aapt resource value: 0x7f0b0061
-			public const int abc_tint_seek_thumb = 2131427425;
+			public const int abc_tint_edittext = 2131427425;
 			
 			// aapt resource value: 0x7f0b0062
-			public const int abc_tint_spinner = 2131427426;
+			public const int abc_tint_seek_thumb = 2131427426;
 			
 			// aapt resource value: 0x7f0b0063
-			public const int abc_tint_switch_track = 2131427427;
+			public const int abc_tint_spinner = 2131427427;
+			
+			// aapt resource value: 0x7f0b0064
+			public const int abc_tint_switch_track = 2131427428;
 			
 			// aapt resource value: 0x7f0b0008
 			public const int accent_material_dark = 2131427336;
@@ -1360,8 +1360,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f0b0040
 			public const int design_bottom_navigation_shadow_color = 2131427392;
 			
-			// aapt resource value: 0x7f0b0064
-			public const int design_error = 2131427428;
+			// aapt resource value: 0x7f0b0065
+			public const int design_error = 2131427429;
 			
 			// aapt resource value: 0x7f0b0041
 			public const int design_fab_shadow_end_color = 2131427393;
@@ -1387,8 +1387,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f0b0048
 			public const int design_snackbar_background_color = 2131427400;
 			
-			// aapt resource value: 0x7f0b0065
-			public const int design_tint_password_toggle = 2131427429;
+			// aapt resource value: 0x7f0b0066
+			public const int design_tint_password_toggle = 2131427430;
 			
 			// aapt resource value: 0x7f0b0016
 			public const int dim_foreground_disabled_material_dark = 2131427350;
@@ -1417,8 +1417,8 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f0b001e
 			public const int highlighted_text_material_light = 2131427358;
 			
-			// aapt resource value: 0x7f0b004f
-			public const int ic_launcher_background = 2131427407;
+			// aapt resource value: 0x7f0b0050
+			public const int ic_launcher_background = 2131427408;
 			
 			// aapt resource value: 0x7f0b001f
 			public const int material_blue_grey_800 = 2131427359;
@@ -1507,17 +1507,20 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f0b0038
 			public const int secondary_text_disabled_material_light = 2131427384;
 			
+			// aapt resource value: 0x7f0b004f
+			public const int splash_background = 2131427407;
+			
 			// aapt resource value: 0x7f0b0039
 			public const int switch_thumb_disabled_material_dark = 2131427385;
 			
 			// aapt resource value: 0x7f0b003a
 			public const int switch_thumb_disabled_material_light = 2131427386;
 			
-			// aapt resource value: 0x7f0b0066
-			public const int switch_thumb_material_dark = 2131427430;
-			
 			// aapt resource value: 0x7f0b0067
-			public const int switch_thumb_material_light = 2131427431;
+			public const int switch_thumb_material_dark = 2131427431;
+			
+			// aapt resource value: 0x7f0b0068
+			public const int switch_thumb_material_light = 2131427432;
 			
 			// aapt resource value: 0x7f0b003b
 			public const int switch_thumb_normal_material_dark = 2131427387;
@@ -2283,26 +2286,26 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f02006c
-			public const int avd_hide_password_1 = 2130837612;
-			
-			// aapt resource value: 0x7f02006d
-			public const int avd_hide_password_2 = 2130837613;
-			
 			// aapt resource value: 0x7f02006e
-			public const int avd_hide_password_3 = 2130837614;
+			public const int avd_hide_password_1 = 2130837614;
+			
+			// aapt resource value: 0x7f02006f
+			public const int avd_hide_password_2 = 2130837615;
+			
+			// aapt resource value: 0x7f020070
+			public const int avd_hide_password_3 = 2130837616;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02006f
-			public const int avd_show_password_1 = 2130837615;
-			
-			// aapt resource value: 0x7f020070
-			public const int avd_show_password_2 = 2130837616;
-			
 			// aapt resource value: 0x7f020071
-			public const int avd_show_password_3 = 2130837617;
+			public const int avd_show_password_1 = 2130837617;
+			
+			// aapt resource value: 0x7f020072
+			public const int avd_show_password_2 = 2130837618;
+			
+			// aapt resource value: 0x7f020073
+			public const int avd_show_password_3 = 2130837619;
 			
 			// aapt resource value: 0x7f020055
 			public const int backgroundMainGradientSelector = 2130837589;
@@ -2355,11 +2358,11 @@ namespace CarRepairShopSupportSystem
 			// aapt resource value: 0x7f020065
 			public const int notification_icon_background = 2130837605;
 			
-			// aapt resource value: 0x7f02006a
-			public const int notification_template_icon_bg = 2130837610;
+			// aapt resource value: 0x7f02006c
+			public const int notification_template_icon_bg = 2130837612;
 			
-			// aapt resource value: 0x7f02006b
-			public const int notification_template_icon_low_bg = 2130837611;
+			// aapt resource value: 0x7f02006d
+			public const int notification_template_icon_low_bg = 2130837613;
 			
 			// aapt resource value: 0x7f020066
 			public const int notification_tile_bg = 2130837606;
@@ -2368,10 +2371,16 @@ namespace CarRepairShopSupportSystem
 			public const int notify_panel_notification_icon_bg = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int tooltip_frame_dark = 2130837608;
+			public const int splash_logo = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int tooltip_frame_light = 2130837609;
+			public const int splash_screen = 2130837609;
+			
+			// aapt resource value: 0x7f02006a
+			public const int tooltip_frame_dark = 2130837610;
+			
+			// aapt resource value: 0x7f02006b
+			public const int tooltip_frame_light = 2130837611;
 			
 			static Drawable()
 			{
@@ -4202,6 +4211,9 @@ namespace CarRepairShopSupportSystem
 			
 			// aapt resource value: 0x7f0a0003
 			public const int CardView_Light = 2131361795;
+			
+			// aapt resource value: 0x7f0a0185
+			public const int MyTheme_Splash = 2131362181;
 			
 			// aapt resource value: 0x7f0a0022
 			public const int Platform_AppCompat = 2131361826;

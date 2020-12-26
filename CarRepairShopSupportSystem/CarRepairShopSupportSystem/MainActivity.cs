@@ -12,22 +12,18 @@ using CarRepairShopSupportSystem.BLL.Service;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
-using Java.IO;
-using CarRepairShopSupportSystem.Helper;
-using CarRepairShopSupportSystem.BLL.Models;
 using System.Threading;
 using Android.Graphics;
 using Android.Locations;
 
 namespace CarRepairShopSupportSystem
 {
-    [Activity(Label = "Auto Centrum", /*Theme = "@style/AppTheme",*/ MainLauncher = true)]
+    [Activity(Label = "Auto Centrum", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity, ILocationListener
     {
         private const int menuRequestCode = 1;
         private const int registerRequestCode = 2;
         private readonly ILoginService loginService;
-        private readonly IApkVersionService apkVersionService;
         private readonly IApplicationSessionService applicationSessionService;
 
         LocationManager locationManager;
@@ -36,7 +32,6 @@ namespace CarRepairShopSupportSystem
         public MainActivity()
         {
             loginService = new LoginService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
-            apkVersionService = new ApkVersionService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
             applicationSessionService = new ApplicationSessionService();
         }
 
@@ -62,37 +57,6 @@ namespace CarRepairShopSupportSystem
             provider = locationManager.GetBestProvider(new Criteria(), false);
             Location location = locationManager.GetLastKnownLocation(provider);
             FindViewById<TextView>(Resource.Id.tvMyLastLocation).Text = $"{provider}: {location?.Latitude} - {location?.Longitude}";
-
-            try
-            {
-                if (CheckRemoteApkVersionCodeIsGreaterThanCurrent())
-                {
-                    DownloadHelper downloadHelper = new DownloadHelper(this);
-                    downloadHelper.DownloadApk();
-                }
-            }
-            catch (IOException e)
-            {
-                Toast.MakeText(Application.Context, "Update error!", ToastLength.Long).Show();
-            }
-        }
-
-        private bool CheckRemoteApkVersionCodeIsGreaterThanCurrent()
-        {
-            long currentVersionCode = PackageManager.GetPackageInfo(PackageName, 0).VersionCode;
-            long remoteVersionCode;
-            if (applicationSessionService.GetUserFromApplicationSession() == null)
-            {
-                ApplicationSession.userName = "TestGuest";
-                ApplicationSession.userPassword = "1";
-                remoteVersionCode = apkVersionService.GetApkVersion();
-                applicationSessionService.ClearApplicationSession();
-            }
-            else
-            {
-                remoteVersionCode = apkVersionService.GetApkVersion();
-            }
-            return currentVersionCode < remoteVersionCode;
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)

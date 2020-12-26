@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
-using Android.Widget;
 
-namespace CarRepairShopSupportSystem.Helper
+namespace CarRepairShopSupportSystem.Handler
 {
-    internal class DownladReceiver : BroadcastReceiver
+    class DownloadReceiver : BroadcastReceiver
     {
         private readonly Android.Net.Uri uri;
         private readonly DownloadManager manager;
         private readonly long downloadId;
         private readonly AppCompatActivity activity;
 
-        public DownladReceiver(Android.Net.Uri uri, DownloadManager manager, long downloadId, AppCompatActivity activity)
+        public DownloadReceiver(Android.Net.Uri uri, DownloadManager manager, long downloadId, AppCompatActivity activity)
         {
             this.uri = uri;
             this.manager = manager;
@@ -41,4 +32,3 @@ namespace CarRepairShopSupportSystem.Helper
         }
     }
 }
-

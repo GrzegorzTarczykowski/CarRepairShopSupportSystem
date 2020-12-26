@@ -3,11 +3,9 @@ using CarRepairShopSupportSystem.WebAPI.DAL.Abstraction;
 using CarRepairShopSupportSystem.WebAPI.DAL.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.WebAPI.BLL.Provider
@@ -25,36 +23,26 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Provider
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            string clientIdCode = string.Empty;
-            string clientSecret = string.Empty;
-
-            // The TryGetBasicCredentials method checks the Authorization header and
-            // Return the ClientId and clientSecret
-            if (!context.TryGetBasicCredentials(out clientIdCode, out clientSecret))
+            if (!context.TryGetBasicCredentials(out string clientIdCode, out string clientSecret))
             {
                 context.SetError("invalid_client", "Client credentials could not be retrieved through the Authorization header.");
                 return Task.FromResult<object>(null);
             }
 
-            //Check the existence of by calling the ValidateClient method
-            Client client = clientRepository.FindBy(c => c.ClientIdCode == clientIdCode
-                                                     && c.ClientSecret == clientSecret).FirstOrDefault();
+            Client client = clientRepository.FindBy(c => c.ClientIdCode == clientIdCode && c.ClientSecret == clientSecret).FirstOrDefault();
 
             if (client == null)
             {
-                // Client could not be validated.
                 context.SetError("invalid_client", "Client credentials are invalid.");
+                return Task.FromResult<object>(null);
+            }
+            else if (!client.Active)
+            {
+                context.SetError("invalid_client", "Client is inactive.");
                 return Task.FromResult<object>(null);
             }
             else
             {
-                if (!client.Active)
-                {
-                    context.SetError("invalid_client", "Client is inactive.");
-                    return Task.FromResult<object>(null);
-                }
-
-                // Client has been verified.
                 context.OwinContext.Set<Client>("ta:client", client);
                 context.OwinContext.Set<string>("ta:clientAllowedOrigin", client.AllowedOrigin);
                 context.OwinContext.Set<string>("ta:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
@@ -66,7 +54,7 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Provider
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             Client client = context.OwinContext.Get<Client>("ta:client");
-            var allowedOrigin = context.OwinContext.Get<string>("ta:clientAllowedOrigin");
+            string allowedOrigin = context.OwinContext.Get<string>("ta:clientAllowedOrigin");
 
             if (allowedOrigin == null)
             {
@@ -86,19 +74,12 @@ namespace CarRepairShopSupportSystem.WebAPI.BLL.Provider
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Role, user.Permission.Name));
             identity.AddClaim(new Claim(ClaimTypes.Name, user.Username));
-
-            var props = new AuthenticationProperties(new Dictionary<string, string>
-                {
-                    {
-                        "client_id", context.ClientId ?? string.Empty
-                    },
-                    {
-                        "userName", context.UserName
-                    }
-                });
-
-            var ticket = new AuthenticationTicket(identity, props);
-            context.Validated(ticket);
+            context.Validated(new AuthenticationTicket(identity
+                , new AuthenticationProperties(
+                    new Dictionary<string, string>{
+                        { "client_id", context.ClientId ?? string.Empty },
+                        { "userName", context.UserName }
+                    })));
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

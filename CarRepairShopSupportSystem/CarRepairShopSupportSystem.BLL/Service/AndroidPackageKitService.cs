@@ -1,18 +1,14 @@
 ﻿using CarRepairShopSupportSystem.BLL.IService;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem.BLL.Service
 {
-    public class ApkVersionService : IApkVersionService
+    public class AndroidPackageKitService : IAndroidPackageKitService
     {
         private readonly IHttpClientService httpClientService;
 
-        public ApkVersionService(IHttpClientService httpClientService)
+        public AndroidPackageKitService(IHttpClientService httpClientService)
         {
             this.httpClientService = httpClientService;
         }
@@ -21,7 +17,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
         {
             try
             {
-                HttpResponseMessage APIResponse = httpClientService.Get($"api/ApkVersion");
+                HttpResponseMessage APIResponse = httpClientService.Get($"api/AndroidPackageKit");
                 if (APIResponse.IsSuccessStatusCode)
                 {
                     string result = APIResponse.Content.ReadAsStringAsync().Result;
