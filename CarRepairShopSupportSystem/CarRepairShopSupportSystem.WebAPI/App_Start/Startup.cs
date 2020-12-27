@@ -19,11 +19,14 @@ namespace CarRepairShopSupportSystem.WebAPI.App_Start
         {
             var builder = new ContainerBuilder();
             builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             var container = builder.Build();
             var config = new HttpConfiguration
             {
                 DependencyResolver = new AutofacWebApiDependencyResolver(container)
             };
+            //Set here instead of in global.asax
+            WebApiConfig.Register(config);
 
             app.UseCors(CorsOptions.AllowAll);
             app.UseAutofacMiddleware(container);
