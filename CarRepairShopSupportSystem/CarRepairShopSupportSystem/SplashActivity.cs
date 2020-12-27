@@ -33,21 +33,21 @@ namespace CarRepairShopSupportSystem
             base.OnResume();
 
             //TODO GT uruchomic jedno pobieranie apk
-            //StartActivity(new Intent(Application.Context, typeof(MainActivity))); //TODO to usunac
+            StartActivity(new Intent(Application.Context, typeof(MainActivity))); //TODO to usunac
 
-            Task startupWork = new Task(delegate
-            {
-                PermissionHandler permissionHandler = new PermissionHandler(this);
-                if (permissionHandler.CheckPermissionsToWriteExternalStorage())
-                {
-                    DownloadApkAndRedirectToInstallation();
-                }
-                else
-                {
-                    permissionHandler.RequestPermissionsToWriteExternalStorage();
-                }
-            });
-            startupWork.Start();
+            //Task startupWork = new Task(delegate
+            //{
+            //    PermissionHandler permissionHandler = new PermissionHandler(this);
+            //    if (permissionHandler.CheckPermissionsToWriteExternalStorage())
+            //    {
+            //        DownloadApkAndRedirectToInstallation();
+            //    }
+            //    else
+            //    {
+            //        permissionHandler.RequestPermissionsToWriteExternalStorage();
+            //    }
+            //});
+            //startupWork.Start();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

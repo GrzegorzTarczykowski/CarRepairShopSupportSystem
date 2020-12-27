@@ -41,7 +41,7 @@ namespace CarRepairShopSupportSystem.BLL.Service
 
                 ApplicationSession.userName = string.Empty;
                 ApplicationSession.userPassword = string.Empty;
-                return true;
+                return false;
             }
             catch (Exception)
             {
