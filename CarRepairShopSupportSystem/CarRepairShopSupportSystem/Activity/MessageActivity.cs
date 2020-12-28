@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
 using Android.Widget;
+using Autofac;
 using CarRepairShopSupportSystem.Adapter;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
-using CarRepairShopSupportSystem.BLL.Service;
 
 namespace CarRepairShopSupportSystem.Activity
 {
@@ -28,8 +24,8 @@ namespace CarRepairShopSupportSystem.Activity
 
         public MessageActivity()
         {
-            messageService = new MessageService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            applicationSessionService = new ApplicationSessionService();
+            messageService = MainApplication.Container.Resolve<IMessageService>();
+            applicationSessionService = MainApplication.Container.Resolve<IApplicationSessionService>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

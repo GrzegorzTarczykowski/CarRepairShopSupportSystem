@@ -5,11 +5,10 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Widget;
+using Autofac;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
-using CarRepairShopSupportSystem.BLL.Service;
 using CarRepairShopSupportSystem.Handler;
-using System.Threading.Tasks;
 
 namespace CarRepairShopSupportSystem
 {
@@ -20,7 +19,7 @@ namespace CarRepairShopSupportSystem
 
         public SplashActivity()
         {
-            androidPackageKitService = new AndroidPackageKitService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
+            androidPackageKitService = MainApplication.Container.Resolve<IAndroidPackageKitService>();
         }
 
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)

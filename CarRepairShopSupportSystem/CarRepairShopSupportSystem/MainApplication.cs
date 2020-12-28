@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Autofac;
 
 namespace CarRepairShopSupportSystem
 {
     [Application]
-    class MainApplication : Application
+    internal class MainApplication : Application
     {
+        internal static ILifetimeScope Container { get; private set; }
+
         protected MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
         public override void OnCreate()
         {
-            base.OnCreate();
+            base.OnCreate(); 
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyModules(typeof(MainApplication).Assembly);
+            Container = builder.Build();
         }
     }
 }

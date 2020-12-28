@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,10 +8,10 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Autofac;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
-using CarRepairShopSupportSystem.BLL.Service;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
@@ -40,10 +38,10 @@ namespace CarRepairShopSupportSystem.Activity
 
         public OrderDetailsActivity()
         {
-            this.orderService = new OrderService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            this.orderStatusService = new OrderStatusService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            this.vehicleService = new VehicleService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
-            this.applicationSessionService = new ApplicationSessionService();
+            this.orderService = MainApplication.Container.Resolve<IOrderService>();
+            this.orderStatusService = MainApplication.Container.Resolve<IOrderStatusService>();
+            this.vehicleService = MainApplication.Container.Resolve<IVehicleService>();
+            this.applicationSessionService = MainApplication.Container.Resolve<IApplicationSessionService>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

@@ -8,13 +8,13 @@ using System;
 using CarRepairShopSupportSystem.Handler;
 using System.Threading.Tasks;
 using CarRepairShopSupportSystem.Activity;
-using CarRepairShopSupportSystem.BLL.Service;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
 using System.Threading;
 using Android.Graphics;
 using Android.Locations;
+using Autofac;
 
 namespace CarRepairShopSupportSystem
 {
@@ -31,8 +31,8 @@ namespace CarRepairShopSupportSystem
 
         public MainActivity()
         {
-            loginService = new LoginService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
-            applicationSessionService = new ApplicationSessionService();
+            loginService = MainApplication.Container.Resolve<ILoginService>();
+            applicationSessionService = MainApplication.Container.Resolve<IApplicationSessionService>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

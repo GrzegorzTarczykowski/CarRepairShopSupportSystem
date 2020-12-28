@@ -6,10 +6,10 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Widget;
+using Autofac;
 using CarRepairShopSupportSystem.Adapter;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
-using CarRepairShopSupportSystem.BLL.Service;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
@@ -24,8 +24,8 @@ namespace CarRepairShopSupportSystem.Activity
 
         public OrderByWorkerListActivity()
         {
-            orderService = new OrderService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            applicationSessionService = new ApplicationSessionService();
+            orderService = MainApplication.Container.Resolve<IOrderService>();
+            applicationSessionService = MainApplication.Container.Resolve<IApplicationSessionService>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

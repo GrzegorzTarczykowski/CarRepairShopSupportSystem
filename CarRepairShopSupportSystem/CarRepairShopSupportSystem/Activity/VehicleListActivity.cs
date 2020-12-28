@@ -7,12 +7,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Widget;
+using Autofac;
 using CarRepairShopSupportSystem.Adapter;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
-using CarRepairShopSupportSystem.BLL.Service;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
@@ -28,7 +28,7 @@ namespace CarRepairShopSupportSystem.Activity
 
         public VehicleListActivity()
         {
-            vehicleService = new VehicleService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
+            vehicleService = MainApplication.Container.Resolve<IVehicleService>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)

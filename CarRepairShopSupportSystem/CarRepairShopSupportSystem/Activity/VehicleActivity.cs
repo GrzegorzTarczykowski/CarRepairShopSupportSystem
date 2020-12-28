@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
 using Android.Widget;
-using CarRepairShopSupportSystem.Adapter;
+using Autofac;
 using CarRepairShopSupportSystem.BLL.Enums;
 using CarRepairShopSupportSystem.BLL.Extensions;
 using CarRepairShopSupportSystem.BLL.IService;
 using CarRepairShopSupportSystem.BLL.Models;
-using CarRepairShopSupportSystem.BLL.Service;
 using Newtonsoft.Json;
 
 namespace CarRepairShopSupportSystem.Activity
@@ -39,12 +34,12 @@ namespace CarRepairShopSupportSystem.Activity
 
         public VehicleActivity()
         {
-            vehicleService = new VehicleService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())), new ApplicationSessionService());
-            vehicleBrandService = new VehicleBrandService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            vehicleModelService = new VehicleModelService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            vehicleEngineService = new VehicleEngineService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            vehicleFuelService = new VehicleFuelService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
-            vehicleTypeService = new VehicleTypeService(new HttpClientService(new AccessTokenService(new ApplicationSessionService(), new TokenService())));
+            vehicleService = MainApplication.Container.Resolve<IVehicleService>();
+            vehicleBrandService = MainApplication.Container.Resolve<IVehicleBrandService>();
+            vehicleModelService = MainApplication.Container.Resolve<IVehicleModelService>();
+            vehicleEngineService = MainApplication.Container.Resolve<IVehicleEngineService>();
+            vehicleFuelService = MainApplication.Container.Resolve<IVehicleFuelService>();
+            vehicleTypeService = MainApplication.Container.Resolve<IVehicleTypeService>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
